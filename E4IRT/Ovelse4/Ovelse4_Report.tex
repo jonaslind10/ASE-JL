@@ -60,30 +60,47 @@ I vil i øvelse 2 have målt forskellige modelparametre, men nu tager vi et fæl
 	\newline \item Idet KC forøges til ca. 90 gg findes tilhørende φm og ωφm . Indtegn situationen i et Bodeplot og kontroller med et stepresponse. Brug Matlab. Iagttag settling time og oversving.\\
 	\newline \item Dimensioner en Lead-regulator så systemet har et oversving < 5\% som i a), men med samme fasemarginsfrekvens som i d). Indtegn situationen i et Bodeplot og kontroller med et stepresponse. Brug Matlab. Iagttag settling time og oversving.\\
 \end{enumerate*}
-\newline a) Iagttag settlingtime, oversving og stationære fejl.
+\newline a) Iagttag settlingtime, oversving og stationære fejl. Kc sættes til 39, da den ved højere værdier giver mere end 5\% overshoot. 39 giver følgende graf og et overshoot på 4,69\%, en settling time på 0,253s uden stationær fejl.
 \begin{figure} [h]
 	\centering
 	\includegraphics[width=0.68\linewidth]{graphics/a_steprespons}
 	\caption{Step Response}
 	\label{fig:asteprespons}
 \end{figure}
-\newline a) Amplitude- og fasekarakteristik for KC værdien og den tilhørende fasemargin og fasemarginsfrekvens. \\
+\newline Amplitude- og fasekarakteristik for Kc værdien. Fasemargin på 65 grader og fasemarginsfrekvensen på 15,1 rad/s. \\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.68\linewidth]{graphics/a_fasekarakteristik}
 	\caption{Bode Diagram}
 	\label{fig:afasekarakteristik}
 \end{figure}
-
-\newpage
-\noindent Den Lead-regulator, der kan realiseres på Controler box’en er:
+\newpage \noindent b) Den stationære fejl findes ved først at udregne hastighedskonstanten med denne formel.\\
+Fejlen er så:\\
+\newline $E = \frac{Haeldning}{K_{v}}$\\
+\newline c)\\
+\newline d) Kc forøges til ca. 90 gg. Iagttag settling time og oversving. Det giver følgende graf og et overshoot på 19,7\%, en settling time på 0,231s uden stationær fejl.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.68\linewidth]{graphics/d_steprespons}
+	\caption{Bode Diagram}
+	\label{fig:dsteprespons}
+\end{figure}
+\newline Amplitude- og fasekarakteristik for Kc værdien. Fasemargin på 48,4 grader og fasemarginsfrekvens på 29,1 rad/s. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.68\linewidth]{graphics/d_fasekarakteristik}
+	\caption{Bode Diagram}
+	\label{fig:dfasekarakteristik}
+\end{figure}
+\newline \noindent Den Lead-regulator, der kan realiseres på Controler box’en er:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{graphics/lead_regulator}
 	\label{fig:leadregulator}
 \end{figure}
 \\Se eksempel på Matlabkode i Appendix.
-	
+
+\newpage	
 \section{Øvelsen}
 Se systemoversigten ovenfor.\\
 
