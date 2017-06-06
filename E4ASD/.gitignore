@@ -1,0 +1,24 @@
+## LockMaster filer
+*.OLD
+*.BAK
+
+## Multisim sikkerhedskopier
+*.ms13 (Security copy)
+*.ms14 (Security copy)
+
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+
+#Office
+*.~vsdx	
+
