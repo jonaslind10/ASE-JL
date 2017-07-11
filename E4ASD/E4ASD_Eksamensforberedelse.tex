@@ -20,7 +20,7 @@
 
 \title{\textbf{ Analog System Design }   Eksamensforberedelse}
 \author{Jonas Lind}
-\date{03-06-2017}
+\date{14-08-2017}
 \maketitle
 \section{Effektforstærkerøvelse: DC}
 \begin{itemize}
@@ -463,37 +463,44 @@ Et design af en operationsforstærker bliver derfor et kompromis mellem at opnå
 
 \newpage
 \section{Dioden}
-Dioder og transistorers egenskab er PN overgangen der kun tillader en elektrisk strøm at løbe i én retning.
+Diodens egenskab er PN overgangen der kun tillader en elektrisk strøm at løbe i én retning. 
+I modsatte retning løber en ubetydelig strøm indtil spændingen over dioden bliver så stor at PN overgangen bryder sammen og strømmen vokser hurtigt.
 
 \begin{itemize}
-	\item En populær model er at spændingsfaldet har en konstant værdi på 0,7 V.
 	\item Dioden er afbrudt når anodens spænding er lavere end katodens spænding.
 	\item Dioden repræsenteres af en spændingsforskel på 0,7 V når anodens spænding er højere end katoden og der løber en strøm.
-	\item Spændingsfaldet over dioden i lederetningen udnyttes i kredsløb som en reference for det øvrige kredsløb. Det kaldes for et kunstigt nulpunkt.
-	Andre kredsløb måler spændingsfaldet som et udtryk for temperaturen da der er en relation på cirka \SI{2}{\milli\volt\per\degreeCelsius} for dioder uanset konstruktionen.
 \end{itemize}
 
-
-\subsection{PN overgangen}
 \begin{itemize}
-	\item Diodens N halvleder har et overskud af frie elektroner.
-	\item Diodens P halvleder har et overskud af flytbare huller. 
-	\item Diffusionen af elektroner danner et elektrisk felt som modvirker diffusionen. 
-	\item En ekstern spændingskilde kan ændre på det elektriske felt og derved styre strømmen i dioden.
+	\item I det ledende område er strømmen en eksponentiel funktion af diodens spænding.
+	\begin{equation}
+	I_F = I_s \exp \left(\dfrac{U_F}{n U_T}\right)
+	\end{equation}
+	\item I det spærrende område er strømmen meget lille, men varierer nu eksponentielt med temperaturen. 
+	\begin{equation}
+	I_R = I_{R0} 2^{(T-T_0)/\Delta{T}}
+	\end{equation}
+	\item I zener området vil diodens strøm vokse voldsomt når spændingen over dioden overskrider en grænse hvorved PN overgangen bryder sammen.
+	\item Relationen er eksponentiel og strømmen vokser en dekade
+	ved en ændring af spændingen over dioden på cirka 60 mV for n = 1. Relationen vil almindeligvis holde over et område på seks dekader fra 10 nA til 10 mA for småsignaldioder.
 \end{itemize}
-
-En elektron kan slås fri fra den yderste skal hvis atomet får tilført tilstrækkelig energi som for silicium er 1,125 eV.
-Energien kan komme fra en temperatur på cirka \SI{300}{\kelvin} (\SI{27}{\degreeCelsius}), fotoner fra lyskilder og elektromagnetiske felter eller kollision med andre partikler som radioaktivitet og avalance-diode.
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/energimodel}
-	\caption{Energimodel af grundstoffet silicium der har 14 elektroner fordelt i tre skaller.}
-	\label{fig:energimodel}
+	\includegraphics[width=0.85\linewidth]{graphics/I-U_karakteristik}
+	\caption{Diodens karakteristik I(U).}
+	\label{fig:I-U_karakteristik}
 \end{figure}
 
-Afstanden mellem den øvre grænse af valensbåndet og den nedre grænse af ledningsbåndet betegnes ”det forbudte bånd”. Elektroner kan ikke opholde sig i dette energiområde.
-Enten har elektronen fået energi nok til at foretage springet eller også har den ikke fået tilført energi nok.
+
+\subsection{PN overgangen}
+Dioden består af et P-lag og et N-lag, med henholdsvis et underskud og et overskud af elektroner.
+\begin{itemize}
+	\item Diodens N halvleder har et overskud af frie elektroner.
+	\item Diodens P halvleder har et overskud af flytbare huller. 
+	\item Diffusionen af elektroner danner et elektrisk felt som modvirker diffusionen. Elektronerne fra N-laget diffunderer mod P-laget.
+	\item En ekstern spændingskilde kan ændre på det elektriske felt og derved styre strømmen i dioden.
+\end{itemize}
 
 \begin{figure} [H]
 	\centering
@@ -502,29 +509,12 @@ Enten har elektronen fået energi nok til at foretage springet eller også har d
 	\label{fig:pnovergang}
 \end{figure}
 
-Hvis der påtrykkes en ekstern spænding med plus ved P og minus ved N vil det tilføre frie elektroner til N halvlederen som rekombinerer med ionerne ved PN overgangen og mindsker det elektriske felt.
-Derved kan elektroner diffundere gennem PN overgangen og rekombinere med hullerne i P. Det skaber et underskud af huller i P som gendannes ved at elektroner løber til batteriets positive pol. \textbf{Der løber en elektrisk strøm i dioden}. \\
+Hvis der påtrykkes en ekstern spænding med plus ved P og minus ved N vil det tilføre frie elektroner til N halvlederen som mindsker det elektriske felt.
+Derved kan elektroner diffundere gennem PN overgangen og rekombinere med hullerne i P halvlederen. \textbf{Der løber en elektrisk strøm i dioden}. \\
 
-Hvis det eksterne batteri vendes om vil det derimod trække
-elektroner ud fra N hvorved det elektriske felt øges og blokerer for en strøm. \textbf{Dioden spærrer.}
+Hvis det eksterne batteri vendes om vil det elektriske felt øges og blokere for en strøm. \textbf{Dioden spærrer.}
 
-\subsection{Diodens I-U karakteristik}
-Diodens karakteristik I(U) har tre vigtige områder. 
-\begin{itemize}
-	\item I det ledende område er strømmen en eksponentiel funktion af diodens spænding.
-	\item I det spærrende område er strømmen meget lille, men varierer nu eksponentielt med temperaturen. 
-	\item I zener området vil diodens strøm vokse voldsomt når spændingen over dioden overskrider en grænse givet af fremstillingsprocessen.
-	\item Relationen er eksponentiel og strømmen vokser en dekade
-	ved en ændring af spændingen over dioden på cirka 60 mV for n = 1. Relationen vil almindeligvis holde over et område på seks dekader fra 10 nA til 10 mA for småsignaldioder.
-\end{itemize}
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.9\linewidth]{graphics/I-U_karakteristik}
-	\caption{Diodens karakteristik I(U).}
-	\label{fig:I-U_karakteristik}
-\end{figure}
-
+\newpage
 \subsection{Modeller - AC/DC}
 \paragraph{DC modellen} for dioden har en DC modstandsværdi, $R_D$, som resulterer i et større målt spændingsfald, $U_D$, i lederetningen ved en given strøm $I_F$.
 
@@ -532,14 +522,18 @@ Diodens karakteristik I(U) har tre vigtige områder.
 U_D = U_F + R_D I_F
 \end{equation}
 
+\begin{itemize}
+	\item Seriemodstanden skyldes ledningsevnen af halvlederens materiale.
+	\item Modstanden $R_D$ er ikke en konstant værdi.
+\end{itemize}
+
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/DC_diode}
+	\includegraphics[width=0.9\linewidth]{graphics/DC_diode}
 	\caption{Diodens seriemodstand ved DC.}
 	\label{fig:DC_diode}
 \end{figure}
 
-\newpage
 \paragraph{AC modellen} for dioden hvor seriemodstanden er ubetydelig, kan dioden ses som en strømstyret modstand. 
 Modstanden falder ved højere strømme.
 
@@ -549,18 +543,38 @@ r_D = \dfrac{U_T}{I_F}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/ACdiode}
+	\includegraphics[width=0.9\linewidth]{graphics/ACdiode}
 	\caption{Diodens seriemodstand ved AC.}
 	\label{fig:AC_diode}
 \end{figure}
 
 \subsection{Anvendelser}
+\paragraph{Ensretning} Halvbølge ensretning af et vekselsignal giver en pulserende jævnstrøm.
+
 \begin{itemize}
-	\item Spændingskilde
-	\item Motor - aflede strøm
-	\item Kortslutningssikringer
-	\item Ensretter 
+	\item Hvis indgangssignalet er positivt vil udgangen følge med indgangssignalet i den positive halvperiode dog med en forskel på cirka \SI{0,7}{\volt}.
+	\item Hvis indgangssignalet er negativt vil dioden spære da der kun kan løbe strøm i diodens lederetning.
 \end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/ensretning}
+	\caption{Halvbølge ensretning af et vekselsignal.}
+	\label{fig:ensretning}
+\end{figure}
+
+\paragraph{Beskyttelseskredsløb} Dioden kan beskytte en følsom indgang imod overspænding.
+
+\begin{itemize}
+	\item Diode afleder strømmen, når ledernes inducerede elektricitets spænding overskrider TVS-diodens spændingstærske
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/diodebeskyt}
+	\caption{Beskytning af en følsom indgang imod overspænding.}
+	\label{fig:diodebeskyt}
+\end{figure}
 
 \newpage
 \section{Transistoren: DC}
