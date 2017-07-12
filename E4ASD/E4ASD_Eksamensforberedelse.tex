@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[danish]{babel}
 \usepackage[T1]{fontenc}	
+\usepackage[a4paper, , margin=1in]{geometry}
 
 \usepackage[version=3]{mhchem} % Package for chemical equation typesetting
 \usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
@@ -18,7 +19,7 @@
 \renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
 \begin{document}
 
-\title{\textbf{ Analog System Design }   Eksamensforberedelse}
+\title{\textbf{Analog System Design} \\Eksamensforberedelse}
 \author{Jonas Lind}
 \date{14-08-2017}
 \maketitle
@@ -514,7 +515,7 @@ Derved kan elektroner diffundere gennem PN overgangen og rekombinere med hullern
 
 Hvis det eksterne batteri vendes om vil det elektriske felt øges og blokere for en strøm. \textbf{Dioden spærrer.}
 
-\newpage
+
 \subsection{Modeller - AC/DC}
 \paragraph{DC modellen} for dioden har en DC modstandsværdi, $R_D$, som resulterer i et større målt spændingsfald, $U_D$, i lederetningen ved en given strøm $I_F$.
 
@@ -534,6 +535,7 @@ U_D = U_F + R_D I_F
 	\label{fig:DC_diode}
 \end{figure}
 
+\newpage
 \paragraph{AC modellen} for dioden hvor seriemodstanden er ubetydelig, kan dioden ses som en strømstyret modstand. 
 Modstanden falder ved højere strømme.
 
@@ -543,7 +545,7 @@ r_D = \dfrac{U_T}{I_F}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.9\linewidth]{graphics/ACdiode}
+	\includegraphics[width=0.8\linewidth]{graphics/ACdiode}
 	\caption{Diodens seriemodstand ved AC.}
 	\label{fig:AC_diode}
 \end{figure}
@@ -565,13 +567,9 @@ r_D = \dfrac{U_T}{I_F}
 
 \paragraph{Beskyttelseskredsløb} Dioden kan beskytte en følsom indgang imod overspænding.
 
-\begin{itemize}
-	\item Diode afleder strømmen, når ledernes inducerede elektricitets spænding overskrider TVS-diodens spændingstærske
-\end{itemize}
-
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{graphics/diodebeskyt}
+	\includegraphics[width=0.5\linewidth]{graphics/diodebeskyt}
 	\caption{Beskytning af en følsom indgang imod overspænding.}
 	\label{fig:diodebeskyt}
 \end{figure}
@@ -580,7 +578,7 @@ r_D = \dfrac{U_T}{I_F}
 \section{Transistoren: DC}
 
 \subsection{DC model}
-
+Der er to modeller for hvordan transistorens kollektorstrøm styres.
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{graphics/transistor_DCmodel}
@@ -619,18 +617,7 @@ U_{BE} = n U_T \ln \dfrac{I_C}{I_S}
 
 \subsection{Forskellige typer (BJT, FET)}
 
-\paragraph{BJT} er en bipolar transistor som fremstilles ud fra en diode ved at tilføje endnu et lag. 
-Med et ekstra N lag på mod diodens anode kan elektronerne løbe videre i ledningsbåndet til nye N lag der kaldes for kollektor.\\
- 
-Hvis bredden af P laget er væsentlig mindre end rekombinationslængden vil hovedparten af elektronerne fortsætte fra emitter til kollektor.
-De elektroner der rekomninerer i basis laget udgør transistorens basisstrøm. 
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.95\linewidth]{graphics/bjt}
-	\caption{En NPN transistors opbygning med emitter (N+), basis (P) og kollektor (N).}
-	\label{fig:bjt}
-\end{figure}
+\paragraph{BJT} er en bipolar transistor som fremstilles ud fra en diode ved at tilføje endnu et lag halvleder. 
 
 \begin{itemize}
 	\item Der er to måder PN overgangene kan arrangeres på: NPN og PNP.
@@ -638,32 +625,43 @@ De elektroner der rekomninerer i basis laget udgør transistorens basisstrøm.
 	\item Meget ens, men lidt større diode spændingsfald ved en PNP.
 \end{itemize}
 
+Ved NPN tilføres et ekstra N lag mod diodens anode hvorved elektronerne kan løbe videre i ledningsbåndet til det nye N lag der kaldes for kollektor.\\
+ 
+Hvis bredden af P laget er væsentlig mindre end rekombinationslængden vil hovedparten af elektronerne fortsætte fra emitter til kollektor.
+De elektroner der rekombinerer i basis laget udgør transistorens basisstrøm. 
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphics/bjt}
+	\caption{En NPN opbygning med emitter (N+), basis (P) og kollektor (N).}
+	\label{fig:bjt}
+\end{figure}
+
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=\linewidth]{graphics/transistor}
 	\caption{NPN og PNP transistor.}
 	\label{fig:transistor}
 \end{figure}
-\newpage
+
 \paragraph{JFET} er en betegnelse for junction field effect transistor. 
 Den har tre elektroder der benævnes \textit{gate} for styreelektroden, \textit{source} for strømkilden og \textit{drain} for opsamling af
 elektronerne. 
 
 Styreelektroden gate er forbundet til kanalen mellem drain og source via en spærrende diode. 
 Med en negativ spænding på gate i forhold til source vil det elektriske felt frastøde elektroner i nærheden af dioden. 
-
 Modstanden af kanalen er givet ved antallet af frie elektroner.
 Hvis kanalen indsnævres ved det elektriske felt fra gate vil der være færre elektroner og derved en højere modstandsværdi mellem source og drain.
 
 \begin{itemize}
-	\item Transistoren er åben uden spænding på gate.
-	\item En negativ gate-source spænding vil begynde at begrænse drain-strømmen $I_D$.
-	\item Transistoren er helt spærende ved den negative pinch off spænding: $U_P$.
+	\item Transistoren er åben uden spænding på gate $V_{GS}=0$. Kaldes Depletion mode.
+	\item En negativ gate-source spænding vil begynde at begrænse drain-strømmen $I_D$ \newline (modsat for en P kanal JFET).
+	\item Transistoren er helt spærende ved den negative pinch off spænding: $V_P$.
 \end{itemize}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/jfet}
+	\includegraphics[width=0.8\linewidth]{graphics/jfet}
 	\caption{JFET transistor.}
 	\label{fig:jfet}
 \end{figure}
@@ -671,30 +669,32 @@ Hvis kanalen indsnævres ved det elektriske felt fra gate vil der være færre e
 Kanalen mellem source og drain er i mange tilfælde symmetrisk og de to elektroder kan da ombyttes. Hvis det ikke er tilfældet tegnes pilen nærmest ved source.
 
 
-\paragraph{MOSFET} er betegnelsen for en metal-oxide silicon field-effect transistor.
+\paragraph{MOSFET} er betegnelsen for en metal-oxide silicon field-effect transistor. 
+Gate-elektroden er opbygget som et metallag med et tyndt lag siliciumoxyd som isolator mellem gate og kanal.
 
 \begin{itemize}
-	\item Mosfetten spærer for strøm når gate-spændingen $U_G < U_{TH}$.
+	\item Mosfetten spærer for strøm når gate-spændingen $V_{GS} < V_{GS (th)}$. Kaldes Enhancement mode.
 	\item Der kan løbe strøm i drain når gaten lades op (det tager tid, som en kondensator).
 	\item Gate kapaciteten begrænser hvor hurtigt den kan tænde/slukke.
 \end{itemize}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{graphics/mosfet}
+	\includegraphics[width=0.5\linewidth]{graphics/mosfet}
 	\caption{MOSFET transistor opbygning.}
 	\label{fig:mosfet}
 \end{figure}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/mosfet_symbol}
+	\includegraphics[width=0.8\linewidth]{graphics/mosfet_symbol}
 	\caption{MOSFET transistor symbol.}
 	\label{fig:mosfet_symbol}
 \end{figure}
 
+\newpage
 \subsection{Anvendelser}
-\textbf{Diodekobling}
+\paragraph{Diodekobling} En diode-koblet transistor opfører sig fuldstændig som en diode.
 \begin{itemize}
 	\item Ved at korslutte basis og kollektor bliver transistoren en diode.
 	\item Hyppigt brugt i IC design.
@@ -703,24 +703,40 @@ Kanalen mellem source og drain er i mange tilfælde symmetrisk og de to elektrod
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{graphics/diodekobling}
+	\includegraphics[width=0.5\linewidth]{graphics/diodekobling}
 	\caption{Transistoren kan benyttes som diode.}
 	\label{fig:diodekobling}
 \end{figure}
 
-\textbf{Strømspejl}
+\paragraph{Strømspejl}
+En strøm $I_1$ i transistor $T_1$ vil give en tilsvarende strøm $I_2$ i transistor $T_2$ så det er muligt at bruge strømmen i ét kredsløb til at styre en strøm i et andet.
 \begin{itemize}
-	\item Strømmen I1 vil føre til en tilsvarende strøm I2.
-	\item Der løber en lille basis-strøm, som i praksis vil føre til en fejl i I2.
+	\item Strømmen $I_1$ vil føre til en tilsvarende strøm $I_2$.
+	\item Der løber en lille basis-strøm, som i praksis vil føre til en fejl i $I_2$.
 \end{itemize}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{graphics/currentmirror}
-	\caption{Strømspejl placeret ved low side (venstre) og high side (højre).}
+	\includegraphics[width=0.8\linewidth]{graphics/diodekobling1}
+	\caption{Strømspejl.}
 	\label{fig:currentmirror}
 \end{figure}
 
+\begin{equation} 
+U_F = n U_T \ln{\left(\frac{I_S}{I_1}\right)}
+\end{equation}
+
+\begin{equation} 
+U_{BE} = U_F
+\end{equation}
+
+\begin{equation} 
+I_2 = I_S \exp{\left(\frac{U_{BE}}{n U_T}\right)}
+\end{equation}
+
+\begin{equation} 
+I_2 = I_S \exp{\left(\frac{n U_T \ln{\left(\frac{I_S}{I_1}\right)}}{n U_T}\right)}
+\end{equation}
 
 \newpage
 \section{Transistoren: AC}
