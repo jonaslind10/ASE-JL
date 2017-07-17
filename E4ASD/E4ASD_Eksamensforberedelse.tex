@@ -121,7 +121,7 @@ SR = \dfrac{I_E}{C_C}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.65\linewidth]{graphics/slewrate}
+	\includegraphics[width=0.4\linewidth]{graphics/slewrate}
 	\caption{Operationsforstærkerens slew rate.}
 	\label{fig:slewrate}
 \end{figure}
@@ -133,6 +133,7 @@ Den dominerende pol giver stabilitet, men begrænser også hvor hurtigt udgangen
 
 \newpage
 \section{Effektforstærkerøvelse: Effektafsættelse}
+\subsection{Beregning af effektafsættelse}
 Herunder regnes den totale effekt afsat i forstærkeren og ud fra den findes effekten afsat i udgangstrinnet.\\
 
 Den tilførte effekt på \SI{67}{\watt} ved \SI{30}{\watt} afgivet i nominelt \SI{8}{\ohm}. 
@@ -155,42 +156,6 @@ Effekttabet i udgangstransistorerne T9 og T10 bliver \SI{32}{\watt} samlet og de
 P_O = \dfrac{U_{CC}U_O}{\pi R_L} =\SI{31.2}{\watt}
 \end{equation}
 
-\subsection{Ohms lov analogi}
-En køleprofil beskrives normalt ved en termisk modstand og Ohms lov antages at gælde for det termiske system. 
-Man siger at effektstrømmen $P$ løber gennem den termiske modstand $R_{th}$ og det danner et temperaturfald på $R_{th}P$ som hæver temperaturen $T$ over omgivelsestemperaturen $T_{amb}$.
-Den termiske modstand kaldes undertiden for køleprofilets K-værdi og enheden er en stigning i temperatur per effekt.
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.65\linewidth]{graphics/ohmslovanalogi}
-	\caption{Beregning af temperaturstigning ved en effektstrøm P i en termisk modstand.}
-	\label{fig:ohmslovanalogi}
-\end{figure}
-
-\subsection{Termisk modstand}
-\begin{itemize}
-	\item Angiver evnen til at transportere og afsætte varme, f.eks. fra transistorens junction til dens overflade.
-	\item Måles i \SIUnitSymbolCelsius /\si{\watt}
-	\item Jo højere værdi, jo varmere vil et komponent blive ved en given afsat effekt.
-\end{itemize}
-
-Klasse AB forstærkerens effekttransistor junction ønskes kølet til maksimalt \SI{100}{\degreeCelsius}
-Ifølge databladet for 2N3055 er junction to case = \SI{1.52}{\degreeCelsius\per\watt}.
-
-\begin{equation}
-T_j = (R_{th\:j-mb} + R_{th\: mb-hs} + R_{th\: hs})P + T_{amb}
-\end{equation}
-
-\begin{equation}
-R_{th\: hs} = \dfrac{T_j-T_{amb}}{P}-R_{th\:j-mb} + R_{th\: mb-hs}
-\end{equation}
-
-\begin{equation}
-R_{th\: hs} = \dfrac{\SI{100}{\degreeCelsius}-\SI{25}{\degreeCelsius}}{\SI{11}{\watt}}-\SI{1.52}{\degreeCelsius\per\watt} = \SI{5.3}{\degreeCelsius\per\watt}
-\end{equation}
-
-Til effekttransistorene blev der valgt en køleplade, som var rigeligt stor.
-
 \subsection{SOA}
 SOA er en betegnelse for safe-operating area.
 SOA findes ved at kombinere følgende tre begrænsninger:
@@ -212,10 +177,79 @@ U_{CE} = \dfrac{P_{MAX}}{I_C} = \dfrac{\SI{115}{\watt}}{\SI{15}{\ampere}} = \SI{
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.5\linewidth]{graphics/soa}
+	\includegraphics[width=0.4\linewidth]{graphics/soa}
 	\caption{Safe-operating area.}
 	\label{fig:soa}
 \end{figure}
+
+
+\subsection{Termisk modstand}
+En køleprofil beskrives normalt ved en termisk modstand og Ohms lov antages at gælde for det termiske system. 
+Man siger at effektstrømmen $P$ løber gennem den termiske modstand $R_{th}$ og det danner et temperaturfald på $R_{th}P$ som hæver temperaturen $T$ over omgivelsestemperaturen $T_{amb}$.
+Den termiske modstand kaldes undertiden for køleprofilets K-værdi og enheden er en stigning i temperatur per effekt.
+
+\begin{equation}
+T = (R_{th} P + T_{amb}
+\end{equation}
+
+\begin{itemize}
+	\item Angiver evnen til at transportere og afsætte varme, f.eks. fra transistorens junction til dens overflade.
+	\item Måles i \SIUnitSymbolCelsius /\si{\watt}
+	\item Jo højere værdi, jo varmere vil et komponent blive ved en given afsat effekt.
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{graphics/ohmslovanalogi}
+	\caption{Beregning af temperaturstigning ved en effektstrøm P i en termisk modstand.}
+	\label{fig:ohmslovanalogi}
+\end{figure}
+
+\begin{itemize}
+	\item $R_{th\:j-mb}$
+	\begin{itemize}
+		\item Den termiske modstand fra PN overgangen \textit{(junction)} til monteringsflade	\textit{(mounting base)}.
+	\end{itemize}
+	\item $R_{th\: mb-hs}$
+	\begin{itemize}
+		\item Den termiske modstand mellem monteringsflade	\textit{(mounting base)} og køleprofilet \textit{(heat sink)}.
+		\item Inkluderes i den termiske model når det er nødvendigt at isolere transistoren fra køleprofilet med en isolationsskive af glimmer eller silicone.
+	\end{itemize} 
+	\item $R_{th\: hs}$ 
+	\begin{itemize}
+		\item Den eksterne termiske modstand for køleprofilet \textit{(heat sink)}.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+T_j = (R_{th\:j-mb} + R_{th\: mb-hs} + R_{th\: hs})P + T_{amb}
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/termiskdesign}
+	\caption{Termisk kredsløb.}
+	\label{fig:termiskdesign}
+\end{figure}
+
+\subsection{Dimensionering af køling}
+Klasse AB forstærkerens effekttransistor junction ønskes kølet til maksimalt \SI{100}{\degreeCelsius}
+Ifølge databladet for 2N3055 er junction to case = \SI{1.52}{\degreeCelsius\per\watt}.
+
+\begin{equation}
+T_j = (R_{th\:j-mb} + R_{th\: mb-hs} + R_{th\: hs})P + T_{amb}
+\end{equation}
+
+\begin{equation}
+R_{th\: hs} = \dfrac{T_j-T_{amb}}{P}-R_{th\:j-mb} + R_{th\: mb-hs}
+\end{equation}
+
+\begin{equation}
+R_{th\: hs} = \dfrac{\SI{100}{\degreeCelsius}-\SI{25}{\degreeCelsius}}{\SI{11}{\watt}}-\SI{1.52}{\degreeCelsius\per\watt} = \SI{5.3}{\degreeCelsius\per\watt}
+\end{equation}
+
+
+
 
 \newpage
 \section{Effektforstærkerøvelse: Effektforsyning}
