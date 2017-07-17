@@ -212,7 +212,7 @@ U_{CE} = \dfrac{P_{MAX}}{I_C} = \dfrac{\SI{115}{\watt}}{\SI{15}{\ampere}} = \SI{
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.65\linewidth]{graphics/soa}
+	\includegraphics[width=0.5\linewidth]{graphics/soa}
 	\caption{Safe-operating area.}
 	\label{fig:soa}
 \end{figure}
@@ -228,10 +228,21 @@ U_{CE} = \dfrac{P_{MAX}}{I_C} = \dfrac{\SI{115}{\watt}}{\SI{15}{\ampere}} = \SI{
 \end{itemize}
 
 
-\subsection{Ensretning udglatning}
+\subsection{Ensretning}
 \begin{itemize}
 	\item Full bridge brokoblingen ensretter de positive og negative halvbølger.
 	\item Der er to diode-spændingsfald, som sænker spændingen \approx \SI{-1.4}{\volt}.
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/ensretning}
+	\caption{Helbølgeensretter med brokobling.}
+	\label{fig:ensretter}
+\end{figure}
+
+\subsection{Udglatning}
+\begin{itemize}
 	\item Kondensatoren $C_{filter}$ udglatter den ensrettede spænding.
 	\item Der vil være ripple, $U_{RIP}$, som øges ved større $I_O$.
 	\item $U_{RIP}$ sænkes ved større kondensator.
@@ -240,9 +251,9 @@ U_{CE} = \dfrac{P_{MAX}}{I_C} = \dfrac{\SI{115}{\watt}}{\SI{15}{\ampere}} = \SI{
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/ensretter}
-	\caption{AC fra transformeren ensrettet af brokoblingen.}
-	\label{fig:ensretter}
+	\includegraphics[width=\linewidth]{graphics/udglatning}
+	\caption{Udglatning af den ensrettede spænding med kondensator.}
+	\label{fig:udglatning}
 \end{figure}
 
 
@@ -254,6 +265,11 @@ t_p = \dfrac{1}{\SI{50}{\hertz}} = \SI{20}{\milli\second}
 C_{Filter} = \dfrac{I_{DC}t_p}{2 U_{RIP}}
 \end{equation}
 
+\begin{itemize}
+	\item 2 tallet skyldes at der regnes for en halvperiode $t_p/2$.
+\end{itemize}
+
+\newpage
 \subsection{Serie regulator}
 \begin{itemize}
 	\item Lineær spændingsregulator, som afsætter overskydende spænding som varme.
@@ -264,12 +280,14 @@ C_{Filter} = \dfrac{I_{DC}t_p}{2 U_{RIP}}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{graphics/serieregulator}
-	\caption{En serieregulator der nedsætter spændingen fra en ustabil
-		effektforsyning til en stabil og kortslutningssikker forsyningslinje. De viste kondensatorer er
-		krævet af hensyn til stabilitet.}
+	\includegraphics[width=0.6\linewidth]{graphics/serieregulator}
+	\caption{Lineær spændingsregulator med afkoblingskondensatorer.}
 	\label{fig:serieregulator}
 \end{figure}
+
+\begin{equation}
+P_{tab} = (U_{DC} - U_O) I_O
+\end{equation}
 
 \subsection{DC-DC konverter}
 DC konverteren benytter en spole til at optage energi fra indgangen i et kort tidsrum hvorefter energien overføres til udgangen i det efterfølgende tidsrum. 
@@ -277,7 +295,7 @@ Den proces gentages i en evindelighed styret af en transistor og en diode der ar
 Transistoren kan være bipolar eller felteffekt.
 \begin{itemize}
 	\item Kan regulere DC spændinger op og ned mere effektivt end lineære regulatorer.
-	\item Har en virkningsgrad på over \SI{90}{percent}.
+	\item Har en virkningsgrad på over \SI{90}{\percent}.
 	\item Der er højfrekvent switching støj på udgangen, hvilket kan være uønsket.
 \end{itemize}
 
@@ -292,9 +310,16 @@ Transistoren kan være bipolar eller felteffekt.
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{graphics/opkonvertering}
+	\includegraphics[width=0.6\linewidth]{graphics/opkonvertering}
 	\caption{Opkonvetering.}
 	\label{fig:opkonvertering}
+\end{figure}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/dcdc_opkonvertering}
+	\caption{Opkonvertering i transistorens to tilstande.}
+	\label{fig:dcdc_opkonvertering}
 \end{figure}
 
 \paragraph{Nedkonvertering}
@@ -309,15 +334,17 @@ Transistoren kan være bipolar eller felteffekt.
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{graphics/nedkonvertering}
+	\includegraphics[width=0.6\linewidth]{graphics/nedkonvertering}
 	\caption{Nedkonvetering.}
 	\label{fig:nedkonvertering}
 \end{figure}
 
-\begin{equation}
-C_{Filter} = \dfrac{I_{DC}t_p}{2 U_{RIP}}
-\end{equation}
-
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/dcdc_nedkonvertering}
+	\caption{Nedkonvertering i transistorens to tilstande.}
+	\label{fig:dcdc_nedkonvertering}
+\end{figure}
 
 \newpage 
 \section{Operationsforstærkeren}
@@ -339,35 +366,63 @@ En OpAmp kan beskrives ved et differentielt indgangstrin der omsætter en spænd
 	\item DC gain: $A_{DC} = g_m \beta R_C$
 	\item AC gain: $A_{OL} = \dfrac{g_m}{\omega C_C}$
 \end{itemize}
-\newpage 
+
 \subsection{Opbygning og DC forhold}
 \begin{itemize}
-	\item Trin 1 – Spænding til strøm – en transkonduktans blok.
-	\item Trin 2 – Forstærker strøm og omsætter til spænding - en transresistans forstærker, også kaldet VAS – Voltage Application Stage).
-	\item Trin 3 – Kommer ved effektforstærkeren. Omsætter fra mA niveau til A niveau.
+	\item Trin 1 - laver spændingsdifferens om til en strøm $I_O$ - en transkonduktans blok.
+	\item Trin 2 - Forstærker strøm og omsætter til spænding - VAS (Voltage Application Stage).
+	\item Trin 3 - Beskytter $R_C$ mod belastningen $R_L$ - omsætter fra mA niveau til A niveau.
 \end{itemize}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/opamp}
+	\includegraphics[width=0.85\linewidth]{graphics/opamp}
 	\caption{Generelt OpAmp kredsløb.}
 	\label{fig:opamp}
 \end{figure}
 \newpage 
-\paragraph{Differentialtrinnet} benytter to BJT med fælles emitter, en såkaldt differentielkobling. En strømkilde driver en fast strøm $I_E$ i den fælles emitter. De to transistorer tvinges derfor til at dele strømmen mellem sig. De to transistorer T3 og T4 udgør et strømspejl hvor strømmen i T1 kopieres over til T4. 
+\paragraph{Differentialtrin} benytter to transistorer med fælles emitter, en såkaldt differentielkobling. En strømkilde driver en fast strøm $I_E$ i den fælles emitter. De to transistorer tvinges derfor til at dele strømmen mellem sig. 
+
+\begin{itemize}
+	\item Når der ikke er nogen spændingsforskel mellem $U_P$ og $U_N$ vil strømmen i de to transistorer være fordelt 50/50.
+	\item Hæves spændingsdifferensen vil T1 trække mere strøm og T2 må så nøjes med en mindre strøm da $I_E$ er konstant. 
+	\begin{itemize}
+		\item Hvis $U_P$ hæves relativ til $U_N$ vil $I_1$ stige.
+	\end{itemize}
+\end{itemize} 
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.68\linewidth]{graphics/differentialtrin}
-	\caption{Differentialtrin med strømspejl.}
+	\includegraphics[width=0.3\linewidth]{graphics/differentialtrin}
+	\caption{Differentialtrin.}
 	\label{fig:differentialtrin}
 \end{figure}
 	
-Strømdelingen styres af en spændingsdifferens $U_P – U_N$ mellem de to indgange ved basis. Hvis spændingsdifferensen er nul deles strømmen ligeligt med \SI{50}{\percent} til hver transistor. 
-Hæves spændingsdifferensen vil T1 trække mere strøm og T2 må så nøjes med en mindre strøm da $I_E$ er konstant. 
-På grund af strømspejlet ved T3 og T4 vil differensen mellem I1 og I2 give en strøm $I_O$ i udgangen.
-	
-Ved stor positiv spændingsdifferens vil T1 lede \SI{100}{percent} strømmen og T2 får \SI{0}{percent}. Der er derfor en øvre grænse for den strøm der kan løbe i udgangen. Det er ikke muligt at få en udgangsstrøm $I_O$ på mere end $I_E$ uanset spændingsdifferensen. 
+\paragraph{Strømspejl} udnytter transistorernes ens karakteristik til at indstille strømmen i $I_2$ som er identisk med den strøm $I_1$ det eksterne kredsløb driver i T1.
+\begin{itemize}
+	\item Differensen mellem de to strømme fra differentialtrinnet dannes af et strømspejl.
+	\item Strømmen $I_1$ vil føre til en tilsvarende strøm $I_2$.
+	\item Der løber en lille basis-strøm, som i praksis vil føre til en fejl i $I_2$.
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/currentmirror}
+	\caption{Strømspejl.}
+	\label{fig:currentmirror1}
+\end{figure}
+
+\newpage
+\subsubsection{Trin 1: Differentialforstærker}
+\begin{itemize}
+	\item Kombinerer differentialetrinnet, strømspejlet og strømkilden.
+	\item På grund af strømspejlet ved T3 og T4 vil differensen mellem $I_1$ og $I_2$ give en strøm $I_O$ i udgangen.
+	\item Der er en øvre grænse for den strøm der kan løbe i udgangen. Det er ikke muligt at få en udgangsstrøm $I_O$ på mere end $I_E$ uanset spændingsdifferensen.
+	\item Forholdet fra spændingsforskel til udgangsstrøm kaldes transkonduktansen $g_m$.
+	\begin{itemize}
+		\item Afhænger af emitterstrømmen fra strømkilden og temperaturspændingen $U_T$.
+	\end{itemize} 
+\end{itemize}
 
 \begin{equation} 
 I_o = g_m(U_P-U_N)
@@ -380,62 +435,55 @@ U_T = \frac{k T}{q_0} \approx \SI{26}{\milli\volt}
 \begin{equation} 
 g_m = \frac{I_E}{2nU_T}
 \end{equation}
-	
+
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{graphics/differentialtrin_transkonduktans}
-	\caption{Differentialtrinnets emitterstrøm.}
-	\label{fig:differentialtrin_transkonduktans}
+	\includegraphics[width=0.7\linewidth]{graphics/differentialtrin_fors}
+	\caption{Differentialforstærkertrinnet.}
+	\label{fig:differentialforstærker}
 \end{figure}
 
-Der er et næsten retlinet forløb for en spændingsdifferens nær ved nul og at stor spændingsdifferens giver et mætningsforløb for strømdifferensen I1 – I2 hvor der optræder en begrænsning til den fælles strøm i emitter. 
 
-$I_E$ er arbejdsstrømmen, en emitterstrøm. Typisk \SI{100}{\micro\ampere} i operationsforstærker og \SI{5}{\milli\ampere} i effektforstærker.
+
 \newpage 
-\paragraph{Det strømforstærkende trin} benytter en BJT transistors strømforstærkning β for at forstærke differentialtrinnets udgangsstrøm. Denne strøm bliver ledet gennem en modstand, $R_C$, som laver det om til en strøm. 
-
-I en integreret forstærker benyttes ofte flere transistorer til at forøge den resulterende strømforstærkning mens en effektforstærker som oftest nøjes med en enkelt transistor da der ikke er behov for den ekstremt høje forstærkning ved DC. 
+\subsubsection{Trin 2: VAS - Voltage Amplification Stage} 
+Transistorens strømforstærkning $\beta$ forstærker differentialtrinnets udgangsstrøm. Denne strøm bliver ledet gennem en modstand, $R_C$, som laver det om til en strøm. 
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.9\linewidth]{graphics/vas}
+	\includegraphics[width=0.7\linewidth]{graphics/vas}
 	\caption{Trans-resistans forstærker (VAS).}
 	\label{fig:VAS_forstærker}
 \end{figure}
-DC forstærkningen er således givet ved:
+
+I en integreret forstærker benyttes ofte flere transistorer til at forøge den resulterende strømforstærkning mens en effektforstærker oftest nøjes med en enkelt transistor da der ikke er behov for den ekstremt høje forstærkning ved DC. 
+
+\begin{itemize}
+	\item Strømmen fra differentialforstærkertrinnet forstærkes op med strømforstærkning $\beta_5$ i T5.
+	\item Strømmen ledes gennem $R_C$ der omsætter til en spænding.
+	\item DC forstærkningen er givet af transkonduktansen $g_m$, forstærkerens $\beta_5$ for T5 og modstanden $R_C$.
+\end{itemize}
+
 \begin{equation} 
 A_{DC} = g_m \beta R_C
 \end{equation}
 
-Kondensatoren $C_C$ skaber en dominerende pol ved $f_0$, som sikrer stabilitet.
+\begin{itemize}
+	\item Kondensatoren $C_C$ skaber en dominerende pol ved $f_0$, som sikrer stabilitet.
+\end{itemize}
 
 \begin{equation} 
 f_0 = \dfrac{1}{2 \pi \beta R_C C_C}
 \end{equation}
+\\
+Den dominerende pol giver stabilitet, men begrænser også hvor hurtigt udgangen kan flyttes. Hvis værdien forsøges overskredet bliver signalet forvrænget.
 
-Slew-raten (SR) begrænses af kondensatoren og strømmen $I_E$.
+\begin{itemize}
+	\item Slew-raten (SR) begrænses af kondensatoren og strømmen $I_E$.
+\end{itemize}
 
 \begin{equation} 
 SR = \dfrac{I_E}{C_C}
-\end{equation}
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.65\linewidth]{graphics/slewrate}
-	\caption{Operationsforstærkerens slew rate.}
-	\label{fig:slewrate}
-\end{figure}
-
-Den dominerende pol giver stabilitet, men begrænser også hvor hurtigt udgangen kan flyttes. Hvis værdien forsøges overskredet bliver signalet forvrænget.
-
-\textbf{Lave frekvenser}
-\begin{equation} 
-U_O = g_m \beta R_C(U_P-U_N)
-\end{equation}
-
-\textbf{Høje frekvenser}
-\begin{equation} 
-U_O = \frac{g_m}{j \omega C_C}(U_P-U_N)
 \end{equation}
 
 \subsection{AC forhold og stabilitet}
@@ -444,24 +492,98 @@ U_O = \frac{g_m}{j \omega C_C}(U_P-U_N)
 	\item En tilbagekoblet operationsforstærker skal have en dominerende pol for stabilitet.
 	\item Ved tilbagekobling giver det en overføringsfunktion af mindst andet orden og det kan give problemer med stabilitet.
 	\item For at gardere sig kan man vælge den dominerende pol $f_0$ så lavt at systemet bliver ubetinget stabilt.
+\end{itemize}
+
+\begin{equation} 
+f_0  \leq \frac{f_h}{4\,A_{DC}}
+\end{equation}
+
+\begin{equation} 
+C_C  = \frac{1}{2\pi \beta f_0 R_C}
+\end{equation}
+
+
+\begin{itemize}
 	\item Miller transformation udføres for at finde modstande og kapaciteter, der resulterer i poler.
 \end{itemize}
 
-Polen mellem differentialtrinnets T1 til T4 og VAS-trinnets T5 bliver normalt ofret ved at inkludere $C_C$ der sænker polens frekvens så den udgør operationsforstærkerens dominerende pol. Polens frekvens er som regel lavere end 1 kHz. 
+\begin{equation} 
+g_{m5} = \frac{I_C}{U_T}
+\end{equation}
+
+\begin{equation} 
+A = g_{m5} R_C
+\end{equation}
+
+\begin{equation} 
+r_{\pi 5} = \frac{\beta_5}{g_{m5}}
+\end{equation}
+
+\begin{equation} 
+C_{\si{\micro}5} = C_{MO5}
+\end{equation}
+
+\begin{equation} 
+C_{MI5} = (1+A)C_{MO5}
+\end{equation}
+
+\begin{itemize}
+	\item Polen ved ind- og udgangen findes.
+\end{itemize}
+
+\begin{equation} 
+f_1 = \dfrac{1}{2\pi \, r_{\pi} (C_{\pi} + C_{MI5})}
+\end{equation}
+
+\begin{equation} 
+f_2 = \dfrac{1}{2\pi \, r_C \, C_{MO5}}
+\end{equation}
+
+\begin{itemize}
+	\item Den nye dominerende pol findes ud fra den høje pol.
+\end{itemize}
+
+\begin{equation} 
+f_0  \leq \frac{f_h}{4\,A_{DC}}
+\end{equation}
+
+\begin{itemize}
+	\item Kompenseringskondensatoren kan nu vælges.
+\end{itemize}
+
+\begin{equation} 
+C_C  = \frac{1}{2\pi \beta f_0 R_C}
+\end{equation}
+\\
+
+Polen mellem differentialtrinnets T1 til T4 og VAS-trinnets T5 bliver normalt ofret ved at inkludere $C_C$ der sænker polens frekvens så den udgør operationsforstærkerens dominerende pol. \\
 
 Der er en fordel ved valget idet kapaciteten $C_{\si{\micro}}$ fra kollektor til basis ved T5 bliver stort set uden betydning. 
 Det er væsentligt fordi operationsforstærkerens egenskaber ved høje frekvenser defineres af netop denne kapacitet.
-Det betyder at kondensatoren er aktiv i hele frekvensområdet den dominerende pol. 
-Transistorens kapacitet $C_{\si{\micro}}$ er spændingsafhængig og vil derfor introducere harmonisk forvrængning, men ved at parallelkoble $C_{\si{\micro}}$ med en stabil kapacitet $C_C$ kan forvrængningen sænkes. 
+Det betyder at kondensatoren er aktiv i hele frekvensområdet for den dominerende pol. 
+Transistorens kapacitet $C_{\si{\micro}}$ er spændingsafhængig og vil derfor introducere harmonisk forvrængning, men ved at parallelkoble $C_{\si{\micro}}$ med en stabil kapacitet $C_C$ kan forvrængningen sænkes. \\
+ 
+Et design af en operationsforstærker bliver et kompromis mellem at opnå en hurtig forstærker, altså en stor slew rate, og stabilitet, altså en lav værdi af GBP. 
 
+\subsubsection{Trin 3: Udgangstrin} 
+Udgangstrinnets opgave er at kunne levere (eller optage) en stor strøm til (fra) belastningen $R_L$ samt at isolere det relativt høje impedansniveau ved kollektor af T5 fra belastningens varierende værdi.\\
 
-Den hastighed udgangen kan flyttes med, altså slew raten, begrænses af strømmen $I_E$ og kapaciteten $C_C$ som beskrevet tidligere. 
-Et design af en operationsforstærker bliver derfor et kompromis mellem at opnå en hurtig forstærker, altså en stor slew rate, og stabilitet, altså en lav værdi af GBP. 
+Modstanden $R_C$ er faktor i udtrykket for åben-sløjfe forstærkningen $A_{OL}$ og ønskes derfor til en høj værdi. Det giver så til gengæld en pol ved udgangen af forstærkertrinnet.
 
-\paragraph{Udgangstrinnet} fra operationsforstærkeren benytter oftest to eller flere transistorer koblet som emitterfølger. Trinnets opgave er at kunne levere (eller optage) en stor strøm til (fra) belastningen $R_L$ samt at isolere det relativt høje impedansniveau ved kollektor af T5 fra belastningens varierende værdi. Modstanden $R_C$ er faktor i udtrykket for åben-sløjfe forstærkningen $A_{OL}$ og ønskes derfor til en høj værdi. Det giver så til gengæld en pol ved udgangen af forstærkertrinnet.
+\begin{itemize}
+	\item Udgangstrinnet adskiller VAS trinnets $R_C$ fra udgangsbelastningen.
+	\item Kan gøres med et par emitterfølgere - eventuelt to dobbelt emitter-følgere, der øger dens evne til at levere strøm.
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{graphics/udgangstrin}
+	\caption{Udgangstrin.}
+	\label{fig:udgangstrin}
+\end{figure}
 
 \subsection{Offset-fejl og støj}
-
+Se side 280 i Analogteknik.
 \newpage
 \section{Dioden}
 Diodens egenskab er PN overgangen der kun tillader en elektrisk strøm at løbe i én retning. 
@@ -581,7 +703,7 @@ r_D = \dfrac{U_T}{I_F}
 Der er to modeller for hvordan transistorens kollektorstrøm styres.
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{graphics/transistor_DCmodel}
+	\includegraphics[width=0.6\linewidth]{graphics/transistor_DCmodel}
 	\caption{Transistorens strøm er styret af base-emitter spændingen eller basisstrømmen.}
 	\label{fig:transistor_DCmodel}
 \end{figure}
@@ -692,7 +814,6 @@ Gate-elektroden er opbygget som et metallag med et tyndt lag siliciumoxyd som is
 	\label{fig:mosfet_symbol}
 \end{figure}
 
-\newpage
 \subsection{Anvendelser}
 \paragraph{Diodekobling} En diode-koblet transistor opfører sig fuldstændig som en diode.
 \begin{itemize}
@@ -741,21 +862,20 @@ I_2 = I_S \exp{\left(\frac{n U_T \ln{\left(\frac{I_S}{I_1}\right)}}{n U_T}\right
 \newpage
 \section{Transistoren: AC}
 \subsection{AC model}
+\paragraph{Linearitet} kan for en transistor opnås ved at holde signalniveauet lavt. Arbejdspunktet må ikke komme tæt på $I_C = \SI{0}{\milli\ampere}$ og må kun svinge få mV omkring dette arbejdspunkt. 
 
-DC-arbejdspunktet angives med $I_B$, $I_C$ og $U_BE$.\\
-
-AC-værdierne angives med $i_B$, $i_C$ og $u_BE$.
-
-\paragraph{Linearitet} kan for en transistor opnås ved at holde signalniveauet lavt. Arbejdspunktet må ikke kommer tæt på $I_C = 0 mA$ og må kun svinge få mV omkring dette arbejdspunkt. 
-\begin{equation} 
-I_C = g_m u_{BE}
-\end{equation}
-
-\begin{equation} 
-i_C = I_S \exp \dfrac{u_{BE}}{n U_T}
-\end{equation}
+\begin{itemize}
+	\item Det antages at transistoren er ved et fornuftigt DC-arbejdspunkt. AC-spændingerne varierer omkring det faste arbejdspunkt.
+	\item Det antages at kredsløbet er lineært, som tillader superposition og dermed	adskillelse mellem DC og AC-analysen (småsignalmodel).
+	\item DC-arbejdspunktet angives med $I_B$, $I_C$ og $U_BE$.
+	\item AC-værdierne angives med $i_B$, $i_C$ og $u_BE$.
+\end{itemize}
 
 Strømmen i kollektor $i_C$ variererer proportionalt med $u_{BE}$ ved svagt signal.
+
+\begin{equation} 
+i_C = g_m u_{BE}
+\end{equation}
 
 \begin{equation} 
 i_C = \dfrac{I_C}{n U_T} u_{BE}
@@ -770,7 +890,7 @@ i_C = \dfrac{I_C}{n U_T} u_{BE}
 
 DC arbejdspunktet $I_C$ giver fundamentet for AC modellens vigtigste parameter: transkonduktansen.
 
-\paragraph{Transkonduktansen} er proportionaliteten mellem småsignals-kollektorstrømmen $i_C$ som funktion af spændingen $u_BE$. 
+\paragraph{Transkonduktansen} er proportionaliteten mellem småsignals-kollektorstrømmen $i_C$ som funktion af spændingen $u_{BE}$. 
 Den beskriver ledningsevnen i siemens (S).\\
 
 For at finde et arbejdspunkt hvor det er muligt at lave denne småsignals overførelse, laves en DC analyse hvor $I_C$  og $U_{BE}$ bestemmes. Ud fra disse kan transkonduktansen findes som:
@@ -779,81 +899,112 @@ For at finde et arbejdspunkt hvor det er muligt at lave denne småsignals overf�
 g_m = \dfrac{I_C}{U_T}
 \end{equation}
 
-\paragraph{Miller transformationen} 
+\newpage
+\paragraph{Miller-transformation} benyttes for at adskille transistorens ind- og udgangsporte. Ved et eksempel med en mikrofon forstærker vises Miller-transformationen. Først oversættes kredsløbet til en AC model.
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphics/mikrofon}
+	\caption{Mikrofonforstærker oversat til en AC model.}
+	\label{fig:mikrofonforstærker}
+\end{figure}
+
+Forstærkningen bestemmes af transkonduktansen og modstanden $R_C$.
+\begin{equation} 
+A = \dfrac{u_o}{u_{BE}} = -g_m R_C
+\end{equation}
+
 Transistoren har en intern kapacitet $C_{\si{\micro}}$ i den spærrende diode i kollektor-basis og den begrænser den opnåelige båndbredde.
-Ved et eksempel med en mikrofon forstærker vises Miller transformationen. Først oversættes kredsløbet til en AC model:
+
+\begin{itemize}
+	\item $C_{\si{\micro}}$ transformeres fra ud- til indgangen ved at gange med forstærkningen A + 1.
+	\begin{itemize}
+		\item Udgangen: $C_{\si{\micro}MO} = C_{\si{\micro}}$
+		\item Indgangen: $C_{\si{\micro}MI} = C_{\si{\micro}}(A + 1)$
+	\end{itemize}
+	\item $R_B$ tranformeres til indgangen ved at dele med $(A + 1)$.
+\end{itemize}
+
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=\linewidth]{graphics/millertransformation}
 	\caption{Mikrofonforstærker med kapaciteten $C_{\si{\micro}}$ indtegnet.}
 	\label{fig:millertransformation}
 \end{figure}
-Fra AC modellen ovenfor ses det at forstærkningen må være 
 
-\begin{equation} 
-A = \dfrac{u_{CE}}{u_{BE}}
-\end{equation}
-
-$u_{CE}$ må for dette kredsløb være spændingsfaldet over $R_C$ da strømmen løber væk fra $I_o$.
-
-\begin{equation} 
-u_{CE} = -g_m u_{BE}R_C
-\end{equation}
-
-Dette indsættes i udtrykket for forstærkningen
-
-\begin{equation} 
-A = \dfrac{-g_m u_{BE}R_C}{u_{BE}}
-\end{equation}
-
-På billedet nedenfor er en mikrofon forstærker Miller transformeret
-
-Først findes transkonduktansen for kredsløbet $I_C$ vælges til \SI{2}{\milli\ampere} i DC analysen:
-
-\begin{equation} 
-g_m = \dfrac{I_C}{u_T} = \dfrac{\SI{2}{\milli\ampere}}{\SI{26}{\milli\volt}} = \SI{0.08}{\siemens}
-\end{equation}
-
-Dernæst findes forstærkningen i kredsløbet:
-
-\begin{equation} 
-A = -g_m R_C = g_m \SI{1.25}{\kilo\ohm} = -95
-\end{equation}
-
-Herefter findes indgangs impedansen af kredsløbet:
-Hvis modstanden $R_B$ skal have samme strøm gennem sig når den er sat til 0V må den ændres i værdi, da der over den er et spændingsfald på
-$u_{CE}-u_{BE}$ hvilket ikke er lig $u_{BE}-0V$. Det nye spændingsfald er 1-A gange mindre og får at få den samme strøm må $R_B$ ændres til
-
-\begin{equation} 
-R_B = \dfrac{R_{BM}}{1-A}
-\end{equation}
-
-\begin{equation} 
-R_I = R_{BM} = \dfrac{\SI{270}{\kilo\ohm}}{1-(-95)} = \SI{2.8}{\kilo\ohm}
-\end{equation}
-
-Næst findes udgangsimpedansen:
-Da $R_B$ set fra indgangens synspunkt har en meget lav spænding (A gange mindre ind på udgangen) på indgangen, kan dette ses som 0V og i dette tilfælde er $u_{CE}-u_{BE} = u_{CE}-0V$, derfor skal modstanden ikke ændres ved Miller transformationen, heller ikke $R_C$. 
-
-\subsection{Koblingstyper og deres egenskaber}
-(forstærkning, ind- og udgangsimpedans)
-
+\newpage
 \subsection{Støj og forvrængning}
+Forstærkeren er ikke støjfri da der genereres termisk støj fra modstandene og haglstøj fra strømmene i basis og kollektor.
 \begin{itemize}
-	\item Forstærkeren er ikke støjfri.
-	\item Termisk støj fra modstandene $e_{nR}$.
+	\item Termisk støj $e_{nR}$ fra modstandene.
 	\begin{itemize}
-		\item Signalkildens modstand $R_G$.
+		\item Signalkildens indre modstand $R_G$.
 		\item Basismodstanden $r_x$.
-	\end{itemize}
-	\item Haglstøj fra strømmene i basis og kollektor.
-	\begin{itemize}
-		\item Basis $i_{nB}$
-		\item Kollektor $i_{nC}$
 	\end{itemize}
 \end{itemize}
 
-Transistorens forvrængning kan holdes til \SI{1}{\percent} THD (total harmonic distortion) ved at indgangssignalet varierer med mindre end 1mA. Dette skyldes transistorens eksponentielle karakteristik.
+Støjbidraget fra den indre modstand $R_G$ og transistorens modstand i basis $r_X$.
+\begin{equation} 
+e_{nR} = \sqrt{4kT(R_G+r_x)}
+\end{equation}
+
+\begin{itemize}
+	\item Haglstøj fra strømmene i basis og kollektor.
+	\begin{itemize}
+		\item Basis $i_{nB} = \sqrt{2 q_0 I_B}$
+		\item Kollektor $i_{nC} = \sqrt{2 q_0 I_C}$
+	\end{itemize}
+\end{itemize}
+
+Støjbidraget fra strømmen $I_B$ i basis som løber gennem $R_G$ og
+$r_X$.
+
+\begin{equation} 
+e_{nB} = (R_G+r_x)i_{nB}
+\end{equation}
+
+Støjbidraget fra strømmen $I_C$ i kollektor som løber gennem den eksterne modstand $R_C$.
+
+\begin{equation} 
+e_{nC} = U_T \sqrt{\dfrac{2q_0}{I_C}}
+\end{equation}
+
+Samlet indgangsstøj
+
+\begin{equation} 
+e_{nTOT} = \sqrt{e_{nR}^2+e_{nB}^2+e_{nC}^2}
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/stoj}
+	\caption{Egenstøj fra transistor.}
+	\label{fig:stoj}
+\end{figure}
+
+Modstanden $r_x$ kan udregnes udfra transistorens støjtal NF som er opgivet i databladet. NF angiver det antal decibel hvormed transistoren forringer det mulige signal/støj forhold.
+
+\begin{equation} 
+r_x = R_G (10^{NF/\SI{10}{\decibel}}-1)
+\end{equation}
+
+Transistorens forvrængning kan holdes til \SI{1}{\percent} THD (total harmonic distortion) ved at indgangssignalet varierer med mindre end \SI{1}{\milli\ampere}. \\
+
+Dette skyldes transistorens eksponentielle karakteristik.
+
+\newpage
+\subsection{Koblingstyper og deres egenskaber}
+\paragraph{Inverterende forstærker} med en forstærkning der teoretisk bør være $-\dfrac{R_B}{R_A}$.\\
+
+Det holder dog ikke i praksis pga. den lave åben-sløjfe forstærkning og indgangsmodstanden ved transistorens basis.
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/inverterende_for}
+	\caption{Inverterende forstærker.}
+	\label{fig:inverterende_for}
+\end{figure}
+		
+
 
 
 \end{document}
