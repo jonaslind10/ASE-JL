@@ -25,47 +25,61 @@
 \maketitle
 \section{Effektforstærkerøvelse: DC}
 \begin{itemize}
-	\item Klasse AB 30W forstærker til \SI{8}{\ohm} højtaler.
+	\item Klasse AB \SI{30}{\watt} forstærker til \SI{8}{\ohm} højtaler.
 	\item Indgangsignalet har signalamplitude på 1V.
 \end{itemize}
 
-\paragraph{Spændingsvinget} som er nødvendigt for at drive højtaleren ved 30W beregnes til 22V. Der skal være plads til to basis-emitter strækninger for udgangstrinnet, noget lignende til den øvrige elektronik og ripple i effektforsyningen og  \SI{10}{percent}  på netspændingen så effektforsyningen bør placeres cirka 5V højere end kravet til $V_O$ og det giver værdien til $+-27V$.
+\paragraph{Spændingsvinget} som er nødvendigt for at drive højtaleren ved \SI{30}{\watt} beregnes til \SI{22}{\volt}. Der skal være plads til to basis-emitter strækninger for udgangstrinnet, noget lignende til den øvrige elektronik og ripple i effektforsyningen og  \SI{10}{percent}  på netspændingen så effektforsyningen bør placeres cirka \SI{5}{\volt} højere end kravet til $V_O$ og det giver værdien til $+-\SI{27}{\volt}$.
 
 \begin{equation}
-P_O = \dfrac{U_{RMS}}{R_L}
+P_O = \dfrac{V_{RMS}}{R_L}
 \end{equation}
 
 \begin{equation}
-U_{RMS} = \sqrt{P_O R_L} = \sqrt{\SI{30}{\watt} \SI{8}{\ohm}} = \SI{15.5}{\volt}
+V_{RMS} = \sqrt{P_O R_L} = \SI{15.5}{\volt}
 \end{equation}
 
 \begin{equation}
-U_{PEAK} = U_{RMS} \sqrt{2} = \SI{22}{\volt}
+V_O = V_{RMS} \sqrt{2} = \SI{22}{\volt}
 \end{equation}
-\paragraph{Strømsvinget} som er nødvendigt på forstærkerens udgang igennem de \SI{8}{\ohm} findes til at være \SI{3.65}{\ampere}, ved en nominel modstandsværdi på \SI{6}{\ohm}. Dette er gældende da højttalerens svingspole har en DC modstand $R_{DC}$ på typisk \SI{80}{percent}  af den nominelle værdi.
+
+\paragraph{Strømsvinget} som er nødvendigt på forstærkerens udgang igennem de \SI{8}{\ohm} findes til at være \SI{3.65}{\ampere}, ved en nominel modstandsværdi på \SI{6}{\ohm}. Dette er gældende da højttalerens svingspole har en DC modstand $R_{DC}$ på typisk \SI{80}{\percent}  af den nominelle værdi. Der forventes en middelstrøm fra effektforsyningen på $I_{DC} = \SI{1.16}{\ampere}$.
 
 \begin{equation}
-I_{O\,PEAK} = \dfrac{U_{PEAK}}{R_L} = \SI{3.65}{\ampere}
+I_{O\,PEAK} = \dfrac{V_O}{R_L} = \SI{3.65}{\ampere}
 \end{equation}
-
-\paragraph{Udgangstrinnet} benytter et darlington par af to emitter følgere (common collector) for at øge strømforstærkningen. 
 
 \begin{equation}
-\beta = \beta_1 \beta_2 = 100 {\cdot} 30 = 3000
+I_{DC} = \dfrac{I_{O\,PEAK}}{\pi} = \SI{1.16}{\ampere}
 \end{equation}
 
-\begin{itemize}
-	\item Dette sænker de \SI{3.65}{\ampere} udganstrinnet skal levere til \SI{1.22}{\milli\ampere}.
-	\item Således belaster udgangstrinnet VAS-trinnet minimalt.
-	\item En \SI{2}{\kilo\ohm} base-modstand begrænser basestrømmen til højest \SI{1.45}{\milli\ampere}.
-	\item Modstanden er bestemt ved at se på fuldt udsving hvor højtaleren har \SI{22}{\volt} over sig og der er 3 gange \SI{0.7}{\volt} op til basen.
-\end{itemize}
+\paragraph{Udgangstrinnet} benytter et darlington par af to emitter følgere (common collector) for at øge strømforstærkningen. Drivertrinnet skal levere basisstrømmen til udgangstransistorerne 2N3055 og MJ2955 og med $\beta_{10} = \beta_{11} = 20$ som strømforstærkning i $T_{10}$ og $T_{11}$ behøves en strøm på \SI{183}{\milli\ampere}.
 
 \begin{equation}
-R = \dfrac{\SI{27}{\volt} − (3 \cdot \SI{0.7}{\volt} + \SI{22}{\volt})}{\SI{1.22}{\milli\ampere}} = \SI{2.38}{\kilo\ohm}
+I_B = \dfrac{I_{O\,PEAK}}{\beta} = \SI{183}{\milli\ampere}
 \end{equation}
+
+Basisstrømmen til drivertrinnet er \SI{5}{\milli\ampere} ved en strømforstærkning på $\beta_8 = \beta_9 = 40$.
+
+\begin{equation}
+I_B = \dfrac{\SI{183}{\milli\ampere}}{\beta} = \SI{4.58}{\milli\ampere}
+\end{equation}
+
+Den samlede strømforstærkning er 800 og forstærker basisstrømmen til drivertrinnet på \SI{4.58}{\milli\ampere} op til det nødvendige strømsving i udgangen på \SI{3.65}{\ampere}.
+
+\begin{equation}
+\beta = \beta_1 \beta_2 = 20 {\cdot} 40 = 800
+\end{equation}
+
+Dette sænker de \SI{3.65}{\ampere} udganstrinnet skal levere til \SI{4.58}{\milli\ampere}.Således belaster udgangstrinnet VAS-trinnet minimalt.
+En strømkilde leverer basestrømmen på \SI{4.66}{\milli\ampere}.
+
 
 \paragraph{Diode biasing} benyttes for at minimere crossover distortion. Fire dioder sættes i serie for at skabe et fast spændingsfald på \SI{2.8}{\volt} mellem de to transistores baser. 
+
+\paragraph{Strømkilde}
+Strømkilden sørger for at der løber en strøm i dioderne, der giver et konstant spændingsfald. Der anvendes en strømkilde istedet for en modstand, da der vil blive afsat for meget effekt i denne.
+Modstanden $R_E (R_{7})$ styrer strømmen $I_O = \SI{4.66}{\milli\ampere}$. 
 
 \begin{figure} [H]
 	\centering
@@ -73,11 +87,6 @@ R = \dfrac{\SI{27}{\volt} − (3 \cdot \SI{0.7}{\volt} + \SI{22}{\volt})}{\SI{1.
 	\caption{Kredsløbsdiagram for effektforstærker klasse AB.}
 	\label{fig:PowerAmp_schematic}
 \end{figure}
-
-\paragraph{Strømkilde}
-For at levere strømmen til dioderne anvendes en strømkilde istedet for en modstand, da der vil blive afsat for meget effekt i denne.
-Modstanden $R_E (R_{14})$ styrer $I_O$.
-$R_{12}$ sørger for at der løber en strøm i dioderne, der giver et konstant spændingsfald.
 
 \newpage
 \section{Effektforstærkerøvelse: AC}
@@ -90,9 +99,49 @@ $R_{12}$ sørger for at der løber en strøm i dioderne, der giver et konstant s
 	\item Ved hurtig og stor udstyring bliver sinusen til en trekant pga den begrænsede hastighed.
 \end{itemize}
 
-\paragraph{Det strømforstærkende trin} benytter en BJT transistors strømforstærkning β for at forstærke differentialtrinnets udgangsstrøm. Denne strøm bliver ledet gennem en modstand, $R_C$, som laver det om til en strøm. 
+\paragraph{Åben-sløjfe forstærkningen} benytter en transistors strømforstærkning $\beta$ for T5 til at forstærke differentialtrinnets udgangsstrøm. Denne strøm bliver ledet gennem modstanden $R_C$, som laver det om til en strøm. 
+Indgangsmodstanden for en emitterfølger er belastningen $R_L$ gange med den samlede strømforstærkning til $R_C = \SI{4.8}{\kilo\ohm}$.
+
+\begin{equation}
+R_C = \beta_8 \beta_{10} R_L = \SI{4.8}{\kilo\ohm}
+\end{equation}
+
+DC forstærkningen beregnes herefter til $A_{DC} = 194000$ ved en belastning på $R_L = \SI{6}{\ohm}$.
+
+\begin{equation}
+A_{DC} = g_m \beta_5 R_C = 194000
+\end{equation}
 
 I en integreret forstærker benyttes ofte flere transistorer til at forøge den resulterende strømforstærkning mens en effektforstærker som oftest nøjes med en enkelt transistor da der ikke er behov for den ekstremt høje forstærkning ved DC. 
+
+\paragraph{Kompenseringskondensatoren} skal sikre stabilitet ved at reducere forstærkningen til en ved den laveste af de høje poler der antages givet af $R_C$ og $C_{\si{\micro}}$ for T5, T8 og T9 i parallel.
+Ved en værdi på \SI{10}{\pico\farad} findes $f_H = \SI{3.3}{\mega\hertz}$ og den dominerende pol $f_0$ findes til \SI{17}{\hertz}. 
+
+\begin{equation} 
+f_H  = \frac{1}{2\pi R_C C_{\si{\micro}}} = \SI{3.3}{\mega\hertz}
+\end{equation}
+
+\begin{equation}
+f_0 = \frac{f_H}{A_{DC}} = \SI{17}{\hertz}
+\end{equation}
+
+Ved den aktuelle forstærkning på $A_{CL} = 31$ kan den dominerende pol $f_P$ findes til \SI{530}{\hertz} som er tilstrækkelig for stabilitet.
+
+\begin{equation}
+f_P = A_{CL} f_0 = \SI{530}{\hertz}
+\end{equation}
+
+Den dominerende pol $f_0$ ligger så lavt at systemet bliver ubetinget stabilt.
+
+\begin{equation} 
+f_0  \leq \frac{f_h A_{CL}}{4\,A_{DC}} = \SI{133}{\hertz}
+\end{equation}
+
+Kompenseringskondensatoren kan herved findes.
+
+\begin{equation} 
+C_C  = \frac{1}{2\pi \beta f_0 R_C}
+\end{equation}
 
 \begin{figure} [H]
 	\centering
@@ -100,6 +149,7 @@ I en integreret forstærker benyttes ofte flere transistorer til at forøge den 
 	\caption{Kredsløbsdiagram for effektforstærker klasse AB.}
 	\label{fig:PowerAmp_schematic1}
 \end{figure}
+
 DC forstærkningen er således givet ved:
 \begin{equation} 
 A_{DC} = g_m \beta R_C
