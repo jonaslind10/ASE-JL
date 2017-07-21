@@ -65,21 +65,20 @@ Basisstrømmen til drivertrinnet er \SI{5}{\milli\ampere} ved en strømforstærk
 I_B = \dfrac{\SI{183}{\milli\ampere}}{\beta} = \SI{4.58}{\milli\ampere}
 \end{equation}
 
-Den samlede strømforstærkning er 800 og forstærker basisstrømmen til drivertrinnet på \SI{4.58}{\milli\ampere} op til det nødvendige strømsving i udgangen på \SI{3.65}{\ampere}.
+Den samlede strømforstærkning er 800 som sænker de \SI{3.65}{\ampere} udganstrinnet skal levere til \SI{4.58}{\milli\ampere}. Således belaster udgangstrinnet VAS-trinnet minimalt.
 
 \begin{equation}
 \beta = \beta_1 \beta_2 = 20 {\cdot} 40 = 800
 \end{equation}
 
-Dette sænker de \SI{3.65}{\ampere} udganstrinnet skal levere til \SI{4.58}{\milli\ampere}.Således belaster udgangstrinnet VAS-trinnet minimalt.
-En strømkilde leverer basestrømmen på \SI{4.66}{\milli\ampere}.
-
-
+\newpage
 \paragraph{Diode biasing} benyttes for at minimere crossover distortion. Fire dioder sættes i serie for at skabe et fast spændingsfald på \SI{2.8}{\volt} mellem de to transistores baser. 
 
 \paragraph{Strømkilde}
-Strømkilden sørger for at der løber en strøm i dioderne, der giver et konstant spændingsfald. Der anvendes en strømkilde istedet for en modstand, da der vil blive afsat for meget effekt i denne.
-Modstanden $R_E (R_{7})$ styrer strømmen $I_O = \SI{4.66}{\milli\ampere}$. 
+Strømkilden sørger for at der løber en strøm i dioderne. 
+Der er valgt at der skal løbe en strøm på \SI{19.45}{\milli\ampere}, der giver et konstant spændingsfald på \SI{2.8}{\volt}. 
+Der anvendes en strømkilde istedet for en modstand, da der vil blive afsat for meget effekt i denne.
+Modstanden $R_E (R_{7})$ styrer strømmen $I_O = \SI{19.45}{\milli\ampere}$. 
 
 \begin{figure} [H]
 	\centering
@@ -92,81 +91,103 @@ Modstanden $R_E (R_{7})$ styrer strømmen $I_O = \SI{4.66}{\milli\ampere}$.
 \section{Effektforstærkerøvelse: AC}
 
 \subsection{Forstærkning og stabilitet}
-\begin{itemize}
-	\item Der laves en dominerende pol for at sikre stabilitet ved at forstærkningen er sænket til under 1 når fasedrejet er 180°.
-	\item Dette begrænser forstærkerens båndbredde.
-	\item Slew rate begrænsning af kondensatoren $C_C$ og strømmen $I_E$.
-	\item Ved hurtig og stor udstyring bliver sinusen til en trekant pga den begrænsede hastighed.
-\end{itemize}
 
 \paragraph{Åben-sløjfe forstærkningen} benytter en transistors strømforstærkning $\beta$ for T5 til at forstærke differentialtrinnets udgangsstrøm. Denne strøm bliver ledet gennem modstanden $R_C$, som laver det om til en strøm. 
-Indgangsmodstanden for en emitterfølger er belastningen $R_L$ gange med den samlede strømforstærkning til $R_C = \SI{4.8}{\kilo\ohm}$.
+
+\begin{itemize}
+	\item Indgangsmodstanden for en emitterfølger er belastningen $R_L$ gange med den samlede strømforstærkning til $R_C = \SI{4.8}{\kilo\ohm}$.
+\end{itemize}
 
 \begin{equation}
 R_C = \beta_8 \beta_{10} R_L = \SI{4.8}{\kilo\ohm}
 \end{equation}
 
-DC forstærkningen beregnes herefter til $A_{DC} = 194000$ ved en belastning på $R_L = \SI{6}{\ohm}$.
+\begin{itemize}
+	\item DC forstærkningen beregnes herefter til $A_{DC} \approx 194000$ ved en belastning på $R_L = \SI{6}{\ohm}$.
+\end{itemize}
 
 \begin{equation}
-A_{DC} = g_m \beta_5 R_C = 194000
+A_{DC} = g_m \beta_5 R_C \approx 194000
 \end{equation}
 
 I en integreret forstærker benyttes ofte flere transistorer til at forøge den resulterende strømforstærkning mens en effektforstærker som oftest nøjes med en enkelt transistor da der ikke er behov for den ekstremt høje forstærkning ved DC. 
 
 \paragraph{Kompenseringskondensatoren} skal sikre stabilitet ved at reducere forstærkningen til en ved den laveste af de høje poler der antages givet af $R_C$ og $C_{\si{\micro}}$ for T5, T8 og T9 i parallel.
-Ved en værdi på \SI{10}{\pico\farad} findes $f_H = \SI{3.3}{\mega\hertz}$ og den dominerende pol $f_0$ findes til \SI{17}{\hertz}. 
+
+\begin{itemize}
+	\item Miller transformation udføres for at finde modstande og kapaciteter, der resulterer i poler.
+\end{itemize}
 
 \begin{equation} 
-f_H  = \frac{1}{2\pi R_C C_{\si{\micro}}} = \SI{3.3}{\mega\hertz}
+g_{m5} = \frac{I_C}{U_T} = \SI{216}{\milli\siemens}
 \end{equation}
+
+\begin{equation} 
+A = g_{m5} R_C \approx 1040
+\end{equation}
+
+\begin{equation} 
+r_{\pi 5} = \frac{\beta_5}{g_{m5}} = \SI{1.9}{\kilo\ohm}
+\end{equation}
+
+\begin{equation} 
+C_{\si{\pi}5} = \frac{g_m}{2\pi f_T}
+\end{equation}
+
+\begin{itemize}
+	\item $C_{\si{\micro}} \approx 3 \si{\pico\farad}$
+\end{itemize}
+
+\begin{equation} 
+C_{\si{\micro}5} = C_{MO}
+\end{equation}
+
+\begin{equation} 
+C_{MI} = (1+A)C_{MO} = \SI{3.1}{\nano\farad}
+\end{equation}
+
+\begin{itemize}
+	\item Polen ved ind- og udgangen findes.
+\end{itemize}
+
+\begin{equation} 
+f_1 = \dfrac{1}{2\pi \, r_{\pi} (C_{\pi} + C_{MI})} = \SI{25.5}{\kilo\hertz}
+\end{equation}
+
+\begin{equation} 
+f_2 = \dfrac{1}{2\pi \, r_C \, C_{MO5}} = \SI{11.1}{\mega\hertz}
+\end{equation}
+
+\begin{itemize}
+	\item Den nye dominerende pol findes ud fra den høje pol.
+\end{itemize}
+
+\begin{equation} 
+f_0  \leq \frac{f_h}{4\,A_{DC}} = \SI{14.3}{\hertz}
+\end{equation}
+
+\begin{itemize}
+	\item Den dominerende pol kan hæves med forstærkningen $A_{CL} = 31$. Dette er tilstrækkelig for stabilitet, da den dominerende pol $f_0$ ligger så lavt at systemet bliver ubetinget stabilt.
+\end{itemize}
 
 \begin{equation}
-f_0 = \frac{f_H}{A_{DC}} = \SI{17}{\hertz}
+f_0  \leq \frac{f_h A_{CL}}{4\,A_{DC}} = \SI{441.9}{\hertz}
 \end{equation}
 
-Ved den aktuelle forstærkning på $A_{CL} = 31$ kan den dominerende pol $f_P$ findes til \SI{530}{\hertz} som er tilstrækkelig for stabilitet.
-
-\begin{equation}
-f_P = A_{CL} f_0 = \SI{530}{\hertz}
-\end{equation}
-
-Den dominerende pol $f_0$ ligger så lavt at systemet bliver ubetinget stabilt.
+\begin{itemize}
+	\item Kompenseringskondensatoren kan nu vælges til $C_C = \SI{180}{\pico\farad}$
+\end{itemize}
 
 \begin{equation} 
-f_0  \leq \frac{f_h A_{CL}}{4\,A_{DC}} = \SI{133}{\hertz}
+C_C  = \frac{1}{2\pi \beta f_0 R_C} = \SI{178.8}{\pico\farad}
 \end{equation}
 
-Kompenseringskondensatoren kan herved findes.
+\paragraph{Slew rate (SR)} begrænses af kondensatoren og strømmen $I_E$. En hurtig sinus med stor amplitude bliver til trekant.\\
+
+Den dominerende pol giver stabilitet, men begrænser også hvor hurtigt udgangen kan flyttes. Hvis værdien forsøges overskredet bliver signalet forvrænget.
 
 \begin{equation} 
-C_C  = \frac{1}{2\pi \beta f_0 R_C}
-\end{equation}
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=\linewidth]{graphics/PowerAmp_schematic}
-	\caption{Kredsløbsdiagram for effektforstærker klasse AB.}
-	\label{fig:PowerAmp_schematic1}
-\end{figure}
-
-DC forstærkningen er således givet ved:
-\begin{equation} 
-A_{DC} = g_m \beta R_C
-\end{equation}
-
-Transkonduktansen gm i differentialtrinnet T1 ... T4 beregnes til 0,1 
-
-Kondensatoren $C_C$ skaber en dominerende pol ved $f_0$, som sikrer stabilitet.
-
-\begin{equation} 
-f_0 = \dfrac{1}{2 \pi \beta R_C C_C}
-\end{equation}
-
-Slew-raten (SR) begrænses af kondensatoren og strømmen $I_E$.
-
-\begin{equation} 
-SR = \dfrac{I_E}{C_C}
+SR = \dfrac{I_E}{C_C} \approx \SI{28}{\volt\per\micro\siemens}
 \end{equation}
 
 \begin{figure} [H]
@@ -176,17 +197,23 @@ SR = \dfrac{I_E}{C_C}
 	\label{fig:slewrate}
 \end{figure}
 
-Den dominerende pol giver stabilitet, men begrænser også hvor hurtigt udgangen kan flyttes. Hvis værdien forsøges overskredet bliver signalet forvrænget.
 
-\subsection{Transistor - AC model}
-\subsection{Diode - AC model}
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/PowerAmp_schematic}
+	\caption{Kredsløbsdiagram for effektforstærker klasse AB.}
+	\label{fig:PowerAmp_schematic1}
+\end{figure}
+
 
 \newpage
 \section{Effektforstærkerøvelse: Effektafsættelse}
 \subsection{Beregning af effektafsættelse}
 Herunder regnes den totale effekt afsat i forstærkeren og ud fra den findes effekten afsat i udgangstrinnet.\\
 
-Den tilførte effekt på \SI{67}{\watt} ved \SI{30}{\watt} afgivet i nominelt \SI{8}{\ohm}. 
+\begin{itemize}
+	\item Den tilførte effekt på \SI{67}{\watt} ved \SI{30}{\watt} afgivet i nominelt \SI{8}{\ohm}. 
+\end{itemize}
 
 \begin{equation}
 I_{O\,PEAK} = \SI{3.65}{\ampere}
@@ -197,41 +224,63 @@ I_{DC} = \dfrac{I_{O\,PEAK}}{\pi} =\SI{1.16}{\ampere}
 \end{equation}
 
 \begin{equation}
-P_{CC} = U_{CC}(I_{PEAK}-I_{DC})=\SI{67.2}{\watt}
+P_{CC} = V_{CC}(I_{PEAK}-I_{DC})=\SI{67.2}{\watt}
 \end{equation}
 
-Effekttabet i udgangstransistorerne T9 og T10 bliver \SI{32}{\watt} samlet og derfor forventes et tab på \SI{16}{\watt} i hver transistor. 
+\begin{itemize}
+	\item Effekttabet i udgangstransistorerne T9 og T10 bliver \SI{24}{\watt} samlet.
+	\item Der forventes derfor et tab på \SI{12}{\watt} i hver transistor.
+	\item Ved simulering ses effektabet til \SI{11.5}{\watt}.
+	\item De valgte transistorer 2N3055 og MJ2955 kan klare \SI{115}{\watt}.
+\end{itemize} 
 
 \begin{equation}
-P_O = \dfrac{U_{CC}U_O}{\pi R_L} =\SI{31.2}{\watt}
+P_T = 0.405 \cdot \dfrac{V_{CC}^2}{2 R_L} \approx \SI{24}{\watt}
 \end{equation}
+
+\textbf{Valg af komponenter og deres vigtige parametre}
+
+\begin{itemize}
+	\item Max afsat effekt (Total Power Dissipation) ($P_D$)
+	\item Max kollektor strøm (Collector Current)($I_{C\;max}$)
+	\item Max spænding over kollektor-emitter (Collector−Emitter Voltage) ($V_{CE\;max}$)
+	\item Strømforstærkning (DC Current Gain) ($\beta / h_{FE}$)
+\end{itemize}
 
 \subsection{SOA}
 SOA er en betegnelse for safe-operating area.
-SOA findes ved at kombinere følgende tre begrænsninger:
+En transistor skal beskyttes mod tre typer overlast: spænding, strøm og effekt.
 \begin{itemize}
-	\item $I_{C,MAX}$
-	\item  $U_{CE,MAX}$
-	\item  $P_{MAX}$
+	\item $I_{C\,MAX} = \SI{15}{A}$
+	\item  $V_{CE\,MAX} = \SI{60}{\volt}$
+	\item  $P_{C\,MAX} \SI{115}{\watt}$
 \end{itemize}
 
-$P_{MAX}$ giver skæringspunkterne for 2N3055:
+Den kan klare en spænding $V_{CE\,MAX}$ over kollektor og emitter uden sammenbrud på grund af den elektriske feltstyrke i PN overgangen. 
+Den kan klare strømmen $I_{C\,MAX}$ uden problemer med strømtætheden i siliciummet, men ved større strøm er der risiko for punktopvarmning (sekundært sammenbrud) eller den interne tråd i emitteren kan smelte som en sikring.
+Endelig kan transistoren klare effekten $P_{C\,MAX}$ uden at opvarmes til destruktion.\\
+
+Ved overskridelse af Absolute Maximum Ratings fra transistorens datablad risikeres alt fra en nedsat levetid til et momentant sammenbrud.
+
+\newpage
+$P_{MAX}$ giver skæringspunkterne for 2N3055.
 
 \begin{equation}
-I_C = \dfrac{P_{MAX}}{U_{CE}} = \dfrac{\SI{115}{\watt}}{\SI{60}{\volt}} = \SI{1.9}{\ampere}
+I_C = \dfrac{P_{MAX}}{V_{CE}} = \dfrac{\SI{115}{\watt}}{\SI{60}{\volt}} = \SI{1.9}{\ampere}
 \end{equation}
 
 \begin{equation}
-U_{CE} = \dfrac{P_{MAX}}{I_C} = \dfrac{\SI{115}{\watt}}{\SI{15}{\ampere}} = \SI{7.7}{\volt}
+V_{CE} = \dfrac{P_{MAX}}{I_C} = \dfrac{\SI{115}{\watt}}{\SI{15}{\ampere}} = \SI{7.7}{\volt}
 \end{equation}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.4\linewidth]{graphics/soa}
+	\includegraphics[width=0.45\linewidth]{graphics/soa}
 	\caption{Safe-operating area.}
 	\label{fig:soa}
 \end{figure}
 
+Arbejdslinjen er $I_{C2} = \SI{3.65}{\ampere} \rightarrow V_{CC} = \SI{27}{\volt}$.
 
 \subsection{Termisk modstand}
 En køleprofil beskrives normalt ved en termisk modstand og Ohms lov antages at gælde for det termiske system. 
@@ -254,6 +303,9 @@ T = (R_{th} P + T_{amb}
 	\caption{Beregning af temperaturstigning ved en effektstrøm P i en termisk modstand.}
 	\label{fig:ohmslovanalogi}
 \end{figure}
+
+Effektstrømmen $P$ løber gennem den termiske modstand $R_{th}$ og det
+danner et temperaturfald på $R_{th}P$ som hæver temperaturen $T$ over omgivelsestemperaturen $T_{amb}$.
 
 \begin{itemize}
 	\item $R_{th\:j-mb}$
