@@ -24,21 +24,339 @@
 \date{15-08-2017}
 \maketitle
 \section{Analyse af digitale signaler med Diskret Fourier Transformation og Spektrogram}
-
+\newpage
 \section{Spektral forbredning, zero-padding og window functions i relation til DFT}
-
+\newpage
 \section{FIR/IIR filter analyse og design vha. placering af poler/nuller i pol-nulpunkts-diagrammet}
 
+\subsection{Pol-nulpunkts analyse}
+\begin{itemize}
+	\item FIR eller IIR-filter?
+	\begin{itemize}
+		\item FIR har kun poler i origo.
+		\item IIR har flere poler.
+	\end{itemize}
+	\item Poler danner peaks.
+	\begin{itemize}
+		\item Har betydning for hvor meget frekvenserne bliver forstærket, hvis den placeres på enhedscirklen forstærkes frekvenserne uendeligt meget.
+	\end{itemize}
+	\item Nulpunkter danner dyk.
+	\begin{itemize}
+		\item Har betydning for hvor meget frekvenserne bliver dæmpet, hvis den placeres på enhedscirklen dæmpes frekvenserne uendeligt meget.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/unitycircle}
+	\caption{Enhedscirklen.}
+	\label{fig:unitycircle}
+\end{figure}
+
+\begin{itemize}
+	\item Stabilitet.
+	\begin{itemize}
+		\item Hvis alle poler er placeret inde i enhedscirklen vil filteret være stabilt.
+		\item Polen kan ophæves ved at have et nulpunkt med præcis samme afstand fra (0,0) og dermed samme længde.
+	\end{itemize}
+\end{itemize}
+
+
+\newpage
 \section{Window method til FIR filter design}
-
+\newpage
 \section{Interpolation og decimation}
+\subsection{Decimation}
+\begin{itemize}
+	\item To-trins proces med lavpasfiltrering efterfulgt af downsampling.
+	\item Samplerate reduceres ved downsampling.
+	\begin{itemize}
+		\item En sekvens af samplede signalværdier kan downsamples med en faktor $M$ ved at beholde hver $M-$sample og kassere alle resterende samples.
+	\end{itemize}
+\end{itemize}
 
+\begin{equation}
+f_{s\, new} = \frac{f_{s\, old}}{M}
+\end{equation}
+
+\begin{equation}
+x_{new}(m) = x_{old}(Mm)
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/decimation}
+	\caption{Sample rate konvertering med den originale sekvens øverst og den downsampled med $M = 3$ sekvens nederst.}
+	\label{fig:decimation}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/decimation1}
+	\caption{Spektrummet af et originalt båndbegrænset samplet $x_{old}(n)$ signal er indikeret med solid lines. Spektralreplikationerne er angivet med dashed lines.}
+	\label{fig:decimation1}
+\end{figure}
+
+\begin{itemize}
+	\item $X_{new}(f)$ kan være opnået direkte ved at sample det originale kontinuerlige $x(t)$ signal med en samplefrekvens på $f_{s\, new}$, i modsætning til nedsampling $x_{old}(n)$ med en faktor på tre.
+	\item Der er en grænse for hvor meget der kan downsamples i forhold til båndbredden $B$ af det originale signal.
+	\begin{itemize}
+		\item 	Den nye samplefrekvens $f_{s\, new} > 2B$ for at forhindre aliasering.
+		\item Hvis en decimation kræver $f_{s\, new} < 2B$, skal $x_{old}(n)$ være lavpasfiltreret før downsampling udføres.
+		\begin{itemize}
+			\item Hvis det originale signal har en båndbredde $B$ og det kun er båndbredden $B_v$ der er interessant at beholde skal signal spektrummet over $B'$ lavpas-filtreres med fuld dæmpning i stopbåndet fra $f_{stop}$.
+			\item  Lavpas filteret's $f_{stop}$ frekvens kan være så høj som $f_{stop} = f_{s\,new} -B'$ og der vil ikke opstå aliasering i båndbredden $B'$.
+		\end{itemize}
+	\end{itemize}
+		\item Downsampling medfører ikke amplitudetab i tidsdomænet.
+		\item Downsampling medfører derimod et amplitudetab med en faktor $M$ i frekvensdomænet, $A_{new} = \frac{A}{M}$.
+		\begin{itemize}
+			\item DFT amplituden er proportional med antallet af samples i tidsdomænet.
+		\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/decimation2}
+	\caption{Decimation.}
+	\label{fig:decimation2}
+\end{figure}
+
+
+\subsection{Interpolation}
+
+\begin{itemize}
+	\item Interpolation er en to-trins proces med upsampling efterfulgt af en lavpasfiltrering.
+	\item Samplerate øges ved upsampling.
+	\begin{itemize}
+		\item 	For at øge samplefrekvensen $f_{s\, old}$ med en faktor $L$ indsættes $L-1$ zero-valued samples mellem hver sample i $x_{old}(n)$, hvilket skaber en længere sekvens. 
+		\item I slutningen af den forlængede sekvens tilføjes også $L-1$ zero-valued samples.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+f_{s\, new} = L \cdot f_{s\, old}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/interpolation}
+	\caption{Interpolation med den originale sekvens øverst og den upsamplede med L = 3 sekvens nederst.}
+	\label{fig:interpolation}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/interpolation1}
+	\caption{Den originale sekvens øverst, den upsamplede med L = 4 sekvens i midten og output sekvensen efter interpolation filter nederst.}
+	\label{fig:interpolation1}
+\end{figure}
+
+\begin{itemize}
+	\item Lavpasfilteret sørger for at dæmpe de spektrale $"images"$ i frekvensdomænet.
+	\begin{itemize}
+		\item Dette filter kaldes for et interpolation filter.
+	\end{itemize}
+	\item Interpolation medfører et amplitudetab med en faktor $L$ i tidsdomænet, men det amplitudetab forsvinder i frekvensdomænet da sekvensen indeholder $L$ gange flere samples.
+	\begin{itemize}
+		\item DFT amplituden er proportional med antallet af samples i tidsdomænet.
+	\end{itemize}
+\end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/Interpolation2}
+	\caption{Interpolation.}
+	\label{fig:Interpolation2}
+\end{figure}
+
+\subsection{Kombination af Interpolation og Decimation}
+\begin{itemize}
+	\item Samplerate konvertering; Interpolation med en faktor L efterfulgt af Decimation med en faktor M.
+\end{itemize}
+
+\begin{equation}
+Sample\;rate\;conversion = \frac{L}{M}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/multirate1}
+	\caption{Kombination af interpolation/decimation.}
+	\label{fig:multirate1}
+\end{figure}
+
+\begin{itemize}
+	\item Interpolationsfiltret $LPF_L$ og decimeringsfiltret $LPF_M$ kan kombineres i et enkelt filter.
+	\item Beregningsbyrden for at ændre sampleraten med $L/M$ er mindre når filterne kombineres end ved en individuel interpolation efterfulgt af en individuel decimation. 
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/multirate2}
+	\caption{Anvendelse af et multirate filter.}
+	\label{fig:multirate2}
+\end{figure}
+
+\begin{itemize}
+	\item Dette kaldes for en sample rate converter.
+	\begin{itemize}
+		\item Hvis L > M har vi interpolation.
+		\item Hvis M > L har vi decimering.	
+	\end{itemize}
+	\item Filteret $LPF_{L/M}$ kaldes ofte et multirate filter.
+\end{itemize}
+
+\begin{itemize}
+	\item For at undgå aliasering skal filteret, $LPF_{L/M}$, dæmpe alle frekvenser der ligger over:
+	\begin{itemize}
+		\item $\frac{f_{s\,old}}{2}$
+	\end{itemize}
+	\item Eller hvis $LPF_{L/M}$ efter hvilen der er mindst:
+	\begin{itemize}
+		\item $\frac{f_{s\,old}}{2}(\frac{L}{M})$
+	\end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+\newpage
 \section{Differentiation og integration}
 
+Differentiation er godt beskrevet for kontinuerte signaler, men differation for diskrete signaler er ikke veldefineret. Derfor bruges der forskellige modeller for tilnærmelsesvis beregning af de afledte derativer i digital signal behandling.
+
+\subsection{First-difference differentiator}
+\begin{itemize}
+	\item Beregner differencen mellem hver sample. 
+	\item Forstærker højfrekvente spektrale komponenter, har samme karakteristik som et højpas filter.
+\end{itemize}
+
+\begin{equation}
+y_{Fd}(n) = x(n)-x(n-1) 
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{graphics/first-difference-differentiator}
+	\caption{First-difference differentiator.}
+	\label{fig:first-difference-differentiator}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/first-difference-differentiator1}
+	\caption{First-difference differentiator.}
+	\label{fig:first-difference-differentiator1}
+\end{figure}
+
+\subsection{Central-difference differentiator}
+\begin{itemize}
+	\item Beregner den gennemsnitlige difference mellem hver 2. sample.
+	\item Dæmper højfrekvente spektrale komponenter.
+\end{itemize}
+
+\begin{equation}
+y_{Cd}(n) = \frac{x(n)-x(n-2)}{2}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{graphics/central-difference-differentiator}
+	\caption{Central-difference differentiator.}
+	\label{fig:central-difference-differentiator}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/central-difference-differentiator1}
+	\caption{Central-difference differentiator.}
+	\label{fig:central-difference-differentiator1}
+\end{figure}
+
+\begin{itemize}
+	\item First-difference og Central-difference differentiators er kun præcise når input signalets båndbredde er lille i forhold til input signalets sample rate $f_s$. 
+	\item Begge	differentiators har lineære fase respons og dermed en konstant tidsforsinkelse kaldet \textit{group delay}.
+	\begin{itemize}
+		\item First-difference differentiator har en delayline på $D = 1$ og dermed et group delay på \newline $G_{diff}= \frac{D}{2} = 1/2 = 0,5$ sample.
+		\item Central-difference differentiator har en delayline på $D = 2$ og dermed et group delay på $G_{diff}= \frac{D}{2} = 2/2 = 1$ sample.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/frekvensrespons_diff}
+	\caption{Frekvensrespons for simple differentiators.}
+	\label{fig:frekvensrespons_diff}
+\end{figure}
+
+\subsection{Integration}
+Integration er godt beskrevet for kontinuerte signaler, men integration for diskrete signaler er ikke veldefineret. Derfor bruges der forskellige modeller for tilnærmelsesvis kontinuert integration.
+
+\paragraph{Rectangular Rule Integrator} udregner summen af de skraverede rektangler. Den nuværende sum $y_{Re}(n)$, er den forhenværende sum $y_{Re}(n-1)$ plus den nuværende input sample $x(n)$.
+
+\begin{equation}
+y{_Re}(n) = x(n)+y_{Re}(n-1)
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/rectangular_rule}
+	\caption{Rectangular Rule Integrator.}
+	\label{fig:rectangular_rule}
+\end{figure}
+
+
+\paragraph{Trapezoidal Rule Integrator} udregner summen af  $y_{Tr}(n)$ ved at beregne arealet ved gennemsnittet af $x(n) + x(n-1)$ i det skraverede areal til højre og addedere det med værdien for den forhenværende sum $y_{Tr}(n-1)$.
+\begin{equation}
+y_{Tr}(n) = 0.5 x(n)+ 0.5 x(n-1) y_{Tr}(n-1)
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/trapezoidal_rule}
+	\caption{Trapezoidal Rule Integrator.}
+	\label{fig:trapezoidal_rule}
+\end{figure}
+
+\paragraph{Simpson's Rule Integrator} benytter tre samples til at beregne arealet under skraverede kurve.
+\begin{equation}
+y_{Si}(n) = \dfrac{x(n)+ 4x(n-1) x(n-2)}{3} + y_{Si}(n-2)
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/simpsons_rule}
+	\caption{Simpson's Rule Integrator.}
+	\label{fig:simpsons_rule}
+\end{figure}
+
+\begin{itemize}
+	\item Simple integrators er præcise ved lave frekvenser (når input signalets båndbredde er lille i forhold til input signalets sample rate $f_s$).
+	\begin{itemize}
+		\item Det er her hvor det er mest nødvendigt med høj præcision.
+	\end{itemize}
+	\item Ved højfrekvent støj scenarier skal Rectangular Rule eller Trapezoidal Rule integratorer anvendes, fordi de giver forbedret dæmpning af spektrale komponenter i nærheden af $\frac{f_s}{2}$.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/integrators}
+	\caption{Normaliseret frekvensrespons for fire integrators.}
+	\label{fig:integrators}
+\end{figure}
+
+
+\newpage
 \section{Stokastiske signaler, herunder middelværdi, varians, sandsynligheds-tæthedsfunktion og histogram}
-
+\newpage
 \section{Beregning af Signal-Noise Ratio i tids- og frekvens-domænet}
-
+\newpage
 \section{Midlingsfiltre}
 
 \newpage
@@ -128,9 +446,9 @@ r(n) = \sum_{k=-\infty}^{\infty} x(k) \cdot x(n+k) = x(n) \circledast x(-n)
 
 \newpage
 \section{CASE projekt 1 – FSK transmission}
-
+\newpage
 \section{CASE projekt 2 – Audio filter}
-
+\newpage
 \section{CASE projekt 3 – Vejecelle}
 
 \newpage
@@ -150,13 +468,75 @@ r(n) = \sum_{k=-\infty}^{\infty} x(k) \cdot x(n+k) = x(n) \circledast x(-n)
 		\item Et sinus signal er kontinuert og da den gentager sig selv er det et problem da vi med korrelation leder efter gentagelser.
 	\end{itemize} 
 	\item Længden af signalet skal sørge for at være langt nok til at optage både når signalet sendes afsted og indtil det er kommet tilbage. 
-	\item Præcisionen af målingen er $\frac{\SI{340}{\meter\per\second}}{\SI{48}{\kilo\hertz}} \approx \SI{7}{\milli\meter}$ per sample.
-	\item Systemet skal kunne måle afstande op til \SI{10}{\meter}. Dette giver en forventning om at ekkoet skal rejse \SI{20}{\meter}, hvilket tager $\frac{\SI{20}{\meter}}{\SI{340}{\meter\per\second}} \approx \SI{59}{\milli\second}$.
-	\item Antal samples der er brug for til at optage afspilningen er $F_s \cdot T + 2400 \cdot 2 \approx 7600$.
-	\item Optagetiden er herved $\frac{7600}{F_s} \approx \SI{160}{\milli\second}$.
-	\item Array størrelsen bliver hermed $2^{13} = 8192$.
+	\item Præcisionen af målingen er ca. \SI{7}{\milli\meter} per sample.
+\end{itemize} 
+\begin{equation}
+ \frac{\SI{340}{\meter\per\second}}{\SI{48}{\kilo\hertz}} \approx \SI{7}{\milli\meter}
+\end{equation}
+\begin{itemize}
+	\item Systemet skal kunne måle afstande op til \SI{10}{\meter}. Dette giver en forventning om at ekkoet skal rejse \SI{20}{\meter}. Det vil tage ekkoet \SI{59}{\milli\second} at rejse 20 meter.
 \end{itemize}
+\begin{equation}
+\frac{\SI{20}{\meter}}{\SI{340}{\meter\per\second}} \approx \SI{59}{\milli\second}
+\end{equation}
+\begin{itemize}
+	\item Antal samples der er brug for til at optage afspilningen er $F_s \cdot T + 2400 \cdot 2 \approx 7600$.
+	\item Array størrelsen bliver hermed $2^{13} = 8192$.
+	\item Optagetiden er herved \SI{160}{\milli\second}.
+\end{itemize}
+\begin{equation}
+\frac{N}{F_s} = \frac{7600}{\SI{48}{\kilo\hertz}} \approx \SI{160}{\milli\second}
+\end{equation}
 
 \subsection{Signal analyse}
+\begin{itemize}
+	\item Krydskorrelation anvendes mellem det udsendte signal og de optagede signaler for at finde tidsforskydningen.
+	\item Distancen kan beregnes ved den sample hvor der opstår peak i krydskorrelationen.
+\end{itemize}
+
+\begin{equation}
+Distance = Sample\cdot \SI{340}{\meter\per\second} \cdot \frac{1}{\SI{48}{\kilo\hertz}} \cdot 0.5
+\end{equation}
+\begin{table} [H]
+	\centering
+\begin{tabular}{|c|c|c|}
+	\hline 
+	Afstand målt [m] & Afstand udregnet [m] & Difference [cm] \\ 
+	\hline 
+	1 & 0,935 & 6,5 \\ 
+	\hline 
+	1,5 & 1,678 & 17,8 \\ 
+	\hline 
+	2 & 2,001 & 0,1 \\ 
+	\hline 
+	3 & 3,184 & 18,4 \\ 
+	\hline 
+	4,5 & 4,388 & 11,2 \\ 
+	\hline 
+\end{tabular} 
+\caption{Resultater af analyse.}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.54\linewidth]{graphics/case4_opg4_1}
+	\caption{Stem af krydskorrelation for \SI{1}{\meter}.}
+	\label{fig:case4_opg4_1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.54\linewidth]{graphics/case4_opg4_2}
+	\caption{Stem af krydskorrelation for \SI{2}{\meter}.}
+	\label{fig:case4_opg4_2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.54\linewidth]{graphics/case4_opg3}
+	\caption{Højtaleren er tæt på mikrofonen hvorfor signalet er meget kraftigere i starten af optagelsen.}
+	\label{fig:case4_opg3}
+\end{figure}
+
 
 \end{document}
