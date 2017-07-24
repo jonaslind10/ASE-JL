@@ -29,6 +29,35 @@
 \newpage
 \section{FIR/IIR filter analyse og design vha. placering af poler/nuller i pol-nulpunkts-diagrammet}
 
+\subsection{FIR- og IIR-filtre generelt}
+\begin{itemize} 
+	\item FIR filter output samples afhænger kun af tidligere input samples.
+	\item IIR filter output samples afhænger af tidligere input samples og af tidligere  output samples.
+	\item FIR filter har et endeligt impuls-respons og $h(n)$ = filter-koefficienter.
+	\item IIR filter har et uendeligt impuls-respons og $h(n)$ skal med tiden falde mod 0 for at det er stabilt. 
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/iir}
+	\caption{IIR digital filter struktur med feedforward og feedback udregninger.}
+	\label{fig:iir}
+\end{figure}
+
+Differensligning - Finite Impulse Response (FIR)
+\begin{equation}
+y(n) = b_0 x(n) + b_1 x(n-1) + ... + b_M x(n-M)
+\end{equation}
+
+Differensligning - Infinite Impulse Respons (IIR)
+\begin{equation}
+y(n) = b_0 x(n) + b_1 x(n-1) + ... + b_M x(n-M) + a_1 y(n-1) + a_2 y(n-2) + ... + a_N y(n-N)
+\end{equation}
+
+\begin{itemize}
+	\item Filtrets orden er største værdi af N og M.
+\end{itemize}
+
 \subsection{Pol-nulpunkts analyse}
 \begin{itemize}
 	\item FIR eller IIR-filter?
@@ -48,9 +77,16 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\linewidth]{graphics/unitycircle}
-	\caption{Enhedscirklen.}
-	\label{fig:unitycircle}
+	\includegraphics[width=0.4\linewidth]{graphics/iir_pz1}
+	\caption{IIR filter poler/nulpunkter og normaliseret frekvens respons.}
+	\label{fig:iir_pz1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/iir_pz2}
+	\caption{IIR filter poler/nulpunkter og normaliseret frekvens respons.}
+	\label{fig:iir_pz2}
 \end{figure}
 
 \begin{itemize}
@@ -58,8 +94,87 @@
 	\begin{itemize}
 		\item Hvis alle poler er placeret inde i enhedscirklen vil filteret være stabilt.
 		\item Polen kan ophæves ved at have et nulpunkt med præcis samme afstand fra (0,0) og dermed samme længde.
+		\item Poler/nulpunkter placeret i (0,0) påvirker ikke filterets frekvens respons. 
 	\end{itemize}
 \end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphics/unitycircle}
+	\caption{Enhedscirklen.}
+	\label{fig:unitycircle}
+\end{figure}
+
+\subsection{Design af 2. ordens IIR filter}
+\begin{itemize}
+	\item Et 2. ordens FIR notch filter designes ved at placere poler og nulpunkter i z-domænet.
+	\item Nulpunkter/poler har en radius og vinkel da de er komplekse tal.
+	\begin{itemize}
+		\item $r$ er nul-radius og $\omega$ er nul-vinkel.
+		\item Nul-radius sættes til 1 og pol-radius sættes til 0,9 da det et skarpt filter ønskes.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+z_0 = r e^{j\omega} \mid p_0 = r e^{j\omega}
+\end{equation}
+
+\begin{itemize}
+	\item Vinklen af de to nulpunkter og to poler beregnes (kompleks konjugerede).
+\end{itemize}
+
+\begin{equation}
+\omega = 2\pi \frac{f}{f_s}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/notchfilter}
+	\caption{Filter Designer tool i Matlab.}
+	\label{fig:notchfilter}
+\end{figure}
+
+\begin{itemize}
+	\item Overførelsesfunktionen H(z) i z-domænet opstilles ud fra poler/nulpunkter.
+\end{itemize}
+
+\begin{equation}
+H(z) = \frac{Y(z)}{X(z)} = G \frac{(z - z_0)(z-\overline{z_0})}{(z - p_0)(z-\overline{p_0})} = G \frac{(z - e^{j\omega})(z - e^{-j\omega})}{(z - r\cdot  e^{j\omega})(z-r\cdot e^{-j\omega})}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/z_domain_delay}
+	\caption{Tids- og z-domæne delay.}
+	\label{fig:z_domain_delay}
+\end{figure}
+
+\begin{itemize}
+	\item Overførselsfunktionen H(z) skrives om således at polynomierne er opløftet negativt.
+\end{itemize}
+
+\begin{equation}
+H(z) = \frac{z^2 - z(e^{j\omega}+e^{-j\omega}) + e^{j\omega}\cdot e^{-j\omega}}{z^2 - z(r\cdot e^{j\omega}+r\cdot e^{-j\omega}) + r\cdot e^{j\omega}\cdot r\cdot e^{-j\omega}} \cdot \frac{z^{-2}}{z^{-2}} \longrightarrow 
+\end{equation}
+
+\begin{equation}
+\frac{1 - z^{-1}(e^{j\omega}+e^{-j\omega}) + z^{-2}(e^{j\omega}\cdot e^{-j\omega})}{1 - z^{-1}(r\cdot e^{j\omega}+r\cdot e^{-j\omega}) + z^{-2}(r\cdot e^{j\omega}\cdot r\cdot e^{-j\omega})}
+\end{equation}
+
+\begin{itemize}
+	\item Brøkerne kan skrives ud.
+\end{itemize}
+
+\begin{equation}
+Y(z)(1-z^{-1}(r\cdot e^{j\omega}+r\cdot e^{-j\omega})+z^{-2}(r\cdot e^{j\omega}\cdot r\cdot e^{-j\omega}) = X(z)(1-z^{-1}(e^{j\omega}+e^{-j\omega})+z^{-2}(e^{j\omega}\cdot e^{-j\omega})
+\end{equation}
+
+\begin{itemize}
+	\item Differensligningen kan opstilles ved at anvende invers z-transformation.
+\end{itemize}
+
+
+
 
 
 \newpage
