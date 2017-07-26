@@ -179,6 +179,75 @@ Y(z)(1-z^{-1}(r\cdot e^{j\omega}+r\cdot e^{-j\omega})+z^{-2}(r\cdot e^{j\omega}\
 
 \newpage
 \section{Window method til FIR filter design}
+
+\begin{itemize}
+	\item Metode til design af FIR filtre, hvor man i frekvensdomænet vælger frekvenser man ønsker at fjerne.
+	\item Der bruges vinduer for at undgå Gibbs fænomen, som er 'ører' på et firkantsignal.
+\end{itemize}
+\subsection{Filter design}
+\begin{itemize}
+	\item Fastlæg samplefrekvensen samt knækfrekvenser.
+	\begin{itemize}
+		\item Antallet af filterkoefficienter/filterorden.
+	\end{itemize}
+	\item Lav ideelt filter I frekvensdomænet.
+	\begin{itemize}
+		\item Antal af bins bestemmer hvor præcist man kan ramme de valgte knækfrekvenser.
+		\item Giver et større group delay. 
+	\end{itemize}
+	\item Det ideelle filters overføringsfunktion konstrueres op til $\frac{f_s}{2}$, hvorefter det spejles omkring $\frac{f_s}{2}$ for at danne den fulde overføringsfunktion. 
+\end{itemize}
+
+$N = 32$\\
+\newline Normeret cut-off frekvens: $f_{cut} = 0,2$\\
+\newline Hvilket bin-nummer rammer tættest på cut-off frekvensen: $N_{cut} = \frac{f_{cut}}{2}\cdot N = 3,2 \approx 3$\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/windowmethod_1}
+	\caption{Ideelt lavpasfilter set med kontinuert frekvensrespons og diskret frekvensrespons.}
+	\label{fig:windowmethod_1}
+\end{figure}
+
+\begin{itemize}
+	\item Der foretages en IDFT for at få filteret over i tidsdomænet.
+	\begin{itemize}
+		\item I tidsdomænet bliver responset repræsenteret som en sinc-funktion.
+	\end{itemize}
+	\item Sinc funktionen shiftes for at få peaket til at ligge midt i de valgte filterkoefficienter, da filterkoefficienterne skal være symmetriske for at få lineær fase.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/windowmethod_2}
+	\caption{IDFT af det diskrete respons efterfulgt af et symmetrisk respons der er blevet shiftet.}
+	\label{fig:windowmethod_2}
+\end{figure}
+
+\begin{itemize}
+	\item Et vindue ganges på for at udvælge betydende filterkoefficienter.
+	\begin{itemize}
+		\item Et vindue giver en kraftigere dæmpning.
+	\end{itemize}
+	\item Filteret kan trækkes over i frekvensdomænet med en DFT, for at validere at der gør som ønsket.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/windowmethod_3}
+	\caption{Der anvendes DFT for at trække filteret over i frekvensdomænet for at validere det.}
+	\label{fig:windowmethod_3}
+\end{figure}
+
+\subsection{Typer af vinduer}
+\begin{itemize}
+	\item Et firkant vindue giver den skarpeste cut-off frekvens, men resultere i ripple på flankerne.
+	\begin{itemize}
+		\item Skyldes at firkanten repræsenteres som en sinc i frekvensdomænet, som foldes med den ideelle overføringsfunktion.
+	\end{itemize}
+	\item Et Blackman vindue giver en større dæmpning og mindre ripple, men derimod mindre skarpe flanker.
+\end{itemize}
+
 \newpage
 \section{Interpolation og decimation}
 \subsection{Decimation}
@@ -469,8 +538,181 @@ y_{Si}(n) = \dfrac{x(n)+ 4x(n-1) x(n-2)}{3} + y_{Si}(n-2)
 
 \newpage
 \section{Stokastiske signaler, herunder middelværdi, varians, sandsynligheds-tæthedsfunktion og histogram}
+
+\subsection{Stokastiske signaler}
+\begin{itemize}
+	\item Stokastisk ('tilfældig') signal.
+	\begin{itemize}
+		\item Modsat deterministisk ('forudsigelig') som kunne være en sinus-tone eller et firkant-signal.
+		\item Kan ikke opskrive fast formel.
+		\item Kan beskrive signalet med middelværdi, varians, sandsynlighedsfunktion.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Middelværdi}
+\begin{itemize}
+	\item DC niveau.
+	\begin{itemize}
+		\item Gennemsnittet af en sekvens af N samples er summen af disse samples divideret med N.
+		\item $x_{ave}$ er den værdi som summen af forskellene mellem $x(n)$ og $x_{ave} = 0$. 
+		\item Summen af sekvensen $d_{iff}(n) = x(n) - x_{ave} = 0$. 
+		\item Lige meget værdi over som under gennemsnittet.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+x_{ave} = \frac{1}{N} \sum_{n=1}^{N}x(n)
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/x_ave}
+	\caption{Gennemsnittet af en N lang sekvens. }
+	\label{fig:x_ave}
+\end{figure}
+
+\subsection{Varians}
+\begin{itemize}
+	\item AC-middel-værdi.
+\end{itemize}
+
+\begin{equation}
+{\sigma}^2 = \frac{1}{N} \sum_{n=0}^{N-1}(x(n)-x_{ave})^2
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/var}
+	\caption{Variansen hvor $\Delta(n) = x(n)-x_{ave}$.}
+	\label{fig:var}
+\end{figure}
+
+\subsection{Standard afvigelse}
+\begin{itemize}
+	\item RMS-værdi (for $DC=0$).
+\end{itemize}
+
+\begin{equation}
+{\sigma} = {\sigma}^2
+\end{equation}
+
+\subsection{Sandsynligheds-tæthedsfunktion}
+\begin{itemize}
+	\item Normal fordeling.
+	\item Kurven topper ved gennemsnittet $\si{\micro}_x$.
+	\item Standardafvigelsen afgør faconen $\si{\micro}_x + \sigma$.
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/pdf}
+	\caption{Normalfordeling med gennemsnit = $\si{\micro}_x$.}
+	\label{fig:pdf}
+\end{figure}
+
+\subsection{Histogram}
+\begin{itemize}
+	\item Histogrammets vertikale akse er antallet af gange, som en bestemt værdi indtræffer i signalet.
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/histogram}
+	\caption{Histogram.}
+	\label{fig:histogram}
+\end{figure}
+
 \newpage
 \section{Beregning af Signal-Noise Ratio i tids- og frekvens-domænet}
+
+Signal-to-noise ratio er forholdet mellem det ønskede signal og det uønskede signal (støj).
+
+\begin{equation}
+SNR = \frac{P_{signal}}{P_{noise}}
+\end{equation}
+
+\paragraph{SNR i tidsdomænet}
+\begin{itemize}
+	\item Estimere SNR af et signal udfra signalets sampleværdier. 
+	\item Middel-effekt.
+\end{itemize}
+
+\begin{equation}
+P = \frac{1}{N} \sum_{n=0}^{N-1}x(n)^2
+\end{equation}
+
+\begin{itemize}
+	\item AC middel-effekt.
+\end{itemize}
+
+\begin{equation}
+P = {\sigma}^2 + x_{ave}^2
+\end{equation}
+
+\begin{itemize}
+	\item SNR for AC udtrykkes ved variansen.
+\end{itemize}
+
+\begin{equation}
+SNR = \frac{{\sigma}_s^2}{{\sigma}_n^2}
+\end{equation}
+
+\begin{itemize}
+	\item I praksis kan et signal variere meget i effekt.
+	\begin{itemize}
+		\item Meget anvendt at bruge dB til at måle SNR.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+SNR_{dB} = 10 {\log}_{10}(SNR)
+\end{equation}
+
+\begin{itemize}
+	\item Hvis rms er oplyst i stedet for effekt.
+	\begin{itemize}
+		\item Da der bruges en amplitude (volt eller ampere) i stedet for effekt benyttes $ 20 {\log}_{10}$ istedet for $ 10 {\log}_{10}$.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+x_{rms} = \sqrt{\frac{1}{N} \sum_{n=0}^{N-1}x(n)^2}
+\end{equation}
+­
+\begin{equation}
+SNR_{dB} = 20 {\log}_{10}\left(\frac{{x_{rms}}_{signal}}{{x_{rms}}_{noise}}\right)
+\end{equation}
+
+
+\paragraph{SNR i frekvensdomænet} kan groft estimateres baseret på signalets egenskaber i frekvensdomænet.
+
+\begin{itemize}
+	\item Der anvendes DFT på signalet i tidsdomænet og herefter fås de positive amplitudestørrelser $|X(m)|^2$.
+	\item En threshold værdi fastsættes.
+	\begin{itemize}
+		\item Over threshold værdien er det ønskede signals amplitudestørrelse.
+		\item Under treshold værdien er det uønskede støjsignals amplitudestørrelse.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+SNR=  \frac{sum\;of\;samples\;above\;threshold}{sum\;of\;samples\;below\;threshold}
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/snr}
+	\caption{Øverst er støj afbildet i tidsdomænet. Nederst er støj afbildet i frekvensdomænet. }
+	\label{fig:snr}
+\end{figure}
+
+\paragraph{Parseval's sætning} siger at energien bevares gennem Fourier’s transformation således at summen af kvadrerede samples i tidsdomænet er lig med summen af kvadrerede samples i frekvensdomænet.
+
+\begin{equation}
+\sum_{n=0}^{N-1}|x(n)|^2 = \frac{1}{N} \sum_{m=0}^{N-1}|X(m)|^2
+\end{equation}
+
+
 \newpage
 \section{Midlingsfiltre}
 
