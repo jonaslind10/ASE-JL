@@ -589,7 +589,7 @@ x_{ave} = \frac{1}{N} \sum_{n=1}^{N}x(n)
 
 \subsection{Standard afvigelse}
 \begin{itemize}
-	\item RMS-værdi (for $DC=0$).
+	\item Standard afvigelsen svarer til RMS-værdien for en $DC=0$.
 \end{itemize}
 
 \begin{equation}
@@ -715,6 +715,97 @@ SNR=  \frac{sum\;of\;samples\;above\;threshold}{sum\;of\;samples\;below\;thresho
 
 \newpage
 \section{Midlingsfiltre}
+Midlingsfiltre benyttes til at beregne en løbende middelværdi for et signal. 
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/ma}
+	\caption{Signal før og efter det er filtreret med midlingsfilter.}
+	\label{fig:ma}
+\end{figure}
+
+\subsection{Ikke-rekursiv}
+\begin{itemize}
+	\item FIR filter med N antal filterkoefficienter. 
+	\item Har $N-1$ delay elementer.
+\end{itemize}
+
+\begin{equation}
+y(n)=\frac{1}{N}(x(n)+x(n-1)+x(n-2)+x(n-N+1))
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.25\linewidth]{graphics/nonrecursic}
+	\caption{Ikke Rekursiv midlingsfilter.}
+	\label{fig:nonrecursic}
+\end{figure}
+
+\subsection{Rekursiv}
+\begin{itemize}
+	\item Mindre beregningstung, da den kun kræver 2 adderinger pr. output sample uanset antallet af delays.
+	\item Har $N$ delay elementer, altså et ekstra delay iforhold til ikke-rekursiv midlingsfilter. 
+\end{itemize}
+
+\begin{equation}
+y(n)=\frac{1}{N}(x(n)-x(n-N))+y(n-1)
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{graphics/recursic}
+	\caption{Rekursiv midlingsfilter.}
+	\label{fig:recursic}
+\end{figure}
+
+\subsubsection{Frekvensrespons}
+\begin{itemize}
+	\item Ikke-rekursiv og rekursiv midlingsfiltre har akkurat samme frekvensrespons. 
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/ma_freqresponse}
+	\caption{Frekvensrespons for et midlingsfilter med N antal fulterkoefficienter.}
+	\label{fig:ma_freqresponse}
+\end{figure}
+
+\subsection{Eksponentielt midlingsfilter}
+\begin{itemize}
+	\item Nyeste samples får størst vægt.
+	\item Reagerer hurtigere på ændringer i input ifht. almindelig midlingsfilter.
+	\item Faktoren $0<\si{\alpha}<1$ bestemmer hvor meget vægt tidligere output værdier skal have for nye output værdier.
+	\begin{itemize}
+		\item Hvis $\si{\alpha}=1$ giver det ingen dæmpning og samtidig ignoreres tidligere output værdier, da nye output værdier reagerer med det samme på nye input værdier.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/exponentieltfilter}
+	\caption{Eksponentielt midlingsfilter.}
+	\label{fig:exponentieltfilter}
+\end{figure}
+
+\subsubsection{Støjreduktion}
+\begin{itemize}
+	\item En mindre \si{\alpha} værdi giver en bedre støjreduktion men midlingsfilterets output tager samtidig længere tid om at reagere og stabilisere sig. 
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/exp_snr}
+	\caption{Eksponentielt midlingsfilterets SNR som en funktion af faktoren \si{\alpha}.}
+	\label{fig:exp_snr}
+\end{figure}
+
+\begin{itemize}
+	\item Midlingsfilterets SNR kan regnes herved.
+\end{itemize}
+
+\begin{equation}
+SNR_{exp(dB)} = 10 \log_{10}\left(\dfrac{\si{\alpha}}{2-\si{\alpha}}\right)
+\end{equation}
 
 \newpage
 \section{Auto- og kryds-korrelation}
@@ -807,6 +898,121 @@ r(n) = \sum_{k=-\infty}^{\infty} x(k) \cdot x(n+k) = x(n) \circledast x(-n)
 \section{CASE projekt 2 – Audio filter}
 \newpage
 \section{CASE projekt 3 – Vejecelle}
+\subsection{Opgavebeskrivelse}
+\begin{itemize}
+	\item Analysere og forbedre dataene fra en støjfyldt måling på en vejecelle.
+	\item Der designes og implementeres forskellige midlingsfiltre i Matlab for at fjerne støj.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{graphics/case3_1}
+	\caption{Vejecelle måling med \SI{1}{\kilogram} belastning og  uden belastning.}
+	\label{fig:case3_1}
+\end{figure}
+
+\subsection{Data analyse}
+\begin{itemize}
+	\item Den første del af signalet er med \SI{1}{\kilogram} belastning og næste del er uden belastning. 
+	\item  Signalet deles derfor op for at kunne udregne middelværdi, spredning og varians af de to forskellige målinger.
+\end{itemize} 
+
+\paragraph{Middelværdi} er gennemsnittet af sekvensen på N samples er summen af disse samples divideret med N. Der er lige meget værdi over som under gennemsnittet.
+
+\begin{equation}
+x_{ave} = \frac{1}{N} \sum_{n=1}^{N}x(n) \approx 1100  \ldots 1400
+\end{equation}
+
+\paragraph{Varians} er AC-middel-værdien.
+
+\begin{equation}
+{\sigma}^2 = \frac{1}{N} \sum_{n=0}^{N-1}(x(n)-x_{ave})^2 \approx 772  \ldots 794
+\end{equation}
+
+\paragraph{Standard afvigelse} svarer til RMS-værdien for en $DC=0$. Standard afvigelsen kaldes også for spredningen. 
+
+\begin{equation}
+{\sigma} = {\sigma}^2 \approx 27  \ldots 28
+\end{equation}
+
+\begin{itemize}
+	\item Variansen og spredningen for de to målinger er cirka den samme. 
+	\begin{itemize}
+		\item Forventeligt da det kun er DC værdien der burde ændres.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.42\linewidth]{graphics/case3_2}
+	\caption{Histogram af de to signalniveauer normal fordelt rundt om deres middelværdi.}
+	\label{fig:case3_2}
+\end{figure}
+
+\subsection{Midlingsfiltre}
+\paragraph{Ikke-rekursiv midlingsfilter}
+\begin{itemize}
+	\item Mindre beregningstung, da den kun kræver 2 adderinger pr. output sample uanset antallet af delays.
+	\item Har $N$ delay elementer, altså et ekstra delay iforhold til ikke-rekursiv midlingsfilter. 
+\end{itemize}
+
+\begin{equation}
+y(n)=\frac{1}{N}(x(n)-x(n-N))+y(n-1)
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{graphics/recursic}
+	\caption{Rekursiv midlingsfilter.}
+	\label{fig:recursic}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\linewidth]{graphics/case3_3}
+	\caption{Vejecelle måling med \SI{1}{\kilogram} belastning og  uden belastning med et 10. og 100. ordens midlingsfilter.}
+	\label{fig:case3_3}
+\end{figure}
+
+\begin{itemize}
+	\item Midlingsfilteret gør at der kommer en indsvingningstid. \begin{itemize}
+		\item Ved et 10. ordens filter nås DC værdien efter cirka 10 samples.
+		\item Ved et 100. ordens filter nås DC værdien efter cirka 100 samples.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/case3_4}
+	\caption{Histogram af de to signalniveauer normal fordelt efter midlingsfilteret. Dataen er mere samlet.}
+	\label{fig:case3_4}
+\end{figure}
+
+\paragraph{Eksponentielt midlingsfilter}
+\begin{itemize}
+	\item Nyeste samples får størst vægt.
+	\item Reagerer hurtigere på ændringer i input ifht. almindelig midlingsfilter.
+	\item Faktoren $0<\si{\alpha}<1$ bestemmer hvor meget vægt tidligere output værdier skal have for nye output værdier.
+	\begin{itemize}
+		\item Hvis $\si{\alpha}=1$ giver det ingen dæmpning og samtidig ignoreres tidligere output værdier, da nye output værdier reagerer med det samme på nye input værdier.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/exponentieltfilter}
+	\caption{Eksponentielt midlingsfilter.}
+	\label{fig:exponentieltfilter}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/case3_5}
+	\caption{Vejecelle måling med \SI{1}{\kilogram} belastning og  uden belastning med et 10. og 100. ordens eksponentielt midlingsfilter.}
+	\label{fig:case3_5}
+\end{figure}
+
 
 \newpage
 \section{CASE projekt 4 - Sonar}
