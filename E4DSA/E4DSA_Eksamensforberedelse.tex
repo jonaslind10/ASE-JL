@@ -24,6 +24,108 @@
 \date{15-08-2017}
 \maketitle
 \section{Analyse af digitale signaler med Diskret Fourier Transformation og Spektrogram}
+\subsection{DFT}
+\begin{itemize}
+	\item Tidsinvariant (amplitude, frekvens og fase ændrer sig ikke med tiden indenfor vinduet der analyseres).
+	\item Bruges til at transformere tidsdomæne data til frekvensdomæne data.
+	\begin{itemize}
+		\item Et tidsdiskret signal i tidsdomænet transformeres til et signal angivet som et komplekst frekvensspektrum i frekvensdomænet.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+X(m)=\sum_{n=0}^{N-1}x(n)e^{\frac{-j2\pi mn}{N}}
+\end{equation}
+
+ \setlength\parindent{24pt} $n$ = tidsindex, $m$ = frekvensindex, $f_s$ = samplingsfrekvens, $N$ = antal samples
+
+\begin{itemize}
+	\item Eulers formel bruges for at beregne den reelle del og den imaginære del.
+\end{itemize}
+
+\begin{equation}
+e^{-j\theta}=\cos(\theta) -j\sin(\theta)
+\end{equation}
+
+\begin{equation}
+X(m)=\sum_{n=0}^{N-1}x(n)(\cos{\left(\frac{-j2\pi mn}{N}\right)}\sin{\left(\frac{-j2\pi mn}{N}\right)})
+\end{equation}
+
+\paragraph{Amplitudespektrum} Amplituden af X(m) kan beregnes ved længden af den reelle og imaginære del.
+
+\begin{equation}
+|X(m)|=\sqrt{Re(X(m))^2+Im(X(m))^2}
+\end{equation}
+
+\paragraph{Effektspektrum} Effekten af X(m) kan beregnes ved at opløfte amplituden i 2. potens. 
+
+\begin{equation}
+|X(m)|^2
+\end{equation}
+
+\paragraph{Analyse frekvens} Samplefrekvensen kan findes ved en sample periode.
+
+\begin{equation}
+f_s=\frac{1}{t_s}
+\end{equation}
+
+\begin{equation}
+f_{analyse}(m)=\frac{m f_s}{N}
+\end{equation}
+
+\subsection{Frekvensopløsning}
+	\begin{itemize}
+	\item Længden af vinduet bestemmer frekvensopløsningen.
+­	\begin{itemize}
+	\item Et bredt vindue øger frekvens opløsningen, men der ting der forhindrer det praktisk.
+	\item Hvis ikke $\Delta R$ går op i sinus signalet kommer der spektral forbredning.
+\end{itemize} 
+	\item Inputsignalet har en frekvens der ligger under $\Delta R$, vil der opstå spektral forbredning og inputsignalet vil vise sig i alle output "bins".
+\end{itemize}
+
+\begin{equation}
+\Delta R = \frac{f_s}{N}
+\end{equation}
+
+\begin{itemize}
+	\item Et bredt vindue medfører
+­	\begin{itemize}
+	\item Sampletiden forlænges og det betyder lange delays og en større DFT udregning.
+­	\item Et langt vindue vil resultere i et signal der varierer med tiden.
+­	\item Det medfører en ukorrekt frekvensanalyse hvis DFT udføres på et signal der ændrer sig over tid.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Short-Time DFT} 
+\begin{itemize}
+	\item Løsningen på at udføre DFT på et bredt vindue.
+­	\begin{itemize}
+	\item Bryder et langt signal ned til mindre segmenter og analysere hvert enkelt segment med DFT.
+­	\item Segmenterne er i et fast interval fra $k = 0$ til $k = N-1$.
+­	\item Når n ændres glider vinduet over på et andet segment af signalet. 
+\end{itemize}
+\end{itemize}
+
+\subsection{Spektrogram}
+\begin{itemize}
+	\item Der er et trade-off imellem en god frekvensopløsning eller en god tidsopløsning. 
+­	\begin{itemize}
+		\item Et smalt vindue giver en god opløsning i tid, men giver en dårlig opløsning i frekvens. 
+­		\item Et bredt vindue giver en god opløsning i frekvens, men en dårlig opløsning i tid. 
+	\end{itemize}
+\end{itemize}
+
+\subsection{Invers-DFT}
+\begin{itemize}
+	\item Bruges til at transformere frekvensdomæne data til tidsdomæne data.
+\end{itemize}
+
+\begin{equation}
+X(m)=\frac{1}{N}\sum_{m=0}^{N-1}X(m)e^{\frac{j2\pi mn}{N}}
+\end{equation}
+
+
+
 \newpage
 \section{Spektral forbredning, zero-padding og window functions i relation til DFT}
 \newpage
@@ -719,7 +821,7 @@ Midlingsfiltre benyttes til at beregne en løbende middelværdi for et signal.
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.4\linewidth]{graphics/ma}
+	\includegraphics[width=\linewidth]{graphics/ma}
 	\caption{Signal før og efter det er filtreret med midlingsfilter.}
 	\label{fig:ma}
 \end{figure}
@@ -761,12 +863,19 @@ y(n)=\frac{1}{N}(x(n)-x(n-N))+y(n-1)
 \subsubsection{Frekvensrespons}
 \begin{itemize}
 	\item Ikke-rekursiv og rekursiv midlingsfiltre har akkurat samme frekvensrespons. 
+	\item "The roll-off" er meget langsom og stopbåndets dæmpning er ringe.
+	\item \textit{Remember, good performance in the time domain results in poor performance
+		in the frequency domain, and vice versa.}\footnote{The Scientist and Engineer's Guide to Digital Signal Processing Moving Average Filters, Chapter 15, Page 180.}
+	\begin{itemize}
+		\item Midlingsfilteret er et fantastisk midlingsfilter i tidsdomænet, men en elendig lavpas filter i frekvensdomænet.
+	\end{itemize}
 \end{itemize}
+
 
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{graphics/ma_freqresponse}
-	\caption{Frekvensrespons for et midlingsfilter med N antal fulterkoefficienter.}
+	\caption{Frekvensrespons for et midlingsfilter med N antal filterkoefficienter.}
 	\label{fig:ma_freqresponse}
 \end{figure}
 
@@ -776,7 +885,7 @@ y(n)=\frac{1}{N}(x(n)-x(n-N))+y(n-1)
 	\item Reagerer hurtigere på ændringer i input ifht. almindelig midlingsfilter.
 	\item Faktoren $0<\si{\alpha}<1$ bestemmer hvor meget vægt tidligere output værdier skal have for nye output værdier.
 	\begin{itemize}
-		\item Hvis $\si{\alpha}=1$ giver det ingen dæmpning og samtidig ignoreres tidligere output værdier, da nye output værdier reagerer med det samme på nye input værdier.
+		\item Hvis $\si{\alpha}=1$ ignoreres tidligere output værdier, da nye output værdier reagerer med det samme på nye input værdier samtidig giver det ingen dæmpning.
 	\end{itemize}
 \end{itemize}
 
