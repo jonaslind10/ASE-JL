@@ -37,7 +37,7 @@
 X(m)=\sum_{n=0}^{N-1}x(n)e^{\frac{-j2\pi mn}{N}}
 \end{equation}
 
- \setlength\parindent{24pt} $n$ = tidsindex, $m$ = frekvensindex, $f_s$ = samplingsfrekvens, $N$ = antal samples
+{\setlength\parindent{24pt} $n$ = tidsindex, $m$ = frekvensindex, $f_s$ = samplingsfrekvens, $N$ = antal samples}
 
 \begin{itemize}
 	\item Eulers formel bruges for at beregne den reelle del og den imaginære del.
@@ -115,6 +115,13 @@ f_{analyse}(m)=\frac{m f_s}{N}
 	\end{itemize}
 \end{itemize}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/spectrogram}
+	\caption{Spektrogram af frekvenserne sendt gennem kommunikationssystemet Frequency-Shift Keying.}
+	\label{fig:spectrogram}
+\end{figure}
+
 \subsection{Invers-DFT}
 \begin{itemize}
 	\item Bruges til at transformere frekvensdomæne data til tidsdomæne data.
@@ -128,6 +135,90 @@ X(m)=\frac{1}{N}\sum_{m=0}^{N-1}X(m)e^{\frac{j2\pi mn}{N}}
 
 \newpage
 \section{Spektral forbredning, zero-padding og window functions i relation til DFT}
+\subsection{DFT}
+\begin{itemize}
+	\item Tidsinvariant (amplitude, frekvens og fase ændrer sig ikke med tiden indenfor vinduet der analyseres).
+	\item Bruges til at transformere tidsdomæne data til frekvensdomæne data.
+	\begin{itemize}
+		\item Et tidsdiskret signal i tidsdomænet transformeres til et signal angivet som et komplekst frekvensspektrum i frekvensdomænet.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+X(m)=\sum_{n=0}^{N-1}x(n)e^{\frac{-j2\pi mn}{N}}
+\end{equation}
+
+\subsection{Spektral forbredning}
+\begin{itemize}
+	\item Længden af vinduet bestemmer frekvensopløsningen.
+	\item Et bredt vindue øger frekvens opløsningen, men der er ting der forhindrer det praktisk.
+\end{itemize}
+
+\begin{equation}
+\Delta R=\frac{f_s}{N}
+\end{equation}
+
+\begin{itemize}
+	\item -	Hvis ikke $\Delta R$ går op i sinus signalet kommer der spektral forbredning. 
+	\begin{itemize}
+		\item Inputsignalet har en frekvens der ligger mellem vores analyse frekvenser hvorved der opstår spektral forbredning og inputsignalet vil vise sig i alle output "bins" $m$.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+f_{analyse}(m)=\frac{m f_s}{N}
+\end{equation}
+
+\begin{itemize}
+	\item Antal samples N er invers proportional med hovedsløjfens (main lobe) bredde.
+	\item Spektral forbredning kan nemmere ses på en decibel skala.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/leakage}
+	\caption{Spektral forbredning.}
+	\label{fig:leakage}
+\end{figure}
+
+\subsection{Zero-padding}
+\begin{itemize}
+	\item Ved zero-padding forlænges et signal ved at tilføje et n antal 0'er til det oprindelige signal. 
+	\item Dette er med til at øge antallet af samples N også kaldet bins i frekvensdomænet, hvilket forbedrer frekvensopløsningen på signalet.
+	\item Når der anvendes zero-padding skal det gøres før der foretages frekvensanalyse med DFT.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphics/zeropadding}
+	\caption{Zeropadding (a) N = 16, (b) N = 32, (c) N = 64, (d) N = 128.}
+	\label{fig:zeropadding}
+\end{figure}
+
+\subsection{Window functions}
+\begin{itemize}
+	\item Vindues metoder reducerer DFT-lækage ved at minimere størrelsen af sinc-funktionens sidelobes.
+­	\begin{itemize}
+		\item 	Samme amplitudeværdi af inputtet ved både start og slutningen af sample intervallet. 
+­		\item Hovedsløjfens peak værdi reduceres – kaldes for processing loss of a window. 
+	\end{itemize}
+	\item Tradeoff
+­	\begin{itemize}
+		\item 	Bredden af hovedsløjfen, dæmpningen af sidesløjferne og hastigheden hvorved de dæmpes.
+	\end{itemize}
+	\item Anvendelse af både zerro-padding og window functions
+­	\begin{itemize}
+		\item Vinduesfunktionen må kun anvendes på det originale signal inden der foretages zerro-padding.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/windows}
+	\caption{Rektangulær og Triangulær vinduesfunktion.}
+	\label{fig:windows}
+\end{figure}
+
 \newpage
 \section{FIR/IIR filter analyse og design vha. placering af poler/nuller i pol-nulpunkts-diagrammet}
 
@@ -203,7 +294,7 @@ y(n) = b_0 x(n) + b_1 x(n-1) + ... + b_M x(n-M) + a_1 y(n-1) + a_2 y(n-2) + ... 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{graphics/unitycircle}
-	\caption{Enhedscirklen.}
+	\caption{s-planet og z-planet.}
 	\label{fig:unitycircle}
 \end{figure}
 
@@ -240,8 +331,19 @@ z_0 = r e^{j\omega} \mid p_0 = r e^{j\omega}
 	\item Overførelsesfunktionen H(z) i z-domænet opstilles ud fra poler/nulpunkter.
 \end{itemize}
 
+{\setlength\parindent{24pt}
+\begin{tabular}{l}
+	$z_0 =  e^{j0,1028}$ \\ 
+	
+	$\overline{z_0} =  e^{-j0,1028}$ \\ 
+	
+	$p_0 = 0,9 e^{j0,1028}$ \\ 
+	
+	$ \overline{p_0} = 0,9 e^{-j0,1028}$ \\ 
+\end{tabular}} 
+
 \begin{equation}
-H(z) = \frac{Y(z)}{X(z)} = G \frac{(z - z_0)(z-\overline{z_0})}{(z - p_0)(z-\overline{p_0})} = G \frac{(z - e^{j\omega})(z - e^{-j\omega})}{(z - r\cdot  e^{j\omega})(z-r\cdot e^{-j\omega})}
+H(z) = \frac{Y(z)}{X(z)} = G \frac{(z - z_0)(z-\overline{z_0})}{(z - p_0)(z-\overline{p_0})} = G \frac{(z - e^{j0,1028})(z - e^{-j0,1028})}{(z - 0,9\cdot  e^{j0,1028})(z-0,9\cdot e^{-j0,1028})}
 \end{equation}
 
 \begin{figure}[H]
@@ -256,11 +358,7 @@ H(z) = \frac{Y(z)}{X(z)} = G \frac{(z - z_0)(z-\overline{z_0})}{(z - p_0)(z-\ove
 \end{itemize}
 
 \begin{equation}
-H(z) = \frac{z^2 - z(e^{j\omega}+e^{-j\omega}) + e^{j\omega}\cdot e^{-j\omega}}{z^2 - z(r\cdot e^{j\omega}+r\cdot e^{-j\omega}) + r\cdot e^{j\omega}\cdot r\cdot e^{-j\omega}} \cdot \frac{z^{-2}}{z^{-2}} \longrightarrow 
-\end{equation}
-
-\begin{equation}
-\frac{1 - z^{-1}(e^{j\omega}+e^{-j\omega}) + z^{-2}(e^{j\omega}\cdot e^{-j\omega})}{1 - z^{-1}(r\cdot e^{j\omega}+r\cdot e^{-j\omega}) + z^{-2}(r\cdot e^{j\omega}\cdot r\cdot e^{-j\omega})}
+H(z) = \frac{z^2 - 1,99z + 0,99}{z^2 - 1,79z + 0,81} \cdot \frac{z^{-2}}{z^{-2}} \longrightarrow \frac{1 - 1,99z^{-1} + 0,99z^{-2}}{1 - 1,79z^{-1} + 0,81z^{-2}}
 \end{equation}
 
 \begin{itemize}
@@ -268,14 +366,20 @@ H(z) = \frac{z^2 - z(e^{j\omega}+e^{-j\omega}) + e^{j\omega}\cdot e^{-j\omega}}{
 \end{itemize}
 
 \begin{equation}
-Y(z)(1-z^{-1}(r\cdot e^{j\omega}+r\cdot e^{-j\omega})+z^{-2}(r\cdot e^{j\omega}\cdot r\cdot e^{-j\omega}) = X(z)(1-z^{-1}(e^{j\omega}+e^{-j\omega})+z^{-2}(e^{j\omega}\cdot e^{-j\omega})
+Y(z)(1-1,79z^{-1}+0,81z^{-2}) = X(z)(1-1,99z^{-1}+0,99 z^{-2})
 \end{equation}
 
 \begin{itemize}
 	\item Differensligningen kan opstilles ved at anvende invers z-transformation.
 \end{itemize}
 
+\begin{equation}
+y(n)-1,79y(n-1)+0,81y(n-2)=x(n)-1,99x(n-1)+0,99x(n-2)
+\end{equation}
 
+\begin{equation}
+y(n)=1x(n)-1,99x(n-1)+0,99x(n-2)+1,79y(n-1)-0,81y(n-2)
+\end{equation}
 
 
 
@@ -1005,6 +1109,167 @@ r(n) = \sum_{k=-\infty}^{\infty} x(k) \cdot x(n+k) = x(n) \circledast x(-n)
 \section{CASE projekt 1 – FSK transmission}
 \newpage
 \section{CASE projekt 2 – Audio filter}
+\subsection{Opgavebeskrivelse}
+\begin{itemize}
+	\item Analysere støjfyldt lydsignal og undersøge hvilken frekvens som ønskes fjernet.
+	\item Designe IIR filter ved placering af poler/nuller.
+	\item Implementere IIR filter på Blackfin processor.
+\end{itemize}
+
+\subsection{Analyse af lydsignal}
+\begin{itemize}
+	\item Frekvensanalyse med DFT af lydfil hvorved støjsignal findes.
+	\item  På et spektrogram kan den gennemgående støj ses som en gul streg ved frekvensen \SI{785}{\hertz}.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/case2_1}
+	\caption{Signalet i tidsdomænet og efterfølgende DFT af signalet.}
+	\label{fig:case2_1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/case2_2}
+	\caption{Spektrogramanalyse af signalet.}
+	\label{fig:case2_2}
+\end{figure}
+
+\subsection{Design af IIR filter}
+\begin{itemize}
+	\item Poler danner peaks.
+	\begin{itemize}
+		\item Har betydning for hvor meget frekvenserne bliver forstærket, hvis den placeres på enhedscirklen forstærkes frekvenserne uendeligt meget.
+	\end{itemize}
+	\item Nulpunkter danner dyk.
+	\begin{itemize}
+		\item Har betydning for hvor meget frekvenserne bliver dæmpet, hvis den placeres på enhedscirklen dæmpes frekvenserne uendeligt meget.
+	\end{itemize}
+	\item Stabilitet.
+	\begin{itemize}
+		\item Hvis alle poler er placeret inde i enhedscirklen vil filteret være stabilt.
+		\item Polen kan ophæves ved at have et nulpunkt med præcis samme afstand fra (0,0) og dermed samme længde.
+		\item Poler/nulpunkter placeret i (0,0) påvirker ikke filterets frekvens respons. 
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/case2_3}
+	\caption{IIR filter poler/nulpunkter og frekvens respons.}
+	\label{fig:case2_3}
+\end{figure}
+
+
+\begin{itemize}
+	\item Et 2. ordens IIR notch filter designes ved at placere poler og nulpunkter i z-domænet.
+	\item Nulpunkter/poler har en radius og vinkel da de er komplekse tal.
+	\begin{itemize}
+		\item $r$ er nul-radius og $\omega$ er nul-vinkel.
+		\item Nul-radius sættes til 1 og pol-radius sættes til 0,9 da det et skarpt filter ønskes.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+z_0 = r e^{j\omega} = e^{j\omega}
+\end{equation}
+
+\begin{equation}
+p_0 = r e^{j\omega} = 0,9 e^{j\omega}
+\end{equation}
+
+\begin{itemize}
+	\item Vinklen af de to nulpunkter og to poler beregnes (kompleks konjugerede).
+\end{itemize}
+
+\begin{equation}
+\omega = 2\pi \frac{f}{f_s} = 2\pi \frac{\SI{785}{\hertz}}{\SI{48}{\kilo\hertz}} = 0,1028
+\end{equation}
+
+\newpage
+\begin{itemize}
+	\item Overførelsesfunktionen H(z) i z-domænet opstilles ud fra poler/nulpunkter.
+\end{itemize}
+
+{\setlength\parindent{24pt}
+\begin{tabular}{l}
+	$z_0 =  e^{j0,1028}$ \\ 
+
+	$\overline{z_0} =  e^{-j0,1028}$ \\ 
+	
+	$p_0 = 0,9 e^{j0,1028}$ \\ 
+	
+	$ \overline{p_0} = 0,9 e^{-j0,1028}$ \\ 
+\end{tabular}} 
+
+\begin{equation}
+H(z) = \frac{Y(z)}{X(z)} = G \frac{(z - z_0)(z-\overline{z_0})}{(z - p_0)(z-\overline{p_0})} = G \frac{(z - e^{j0,1028})(z - e^{-j0,1028})}{(z - 0,9\cdot  e^{j0,1028})(z-0,9\cdot e^{-j0,1028})}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/z_domain_delay}
+	\caption{Tids- og z-domæne delay.}
+	\label{fig:z_domain_delay}
+\end{figure}
+
+\begin{itemize}
+	\item Overførselsfunktionen H(z) skrives om således at polynomierne er opløftet negativt.
+\end{itemize}
+
+\begin{equation}
+H(z) = \frac{z^2 - 1,99z + 0,99}{z^2 - 1,79z + 0,81} \cdot \frac{z^{-2}}{z^{-2}} \longrightarrow \frac{1 - 1,99z^{-1} + 0,99z^{-2}}{1 - 1,79z^{-1} + 0,81z^{-2}}
+\end{equation}
+
+\begin{itemize}
+	\item Brøkerne kan skrives ud.
+\end{itemize}
+
+\begin{equation}
+Y(z)(1-1,79z^{-1}+0,81z^{-2}) = X(z)(1-1,99z^{-1}+0,99 z^{-2})
+\end{equation}
+
+\begin{itemize}
+	\item Differensligningen kan opstilles ved at anvende invers z-transformation.
+\end{itemize}
+
+\begin{equation}
+y(n)-1,79y(n-1)+0,81y(n-2)=x(n)-1,99x(n-1)+0,99x(n-2)
+\end{equation}
+
+\begin{equation}
+y(n)=1x(n)-1,99x(n-1)+0,99x(n-2)+1,79y(n-1)-0,81y(n-2)
+\end{equation}
+
+\begin{itemize}
+	\item Filterkoefficienterne bliver dermed.
+\end{itemize}
+
+{\setlength\parindent{24pt}
+\begin{tabular}{l}
+	$b_0 = 1$ \\ 
+	
+	$b_1 = -1,99$ \\ 
+	
+	$b_2 = 0,99$ \\ 
+	
+	$a_0 = 1,79$ \\ 
+	
+	$a_1 = -0,81$ \\
+\end{tabular}}
+
+\subsection{Implementation på Blackfin processor}
+\begin{itemize}
+	\item Datatypen ”short” anvendes til variablene, da der arbejdes på en fixed-point processor.
+	\item Bitmanipulation (1 << 14)
+	\begin{itemize}
+		\item  Bit 1 er signbit som afgør om det er positiv eller negativ talværdi. 
+		\item Bit 2 er fixed-point binary som placerer kommaet det samme sted.
+	\end{itemize}
+	\item Der bitshiftes dermed 14 pladser til venstre for at placere filterkoefficienter som MSB lige efter signbit og fixed-point bit.
+\end{itemize}
+
 \newpage
 \section{CASE projekt 3 – Vejecelle}
 \subsection{Opgavebeskrivelse}
