@@ -15,7 +15,7 @@
 \graphicspath{ {graphics/} }
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
-
+\setcounter{tocdepth}{1}
 \renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
 \begin{document}
 
@@ -23,6 +23,9 @@
 \author{Jonas Lind}
 \date{14-08-2017}
 \maketitle
+\tableofcontents
+\newpage
+
 \section{Effektforstærkerøvelse: DC}
 \begin{itemize}
 	\item Klasse AB \SI{30}{\watt} forstærker til \SI{8}{\ohm} højtaler.
@@ -46,26 +49,26 @@ V_O = V_{RMS} \sqrt{2} = \SI{22}{\volt}
 \paragraph{Strømsvinget} som er nødvendigt på forstærkerens udgang igennem de \SI{8}{\ohm} findes til at være \SI{3.65}{\ampere}, ved en nominel modstandsværdi på \SI{6}{\ohm}. Dette er gældende da højttalerens svingspole har en DC modstand $R_{DC}$ på typisk \SI{80}{\percent}  af den nominelle værdi. Der forventes en middelstrøm fra effektforsyningen på $I_{DC} = \SI{1.16}{\ampere}$.
 
 \begin{equation}
-I_{O\,PEAK} = \dfrac{V_O}{R_L} = \SI{3.65}{\ampere}
+I_{O\,PEAK} = \dfrac{V_O}{R_L} \approx \SI{3}{\ampere}
 \end{equation}
 
 \begin{equation}
-I_{DC} = \dfrac{I_{O\,PEAK}}{\pi} = \SI{1.16}{\ampere}
+I_{DC} = \dfrac{I_{O\,PEAK}}{\pi} \approx \SI{1}{\ampere}
 \end{equation}
 
 \paragraph{Udgangstrinnet} benytter et darlington par af to emitter følgere (common collector) for at øge strømforstærkningen. Drivertrinnet skal levere basisstrømmen til udgangstransistorerne 2N3055 og MJ2955 og med $\beta_{10} = \beta_{11} = 20$ som strømforstærkning i $T_{10}$ og $T_{11}$ behøves en strøm på \SI{183}{\milli\ampere}.
 
 \begin{equation}
-I_B = \dfrac{I_{O\,PEAK}}{\beta} = \SI{183}{\milli\ampere}
+I_B = \dfrac{I_{O\,PEAK}}{\beta} \approx \SI{150}{\milli\ampere}
 \end{equation}
 
-Basisstrømmen til drivertrinnet er \SI{5}{\milli\ampere} ved en strømforstærkning på $\beta_8 = \beta_9 = 40$.
+Basisstrømmen til drivertrinnet er ca \SI{4}{\milli\ampere} ved en strømforstærkning på $\beta_8 = \beta_9 = 40$.
 
 \begin{equation}
-I_B = \dfrac{\SI{183}{\milli\ampere}}{\beta} = \SI{4.58}{\milli\ampere}
+I_B = \dfrac{\SI{150}{\milli\ampere}}{\beta} \approx \SI{4}{\milli\ampere}
 \end{equation}
 
-Den samlede strømforstærkning er 800 som sænker de \SI{3.65}{\ampere} udganstrinnet skal levere til \SI{4.58}{\milli\ampere}. Således belaster udgangstrinnet VAS-trinnet minimalt.
+Den samlede strømforstærkning er 800 som sænker de \SI{3}{\ampere} udganstrinnet skal levere til \SI{4}{\milli\ampere}. Således belaster udgangstrinnet VAS-trinnet minimalt.
 
 \begin{equation}
 \beta = \beta_1 \beta_2 = 20 {\cdot} 40 = 800
@@ -131,7 +134,7 @@ r_{\pi 5} = \frac{\beta_5}{g_{m5}} = \SI{1.9}{\kilo\ohm}
 \end{equation}
 
 \begin{equation} 
-C_{\si{\pi}5} = \frac{g_m}{2\pi f_T}
+C_{\si{\pi}5} = \frac{g_m}{2\pi f_T} \approx \SI{90}{\pico\farad}
 \end{equation}
 
 \begin{itemize}
@@ -216,22 +219,24 @@ Herunder regnes den totale effekt afsat i forstærkeren og ud fra den findes eff
 \end{itemize}
 
 \begin{equation}
-I_{O\,PEAK} = \SI{3.65}{\ampere}
+I_{O\,PEAK} \approx \SI{3,5}{\ampere}
 \end{equation}
 
 \begin{equation}
-I_{DC} = \dfrac{I_{O\,PEAK}}{\pi} =\SI{1.16}{\ampere}
+I_{DC} = \dfrac{I_{O\,PEAK}}{\pi} \approx\SI{1}{\ampere}
 \end{equation}
 
 \begin{equation}
-P_{CC} = V_{CC}(I_{PEAK}-I_{DC})=\SI{67.2}{\watt}
+P_{CC} = V_{CC}(I_{PEAK}-I_{DC})\approx \SI{67}{\watt}
 \end{equation}
 
 \begin{itemize}
 	\item Effekttabet i udgangstransistorerne T9 og T10 bliver \SI{24}{\watt} samlet.
-	\item Der forventes derfor et tab på \SI{12}{\watt} i hver transistor.
-	\item Ved simulering ses effektabet til \SI{11.5}{\watt}.
-	\item De valgte transistorer 2N3055 og MJ2955 kan klare \SI{115}{\watt}.
+	\begin{itemize}
+		\item Der forventes derfor et tab på \SI{12}{\watt} i hver transistor.
+		\item Ved simulering ses effektabet til \SI{11.5}{\watt}.
+		\item De valgte transistorer 2N3055 og MJ2955 kan klare \SI{115}{\watt}.
+	\end{itemize}
 \end{itemize} 
 
 \begin{equation}
@@ -243,13 +248,14 @@ P_T = 0.405 \cdot \dfrac{V_{CC}^2}{2 R_L} \approx \SI{24}{\watt}
 \begin{itemize}
 	\item Max afsat effekt (Total Power Dissipation) ($P_D$)
 	\item Max kollektor strøm (Collector Current)($I_{C\;max}$)
-	\item Max spænding over kollektor-emitter (Collector−Emitter Voltage) ($V_{CE\;max}$)
+	\item Max spænding over kollektor-emitter (Collector-Emitter Voltage) ($V_{CE\;max}$)
 	\item Strømforstærkning (DC Current Gain) ($\beta / h_{FE}$)
 \end{itemize}
 
 \subsection{SOA}
 SOA er en betegnelse for safe-operating area.
-En transistor skal beskyttes mod tre typer overlast: spænding, strøm og effekt.
+En transistor skal beskyttes mod tre typer overlast:
+\newline spænding, strøm og effekt.
 \begin{itemize}
 	\item $I_{C\,MAX} = \SI{15}{A}$
 	\item  $V_{CE\,MAX} = \SI{60}{\volt}$
@@ -288,7 +294,7 @@ Man siger at effektstrømmen $P$ løber gennem den termiske modstand $R_{th}$ og
 Den termiske modstand kaldes undertiden for køleprofilets K-værdi og enheden er en stigning i temperatur per effekt.
 
 \begin{equation}
-T = (R_{th} P + T_{amb}
+T = R_{th} P + T_{amb}
 \end{equation}
 
 \begin{itemize}
@@ -307,6 +313,7 @@ T = (R_{th} P + T_{amb}
 Effektstrømmen $P$ løber gennem den termiske modstand $R_{th}$ og det
 danner et temperaturfald på $R_{th}P$ som hæver temperaturen $T$ over omgivelsestemperaturen $T_{amb}$.
 
+\newpage
 \begin{itemize}
 	\item $R_{th\:j-mb}$
 	\begin{itemize}
@@ -347,9 +354,34 @@ R_{th\: hs} = \dfrac{T_j-T_{amb}}{P}-R_{th\:j-mb} + R_{th\: mb-hs}
 \end{equation}
 
 \begin{equation}
-R_{th\: hs} = \dfrac{\SI{100}{\degreeCelsius}-\SI{25}{\degreeCelsius}}{\SI{11}{\watt}}-\SI{1.52}{\degreeCelsius\per\watt} = \SI{5.3}{\degreeCelsius\per\watt}
+R_{th\: hs} = \dfrac{\SI{100}{\degreeCelsius}-\SI{25}{\degreeCelsius}}{\SI{12}{\watt}}-\SI{1.52}{\degreeCelsius\per\watt} \approx \SI{4,7}{\degreeCelsius\per\watt}
 \end{equation}
 
+\subsection{Valg af køleplade}
+\begin{itemize}
+	\item Dens termiske modstand blev regnet med en online lommeregner til \SI{2.15}{\degreeCelsius\per\watt}.
+\end{itemize}
+
+\begin{equation}
+R_{th\: hs} = \dfrac{T_{HS}-T_{AMB}}{P_R+P_K}
+\end{equation}
+
+\begin{itemize}
+	\item Varmen fra køleprofilet afgives til omgivelserne gennem varmestråling og konvektion.
+	\item Varmestråling betegnes med $P_R$ for den overførte effekt.
+\end{itemize}
+
+\begin{equation}
+P_R = e \sigma A_R (T_{HS}^4-T_{AMB}^4)
+\end{equation}
+
+\begin{itemize}
+	\item Konvektion betegnes med $P_K$ for effekten overført til luften tæt på køleprofilet.
+\end{itemize}
+
+\begin{equation}
+P_K = 1,2 \frac{A_K}{L^{0,25}} (T_K-T_{AMB})
+\end{equation}
 
 
 
@@ -360,14 +392,14 @@ R_{th\: hs} = \dfrac{\SI{100}{\degreeCelsius}-\SI{25}{\degreeCelsius}}{\SI{11}{\
 \begin{itemize}
 	\item En transformer kan regulere AC-spændinger (ikke DC!) op og ned.
 	\item Lavere antal sekundær vindinger, giver en lavere udgangsspænding.
-	\item Varmetab i spolerne \approx \SI{5}{percent}.
+	\item Varmetab i spolerne $\approx \SI{5}{\percent}$.
 \end{itemize}
 
 
 \subsection{Ensretning}
 \begin{itemize}
 	\item Full bridge brokoblingen ensretter de positive og negative halvbølger.
-	\item Der er to diode-spændingsfald, som sænker spændingen \approx \SI{-1.4}{\volt}.
+	\item Der er to diode-spændingsfald, som sænker spændingen $\approx \SI{-1.4}{\volt}$.
 \end{itemize}
 
 \begin{figure} [H]
@@ -576,7 +608,7 @@ g_m = \frac{I_E}{2nU_T}
 	\centering
 	\includegraphics[width=0.7\linewidth]{graphics/differentialtrin_fors}
 	\caption{Differentialforstærkertrinnet.}
-	\label{fig:differentialforstærker}
+	\label{fig:differentialforstarker}
 \end{figure}
 
 
@@ -589,7 +621,7 @@ Transistorens strømforstærkning $\beta$ forstærker differentialtrinnets udgan
 	\centering
 	\includegraphics[width=0.7\linewidth]{graphics/vas}
 	\caption{Trans-resistans forstærker (VAS).}
-	\label{fig:VAS_forstærker}
+	\label{fig:VAS_forstarker}
 \end{figure}
 
 I en integreret forstærker benyttes ofte flere transistorer til at forøge den resulterende strømforstærkning mens en effektforstærker oftest nøjes med en enkelt transistor da der ikke er behov for den ekstremt høje forstærkning ved DC. 
@@ -1041,7 +1073,7 @@ g_m = \dfrac{I_C}{U_T}
 	\centering
 	\includegraphics[width=0.8\linewidth]{graphics/mikrofon}
 	\caption{Mikrofonforstærker oversat til en AC model.}
-	\label{fig:mikrofonforstærker}
+	\label{fig:mikrofonforstarker}
 \end{figure}
 
 Forstærkningen bestemmes af transkonduktansen og modstanden $R_C$.
