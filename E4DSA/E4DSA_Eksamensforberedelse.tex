@@ -13,7 +13,7 @@
 \usepackage{amssymb}
 \usepackage{float}
 \graphicspath{ {graphics/} }
-
+\setcounter{tocdepth}{1}
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
 \renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
@@ -23,6 +23,8 @@
 \author{Jonas Lind}
 \date{15-08-2017}
 \maketitle
+\tableofcontents
+\newpage
 \section{Analyse af digitale signaler med Diskret Fourier Transformation og Spektrogram}
 \subsection{DFT}
 \begin{itemize}
@@ -1107,6 +1109,85 @@ r(n) = \sum_{k=-\infty}^{\infty} x(k) \cdot x(n+k) = x(n) \circledast x(-n)
 
 \newpage
 \section{CASE projekt 1 – FSK transmission}
+\subsection{Opgavebeskrivelse}
+\begin{itemize}
+	\item Lave et kommunikationssystem imellem to enheder, hvor hver enhed har en mikrofon og en højttaler. 
+	\item Der benyttes en hørbar lyd som generes som et lydsignal-array.
+	\item Bit rate, båndbredde og betydning af signal-støj-forhold.
+\end{itemize}
+
+\subsection{Analyse af lydsignal}
+\begin{itemize}
+	\item Analyse af hvilke karakterer, som svarer til hvilke frekvenser. 
+	\item Signalet analyseres vha. Short-Time Fourier Transform – dvs. med spektrogram-plot.
+	\begin{itemize}
+		\item Et smalt vindue giver en god opløsning i tid, men giver en dårlig opløsning i frekvens.
+		\item Et bredt vindue giver en god opløsning i frekvens, men en dårlig opløsning i tid.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/case1_2}
+	\caption{V: God opløsning i frekvens og dårlig opløsning i tid. H: God opløsning i tid og dårlig opløsning i frekvens.}
+	\label{fig:case1_2}
+\end{figure}
+
+\subsection{Dekodning}
+\begin{itemize}
+	\item Frekvensbåndet der arbejdes indenfor er kendt og dermed den laveste frekvens og højeste frekvens. 
+	\item Længden af hvert symbol er også kendt.
+	\item Antallet af symboler der er blevet sendt findes ved hjælp af samplefrekvensen samt længden på det modtagne signal.
+\end{itemize}
+
+\begin{equation}
+\Delta R = \frac{f_s}{N}
+\end{equation}
+
+\subsection{Signal-støj-forhold}
+\begin{itemize}
+	\item Jo større distance mellem enhederne, jo mindre bliver effekten af signalet fra højtalerne, og jo mere består det samlede signal af støj.
+	\begin{itemize}
+		\item Signalet blev optaget ved 4 forskellige distancer (\SI{0}{\meter}, \SI{0}{\meter}, \SI{0}{\meter} og \SI{0}{\meter}).
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+SNR = \frac{P_{signal}}{P_{noise}}
+\end{equation}
+
+\paragraph{SNR i tidsdomænet}
+\begin{itemize}
+	\item Estimere SNR af et signal udfra signalets sampleværdier. 
+	\item Middel-effekt.
+\end{itemize}
+
+\begin{equation}
+P = \frac{1}{N} \sum_{n=0}^{N-1}x(n)^2
+\end{equation}
+
+\paragraph{SNR i frekvensdomænet} kan groft estimateres baseret på signalets egenskaber i frekvensdomænet.
+
+\begin{itemize}
+	\item Der anvendes DFT på signalet i tidsdomænet og herefter fås de positive amplitudestørrelser $|X(m)|^2$.
+	\item En threshold værdi fastsættes.
+	\begin{itemize}
+		\item Over threshold værdien er det ønskede signals amplitudestørrelse.
+		\item Under treshold værdien er det uønskede støjsignals amplitudestørrelse.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+SNR=  \frac{sum\;of\;samples\;above\;threshold}{sum\;of\;samples\;below\;threshold}
+\end{equation}
+
+\subsection{Bit rate}
+\begin{itemize}
+	\item Ved en enkelt tone kan der aflæses fint med en symbollængde på \SI{0,1}{\second}
+	\item  Hvis der er to frekvenser tæt på hinanden skal der bruges en symbollængde på \SI{0,5}{\second}.
+	\item Der kan anvendes zero-padding til at få den korrekte amplitude.
+\end{itemize}
+
 \newpage
 \section{CASE projekt 2 – Audio filter}
 \subsection{Opgavebeskrivelse}
