@@ -10,10 +10,10 @@
 \usepackage{subcaption} % Add the possibility for subfigures/subcaptions.
 \usepackage{natbib} % Required to change bibliography style to APA
 \usepackage{amsmath} % Required for some math elements
-
+\usepackage{gensymb}
 \usepackage{float}
 \graphicspath{ {graphics/} }
-
+\setcounter{tocdepth}{1}
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
 \renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
@@ -23,8 +23,70 @@
 \author{Jonas Lind}
 \date{16-08-2017}
 \maketitle
-
+\tableofcontents
+\newpage
 \section{Øvelse 1 - Modellering af Blackbox}
+
+\paragraph{Formål} med Øvelse 1 er at finde overføringsfunktionen for Blackbox med frekvenskarakteristikker og stepresonset.  Blackboxen skal repræsentere en ukendt "proces".
+ 
+\paragraph{Forberedelse} for Øvelse 1 er forklaring af hvordan 1. og 2. ordenssystemer ser ud med et steprespons og deres reelle poler og komplekse poler.
+\begin{itemize}
+	\item $\frac{1}{\alpha}$ = Tidskonstanten. Denne måles ved \SI{63}{\percent} af slutværdien.
+	\item $T_r$ = Risetime, Denne måles fra \SI{10}{\percent} til \SI{90}{\percent}.
+	\item $T_s$ = Setlingtime. Denne er når responset har nået \SI{98}{\percent} af den endelige værdi.
+	\item Overføringsfunktionen $G(s)= \frac{K}{s+\alpha}$
+\end{itemize}
+
+Hvorledes bodeplot ser ud for 1. og 2. ordenssystemer. 
+\begin{itemize}
+	\item 1. ordens system har en pol der falder med $20 \si{\decibel}$ pr. dekade og har et fasedrej på \SI{45}{\degree} ved knækfrekvensen, \SI{3}{\decibel} frekvensen, \SI{90}{\degree} i alt. 
+	\item 2. ordens system har to poler, hvor hver pol falder med $20 \si{\decibel}$ pr. dekade, \SI{40}{\decibel} i alt. Har et fasedrej på \SI{180}{\degree} i alt. 
+\end{itemize}
+
+Bestemme systemes stationære fejl overfor step- og rampe input. 
+\begin{itemize}
+	\item Stationær fejl ved stepinput $K_p = \lim\limits_{s\rightarrow 0} \dfrac{5000}{(s+50)(s+1000)}=1$
+	\begin{itemize}
+		\item $e(\infty)=\dfrac{1}{1+K_p} = \dfrac{1}{2}$
+	\end{itemize}
+	\item Stationær fejl ved rampeinput $K_v = \lim\limits_{s\rightarrow 0} s \dfrac{5000}{(s+50)(s+1000)}=0$
+	\begin{itemize}
+		\item $e(\infty)=\dfrac{1}{K_v} = \infty$
+	\end{itemize}
+\end{itemize}
+
+Udformning af G1 så statinære fejl reduceres. 
+\begin{itemize}
+	\item Større forstærkning $K_p$.
+	\item Tilføj et integrationsled $\frac{1}{s}$ på step og to integrationsled $\frac{1}{s^2}$ på rampe.
+\end{itemize}
+
+\paragraph{Praktisk} for Øvelse 1 er identificering af G(s) ud fra stepresponset.
+
+\begin{itemize}
+	\item \si{\tau} \SI{19,2}{\milli\second}
+	\item $\alpha = \frac{1}{\tau} = 52$
+	\item $G(s)= \dfrac{\alpha}{s+\alpha} = \dfrac{52}{s+52}$
+\end{itemize}
+
+Identificere G(s) ud fra målepunkter og indsætte asymptoter.
+\begin{itemize}
+	\item Lave et frekvenssweep og aflæse frekvens, amplitude og fase.
+	\item Tegne \SI{20}{\decibel} pr. dekade og \SI{40}{\decibel} pr. dekade asymptotet på bodeplot og derved se overføringsfunktion G(s).
+	\begin{itemize}
+		\item Knækfrekvensen findes til at være ved \SI{9}{\hertz} og giver en pol ved $\SI{8}{\hertz}\cdot 2\pi \approx 56$.
+		\item Ved ca. \SI{230}{\hertz} ses grafen falde \SI{40}{\decibel} pr. dekade kan endnu en pol findes ved $\SI{230}{\hertz}\cdot 2\pi \approx 1445$.
+	\end{itemize}
+\end{itemize}
+
+Måling af stationære fejl, $V_{out} - V_{in}$. 
+\begin{itemize}
+	\item $K_p$ findes og derved kan den stationære fejl beregnes $K_p = A_{in}-A_{out} = 1 - 0,51 = 0,49$
+	\begin{itemize}
+		\item $ e(\infty)= \frac{1}{1+K_p} = \frac{1}{1+1} = 0,5$
+	\end{itemize}
+\end{itemize}
+
 
 \section{Øvelse 2 -	Modulering af DC-motorstand}
 
