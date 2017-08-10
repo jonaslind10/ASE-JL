@@ -46,6 +46,10 @@ V_{RMS} = \sqrt{P_O R_L} = \SI{15.5}{\volt}
 V_O = V_{RMS} \sqrt{2} = \SI{22}{\volt}
 \end{equation}
 
+\begin{equation}
+V_{CC} = \SI{27}{\volt}
+\end{equation}
+
 \paragraph{Strømsvinget} som er nødvendigt på forstærkerens udgang igennem de \SI{8}{\ohm} findes til at være \SI{3.65}{\ampere}, ved en nominel modstandsværdi på \SI{6}{\ohm}. Dette er gældende da højttalerens svingspole har en DC modstand $R_{DC}$ på typisk \SI{80}{\percent}  af den nominelle værdi. Der forventes en middelstrøm fra effektforsyningen på $I_{DC} = \SI{1.16}{\ampere}$.
 
 \begin{equation}
@@ -215,33 +219,30 @@ SR = \dfrac{I_E}{C_C} \approx \SI{28}{\volt\per\micro\siemens}
 Herunder regnes den totale effekt afsat i forstærkeren og ud fra den findes effekten afsat i udgangstrinnet.\\
 
 \begin{itemize}
-	\item Den tilførte effekt på \SI{67}{\watt} ved \SI{30}{\watt} afgivet i nominelt \SI{8}{\ohm}. 
+	\item Den tilførte effekt på \SI{62}{\watt} ved \SI{30}{\watt} afgivet i nominelt \SI{8}{\ohm}. 
 \end{itemize}
 
 \begin{equation}
-I_{O\,PEAK} \approx \SI{3,5}{\ampere}
+P_{CC} = \dfrac{V_{CC}V_O}{\pi R_L} \approx \SI{31}{\watt}
 \end{equation}
 
 \begin{equation}
-I_{DC} = \dfrac{I_{O\,PEAK}}{\pi} \approx\SI{1}{\ampere}
-\end{equation}
-
-\begin{equation}
-P_{CC} = V_{CC}(I_{PEAK}-I_{DC})\approx \SI{67}{\watt}
+P_{TOT} = P_{CC}\cdot 2 \approx \SI{62}{\watt}
 \end{equation}
 
 \begin{itemize}
 	\item Effekttabet i udgangstransistorerne T9 og T10 bliver \SI{24}{\watt} samlet.
-	\begin{itemize}
-		\item Der forventes derfor et tab på \SI{12}{\watt} i hver transistor.
-		\item Ved simulering ses effektabet til \SI{11.5}{\watt}.
-		\item De valgte transistorer 2N3055 og MJ2955 kan klare \SI{115}{\watt}.
-	\end{itemize}
 \end{itemize} 
 
 \begin{equation}
 P_T = 0.405 \cdot \dfrac{V_{CC}^2}{2 R_L} \approx \SI{24}{\watt}
 \end{equation}
+
+	\begin{itemize}
+	\item Der forventes derfor et tab på \SI{12}{\watt} i hver transistor.
+	\item Ved simulering ses effektabet til \SI{11.5}{\watt}.
+	\item De valgte transistorer 2N3055 og MJ2955 kan klare \SI{115}{\watt}.
+\end{itemize}
 
 \textbf{Valg af komponenter og deres vigtige parametre}
 
@@ -268,7 +269,6 @@ Endelig kan transistoren klare effekten $P_{C\,MAX}$ uden at opvarmes til destru
 
 Ved overskridelse af Absolute Maximum Ratings fra transistorens datablad risikeres alt fra en nedsat levetid til et momentant sammenbrud.
 
-\newpage
 $P_{MAX}$ giver skæringspunkterne for 2N3055.
 
 \begin{equation}
@@ -291,15 +291,14 @@ Arbejdslinjen er $I_{C2} = \SI{3.65}{\ampere} \rightarrow V_{CC} = \SI{27}{\volt
 \subsection{Termisk modstand}
 En køleprofil beskrives normalt ved en termisk modstand og Ohms lov antages at gælde for det termiske system. 
 Man siger at effektstrømmen $P$ løber gennem den termiske modstand $R_{th}$ og det danner et temperaturfald på $R_{th}P$ som hæver temperaturen $T$ over omgivelsestemperaturen $T_{amb}$.
-Den termiske modstand kaldes undertiden for køleprofilets K-værdi og enheden er en stigning i temperatur per effekt.
 
 \begin{equation}
 T = R_{th} P + T_{amb}
 \end{equation}
 
 \begin{itemize}
-	\item Angiver evnen til at transportere og afsætte varme, f.eks. fra transistorens junction til dens overflade.
-	\item Måles i \SIUnitSymbolCelsius /\si{\watt}
+	\item Den termiske modstand kaldes for køleprofilets K-værdi og enheden er en stigning i temperatur per effekt \SIUnitSymbolCelsius /\si{\watt}.
+	\item Angiver evnen til at transportere og afsætte varme, f.eks. fra transistorens junction til dens overflade. 
 	\item Jo højere værdi, jo varmere vil et komponent blive ved en given afsat effekt.
 \end{itemize}
 
@@ -313,7 +312,7 @@ T = R_{th} P + T_{amb}
 Effektstrømmen $P$ løber gennem den termiske modstand $R_{th}$ og det
 danner et temperaturfald på $R_{th}P$ som hæver temperaturen $T$ over omgivelsestemperaturen $T_{amb}$.
 
-\newpage
+
 \begin{itemize}
 	\item $R_{th\:j-mb}$
 	\begin{itemize}
@@ -329,7 +328,7 @@ danner et temperaturfald på $R_{th}P$ som hæver temperaturen $T$ over omgivels
 		\item Den eksterne termiske modstand for køleprofilet \textit{(heat sink)}.
 	\end{itemize}
 \end{itemize}
-
+\newpage
 \begin{equation}
 T_j = (R_{th\:j-mb} + R_{th\: mb-hs} + R_{th\: hs})P + T_{amb}
 \end{equation}
@@ -350,7 +349,7 @@ T_j = (R_{th\:j-mb} + R_{th\: mb-hs} + R_{th\: hs})P + T_{amb}
 \end{equation}
 
 \begin{equation}
-R_{th\: hs} = \dfrac{T_j-T_{amb}}{P}-R_{th\:j-mb} + R_{th\: mb-hs}
+R_{th\: hs} = \dfrac{T_j-T_{amb}}{P}-R_{th\:j-mb}
 \end{equation}
 
 \begin{equation}
@@ -359,7 +358,11 @@ R_{th\: hs} = \dfrac{\SI{100}{\degreeCelsius}-\SI{25}{\degreeCelsius}}{\SI{12}{\
 
 \subsection{Valg af køleplade}
 \begin{itemize}
-	\item Dens termiske modstand blev regnet med en online lommeregner til \SI{2.15}{\degreeCelsius\per\watt}.
+	\item Dens termiske modstand blev regnet med en online lommeregner til \SI{3.77}{\degreeCelsius\per\watt}.
+	\begin{itemize}
+		\item $W:\SI{75}{\milli\meter}, L:\SI{69}{\milli\meter}, H: \SI{10}{\milli\meter}$
+		\item 10 \textit{finner}.
+	\end{itemize}
 \end{itemize}
 
 \begin{equation}
@@ -444,7 +447,12 @@ C_{Filter} = \dfrac{I_{DC}t_p}{2 U_{RIP}}
 	\item Input kondensatoren sikrer stabilitet, hvis dens forsyning er langt fra input.
 	\item Output kodensatoren giver også stabilitet og evnen til hurtigt at levere strøm.
 	\item Reguleres internt ud fra en bandgap spændingsreference, $V_{ref}$.
+	\item Effekttabet i serieregulatoren.
 \end{itemize}
+
+\begin{equation}
+P_{tab} = (U_{DC} - U_O) I_O
+\end{equation}
 
 \begin{figure} [H]
 	\centering
@@ -453,14 +461,10 @@ C_{Filter} = \dfrac{I_{DC}t_p}{2 U_{RIP}}
 	\label{fig:serieregulator}
 \end{figure}
 
-\begin{equation}
-P_{tab} = (U_{DC} - U_O) I_O
-\end{equation}
-
 \subsection{DC-DC konverter}
 DC konverteren benytter en spole til at optage energi fra indgangen i et kort tidsrum hvorefter energien overføres til udgangen i det efterfølgende tidsrum. 
 Den proces gentages i en evindelighed styret af en transistor og en diode der arbejder som kontakter. 
-Transistoren kan være bipolar eller felteffekt.
+
 \begin{itemize}
 	\item Kan regulere DC spændinger op og ned mere effektivt end lineære regulatorer.
 	\item Har en virkningsgrad på over \SI{90}{\percent}.
@@ -526,7 +530,7 @@ En OpAmp kan beskrives ved et differentielt indgangstrin der omsætter en spænd
 \end{figure}
 
 \begin{itemize}
-	\item Forstærker forskellen mellems den to indgange, $U_P$ og $U_N$.
+	\item Forstærker forskellen mellem de to indgange, $U_P$ og $U_N$.
 	\item Differential-trinnet laver spændingsforskellen om til en strøm $I_O$.
 	\item VAS-trinnet forstærker strømmen med $\beta$, som laves til en spænding med $R_C$.
 	\item Udgangstrinnet er en unity gain buffer, så udgangen af VAS-trinnet ikke belastes af eksternt load.
@@ -542,13 +546,6 @@ En OpAmp kan beskrives ved et differentielt indgangstrin der omsætter en spænd
 	\item Trin 3 - Beskytter $R_C$ mod belastningen $R_L$ - omsætter fra mA niveau til A niveau.
 \end{itemize}
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.85\linewidth]{graphics/opamp}
-	\caption{Generelt OpAmp kredsløb.}
-	\label{fig:opamp}
-\end{figure}
-\newpage 
 \paragraph{Differentialtrin} benytter to transistorer med fælles emitter, en såkaldt differentielkobling. En strømkilde driver en fast strøm $I_E$ i den fælles emitter. De to transistorer tvinges derfor til at dele strømmen mellem sig. 
 
 \begin{itemize}
@@ -561,7 +558,7 @@ En OpAmp kan beskrives ved et differentielt indgangstrin der omsætter en spænd
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.3\linewidth]{graphics/differentialtrin}
+	\includegraphics[width=0.25\linewidth]{graphics/differentialtrin}
 	\caption{Differentialtrin.}
 	\label{fig:differentialtrin}
 \end{figure}
@@ -575,12 +572,11 @@ En OpAmp kan beskrives ved et differentielt indgangstrin der omsætter en spænd
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{graphics/currentmirror}
+	\includegraphics[width=0.5\linewidth]{graphics/currentmirror}
 	\caption{Strømspejl.}
 	\label{fig:currentmirror1}
 \end{figure}
 
-\newpage
 \subsubsection{Trin 1: Differentialforstærker}
 \begin{itemize}
 	\item Kombinerer differentialetrinnet, strømspejlet og strømkilden.
@@ -593,7 +589,7 @@ En OpAmp kan beskrives ved et differentielt indgangstrin der omsætter en spænd
 \end{itemize}
 
 \begin{equation} 
-I_o = g_m(U_P-U_N)
+I_O = g_m(V_P-V_N)
 \end{equation}
 
 \begin{equation} 
@@ -606,20 +602,17 @@ g_m = \frac{I_E}{2nU_T}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{graphics/differentialtrin_fors}
+	\includegraphics[width=0.4\linewidth]{graphics/differentialtrin_fors}
 	\caption{Differentialforstærkertrinnet.}
 	\label{fig:differentialforstarker}
 \end{figure}
 
-
-
-\newpage 
 \subsubsection{Trin 2: VAS - Voltage Amplification Stage} 
-Transistorens strømforstærkning $\beta$ forstærker differentialtrinnets udgangsstrøm. Denne strøm bliver ledet gennem en modstand, $R_C$, som laver det om til en strøm. 
+Transistorens strømforstærkning $\beta$ forstærker differentialtrinnets udgangsstrøm. Denne strøm bliver ledet gennem en modstand, $R_C$, som laver det om til en spænding. 
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{graphics/vas}
+	\includegraphics[width=0.6\linewidth]{graphics/vas}
 	\caption{Trans-resistans forstærker (VAS).}
 	\label{fig:VAS_forstarker}
 \end{figure}
@@ -745,13 +738,31 @@ Modstanden $R_C$ er faktor i udtrykket for åben-sløjfe forstærkningen $A_{OL}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.85\linewidth]{graphics/udgangstrin}
+	\includegraphics[width=0.85\linewidth]{graphics/opamp}
 	\caption{Udgangstrin.}
-	\label{fig:udgangstrin}
+	\label{fig:opamp}
 \end{figure}
 
 \subsection{Offset-fejl og støj}
-Se side 280 i Analogteknik.
+\paragraph{Offset-fejl}
+\begin{itemize}
+	\item Der løber en lille basis-strøm, som i praksis vil føre til en fejl i $I_2$.
+	\item Ikke matchede transistorer.
+\end{itemize}
+
+\paragraph{Støj}
+\begin{itemize}
+	\item Haglstøj ($i_n$) fra transistorens PN-overgang.
+	\item Termisk støj ($e_n$) fra modstande, fx $r_x$ i BJT.
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{graphics/noise}
+	\caption{Støjmodellen for operationsforstærker.}
+	\label{fig:noise}
+\end{figure}
+
 \newpage
 \section{Dioden}
 Diodens egenskab er PN overgangen der kun tillader en elektrisk strøm at løbe i én retning. 
@@ -778,7 +789,7 @@ I modsatte retning løber en ubetydelig strøm indtil spændingen over dioden bl
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.85\linewidth]{graphics/I-U_karakteristik}
+	\includegraphics[width=0.6\linewidth]{graphics/I-U_karakteristik}
 	\caption{Diodens karakteristik I(U).}
 	\label{fig:I-U_karakteristik}
 \end{figure}
@@ -795,7 +806,7 @@ Dioden består af et P-lag og et N-lag, med henholdsvis et underskud og et overs
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/PN_overgang}
+	\includegraphics[width=0.7\linewidth]{graphics/PN_overgang}
 	\caption{PN overgangen.}
 	\label{fig:pnovergang}
 \end{figure}
@@ -807,25 +818,27 @@ Hvis det eksterne batteri vendes om vil det elektriske felt øges og blokere for
 
 
 \subsection{Modeller - AC/DC}
-\paragraph{DC modellen} for dioden har en DC modstandsværdi, $R_D$, som resulterer i et større målt spændingsfald, $U_D$, i lederetningen ved en given strøm $I_F$.
+\paragraph{DC modellen} for dioden har en DC modstandsværdi.
+\begin{itemize}
+	\item $R_D$ resulterer i et større målt spændingsfald, $U_D$, i lederetningen ved en given strøm $I_F$.
+\end{itemize} 
 
 \begin{equation}
 U_D = U_F + R_D I_F
 \end{equation}
 
 \begin{itemize}
-	\item Seriemodstanden skyldes ledningsevnen af halvlederens materiale.
-	\item Modstanden $R_D$ er ikke en konstant værdi.
+	\item Seriemodstanden $R_D$ skyldes ledningsevnen af halvlederens materiale. Modstanden $R_D$ er ikke en konstant værdi.
 \end{itemize}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.9\linewidth]{graphics/DC_diode}
+	\includegraphics[width=0.6\linewidth]{graphics/DC_diode}
 	\caption{Diodens seriemodstand ved DC.}
 	\label{fig:DC_diode}
 \end{figure}
 
-\newpage
+
 \paragraph{AC modellen} for dioden hvor seriemodstanden er ubetydelig, kan dioden ses som en strømstyret modstand. 
 Modstanden falder ved højere strømme.
 
@@ -835,7 +848,7 @@ r_D = \dfrac{U_T}{I_F}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{graphics/ACdiode}
+	\includegraphics[width=0.6\linewidth]{graphics/ACdiode}
 	\caption{Diodens seriemodstand ved AC.}
 	\label{fig:AC_diode}
 \end{figure}
@@ -853,6 +866,19 @@ r_D = \dfrac{U_T}{I_F}
 	\includegraphics[width=\linewidth]{graphics/ensretning}
 	\caption{Halvbølge ensretning af et vekselsignal.}
 	\label{fig:ensretning}
+\end{figure}
+
+\paragraph{Shuntregulator} med en zenerdiode kan anvendes til at give en konstant spænding eller som beskyttelse af
+en indgang der ikke kan tåle spændinger over en given værdi.
+\begin{itemize}
+	\item Zenerdioder anvendes med en modstand $R_F$ der begrænser strømmen i zenerdioden til $I_Z$.
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{graphics/shunt}
+	\caption{Shuntregulator.}
+	\label{fig:shunt}
 \end{figure}
 
 \paragraph{Beskyttelseskredsløb} Dioden kan beskytte en følsom indgang imod overspænding.
