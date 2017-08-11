@@ -152,7 +152,7 @@ X(m)=\sum_{n=0}^{N-1}x(n)e^{\frac{-j2\pi mn}{N}}
 
 \subsection{Spektral forbredning}
 \begin{itemize}
-	\item Længden af vinduet bestemmer frekvensopløsningen.
+	\item Længden N af vinduet bestemmer frekvensopløsningen.
 	\item Et bredt vindue øger frekvens opløsningen, men der er ting der forhindrer det praktisk.
 \end{itemize}
 
@@ -161,9 +161,9 @@ X(m)=\sum_{n=0}^{N-1}x(n)e^{\frac{-j2\pi mn}{N}}
 \end{equation}
 
 \begin{itemize}
-	\item -	Hvis ikke $\Delta R$ går op i sinus signalet kommer der spektral forbredning. 
+	\item Hvis ikke $\Delta R$ går op i sinus signalet kommer der spektral forbredning. 
 	\begin{itemize}
-		\item Inputsignalet har en frekvens der ligger mellem vores analyse frekvenser hvorved der opstår spektral forbredning og inputsignalet vil vise sig i alle output "bins" $m$.
+		\item Inputsignalet har en frekvens der ligger mellem vores analyse frekvenser hvorved der opstår spektral forbredning og inputsignalet vil vise sig i alle output "bins" = $m$.
 	\end{itemize}
 \end{itemize}
 
@@ -302,7 +302,7 @@ y(n) = b_0 x(n) + b_1 x(n-1) + ... + b_M x(n-M) + a_1 y(n-1) + a_2 y(n-2) + ... 
 
 \subsection{Design af 2. ordens IIR filter}
 \begin{itemize}
-	\item Et 2. ordens FIR notch filter designes ved at placere poler og nulpunkter i z-domænet.
+	\item Et 2. ordens IIR notch filter designes ved at placere poler og nulpunkter i z-domænet.
 	\item Nulpunkter/poler har en radius og vinkel da de er komplekse tal.
 	\begin{itemize}
 		\item $r$ er nul-radius og $\omega$ er nul-vinkel.
@@ -423,6 +423,9 @@ $N = 32$\\
 		\item I tidsdomænet bliver responset repræsenteret som en sinc-funktion.
 	\end{itemize}
 	\item Sinc funktionen shiftes for at få peaket til at ligge midt i de valgte filterkoefficienter, da filterkoefficienterne skal være symmetriske for at få lineær fase.
+	\begin{itemize}
+		\item Den sidste sample fjernes for at shifte impulsresponsen.
+	\end{itemize}
 \end{itemize}
 
 \begin{figure}[H]
@@ -706,7 +709,7 @@ y{_Re}(n) = x(n)+y_{Re}(n-1)
 
 \paragraph{Trapezoidal Rule Integrator} udregner summen af  $y_{Tr}(n)$ ved at beregne arealet ved gennemsnittet af $x(n) + x(n-1)$ i det skraverede areal til højre og addedere det med værdien for den forhenværende sum $y_{Tr}(n-1)$.
 \begin{equation}
-y_{Tr}(n) = 0.5 x(n)+ 0.5 x(n-1) y_{Tr}(n-1)
+y_{Tr}(n) = 0.5 x(n)+ 0.5 x(n-1) + y_{Tr}(n-1)
 \end{equation}
 
 \begin{figure}[H]
