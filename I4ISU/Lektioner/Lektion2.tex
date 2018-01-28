@@ -1,0 +1,109 @@
+\section{Lektion 04-04-2017}
+
+\begin{enumerate}
+	\item Shared data problem
+	\item Processer
+	\item User vs. kernelspace
+	\item Call backs
+\end{enumerate}
+
+\subsection{Processer}
+En proces er en aktiv enhed, en eksekvering af et program. Den består udover programkode af en program counter, stackpointer, variableværdier, datasektion (globale variabler), indholdet af en processerens registr, MMP.
+Processer kommunikerer med hinanden ved hjælp af IPC, styret af OS. Hver proces har sin egen virtuelle hukommelses adresse space. Processer kan ikke tilgå andre processers hukommelse. \\
+
+\textbf{Oprettelse af processer}
+\begin{itemize}
+	\item Systeminitialisering
+	\item En kørende proces opretter en ny proces (f.eks. fork)
+	\item En bruger opretter en ny proces
+	\item Initialisering af et batch job
+	\item Init processen
+\end{itemize}
+
+\textbf{Processernedlæggelse}
+\begin{itemize}
+	\item Normal exit: Processens job er udført
+	\item Error exit: Når der er sket en fatal fejl, fx hvis brugeren vil kompile et ikke-eksisterende program, ulovlig instruktion, reference til ugyldig hukommelse, division med nul
+	\item Nedlagt af en anden proces: Når f.eks. en proces anvender kill til at få OS til at nedlægge en proces i UNIX.
+\end{itemize}
+
+\textbf{Fem stadier}
+\begin{itemize}
+	\item Nyt stadie: Processen bliver oprettet
+	\item Running: Processen kører i CPU'en
+	\item Blocked: Afventer et ekstern event, fx I/O for at kunne fortsætte
+	\item Ready: Klar til at køre i CPU hvis denne bliver ledig
+	\item Terminated: Har afsluttet eksekvering
+	\begin{itemize}
+		\item En baggrundsproces hedder en daemon
+	\end{itemize}
+\end{itemize} 
+
+
+\subsection{Tråde}
+Kaldes også for tasks, jobs eller letvægtede processer. En tråd er en del af en proces, som skal eksekveres i CPU’en. Alle processer har minimum en tråd. CPU’en skifter imellem de forskellige tråde. Skaber illusionen om parallelitet (hvis der kun er en kerne).  En tråd kan være i samme stadier som en proces. En tråd har:
+Stack, PC, registre. Imellem sig deler trådene: kodesektion, datasektion, opgaver (som fx open files og signaler)\\
+
+\textbf{Ligheder ml. tråde og processer}
+
+\begin{itemize}
+	\item Deler CPU
+	\item Eksekveres sekventielt
+	\item Kan lave børn
+	\item En ny tråd overtager hvis en anden bliver blokeret
+\end{itemize}
+
+\textbf{Forskelle ml. tråde og processer}
+\begin{itemize}
+	\item Tråde er ikke uafhængige af hinanden
+	\item Tråde har adgang til de samme adresser i opgaven (problem)
+	\item Altid designet til at hjælpe hinanden
+	\begin{itemize}
+		\item Processer kan hjælpe hinanden alt efter oprindelse
+	\end{itemize}
+\end{itemize}
+
+\textbf{Fordele ved tråde}
+\begin{itemize}
+	\item Tråde koster ikke mange ressource (letvægtede processer)
+	\item Behøver kun en stack og lidt hukommelse
+	\item Behøver ikke adressespace el. globale data, programkode eller OS ressourcer
+	\item Context switch er hurtigt (udskiftning af tråde i CPU'en)
+\end{itemize}
+
+\subsection{User-threads}
+Hver proces bliver af kernen opfattet som enkelttrådede processere ligegyldigt hvor mange tråde den har. Ved trådskifte bliver der ikke lavet systemkald pga. implementationen i userspace bibliotekerne. Hver proces har et threadtable over sine tråde.\\
+
+
+\textbf{Fordele}
+\begin{itemize}
+	\item Anvendes i OS der ikke understøtter flertrådethed
+	\item Alt er gemt i user space adresse space: PC, registers, stack og en controlblock
+	\item Kernen bliver ikke forstyrret 
+	\item Ikke meget dyrere i ressourcer end et procedure call
+\end{itemize}
+
+\textbf{Ulemper}\\
+\begin{itemize}
+	\item Kun et timeslice per proces ligegyldig antallet af tråde. Hver tråd skal overgive kontrollen til andre tråde når de er færdige (nonpreemptive)
+	\item Hvis én tråd blokerer vil hele processen stoppe (selvom der er andre tråde i samme proces som kunne fortsætte)
+	\item Kan ikke udnytte flerkernesystemer
+\end{itemize}
+
+\subsection{Kernel-threads}
+Kernen kender til trådene og har kontrollen over dem. Kernen har thread table udover proces table. Tråde dannes og styres vha. system kald. \\
+
+\textbf{Fordele}
+\begin{itemize}
+	\item Prioritering af tid: En proces med mange tråde kan få mere CPU-tid tildelt af scheduleren
+	\item Rigtig godt til applikationer der ofte blokerer
+	\item Kan udnytte flerkernesystemer
+\end{itemize}
+
+\textbf{Ulemper}
+\begin{itemize}
+	\item Langsomt og ueffektivt - 100 gange langsommere end userspacethreading \item Fuld thread control block TCB er nødvendig for hver tråd. Det skaber et stort overhead og kernekompleksitet.
+\end{itemize}
+
+
+

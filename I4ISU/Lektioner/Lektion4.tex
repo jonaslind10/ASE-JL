@@ -1,0 +1,23 @@
+\section{Lektion 02-05-2017}
+
+\begin{enumerate}
+	\item Deadlocks
+	\item Priority inversion
+\end{enumerate}
+
+\subsection{Deadlocks}
+Der er fire ting der skal være opfyldt for at en deadlock kan opstå:
+\begin{itemize}
+	\item Mutual exclusion: Ressourcen kan kun bruges af en proces af gangen
+	\item Hold-and-wait: Processer der allerede har en ressource kan forespørge flere
+	\item No preemption: Ingen ressourcer kan fratvinges sine ressourcer
+	\item Circular wait condition: Cyclisk afhængighed
+\end{itemize}
+
+\subsection{Priority inversion}
+A (HP-task) deler semaphor med C (LP-task). C har semaphoren.  B (MP-task) overtager CPU'en. A kan ikke komme til så længe B har CPU, fordi C ikke nåede at frigive semaphor.
+
+\begin{enumerate}
+	\item \textbf{Priority inheritance:} When a thread holds a mutex it is temporarily assigned the priority of the highest-priority thread waiting for the mutex.
+	\item \textbf{Priority ceiling:} All mutexes are assigned a (high) priority (the priority ceiling) which the owner of the mutex is assigned while it holds the mutex.
+\end{enumerate}

@@ -1,7 +1,14 @@
 \documentclass[12pt,a4paper,danish]{book}
 \setlength{\headheight}{15pt}
 \usepackage{amsmath, amsthm, amssymb}
-\usepackage{mdframed}
+\usepackage[framemethod=default]{mdframed}
+\usepackage{showexpl}
+
+\mdfdefinestyle{exampledefault}{%
+rightline=true,innerleftmargin=10,innerrightmargin=10,
+frametitlerule=true,frametitlerulecolor=green,
+frametitlebackgroundcolor=yellow,
+frametitlerulewidth=2pt}
 
 \usepackage{lipsum}
 \usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
@@ -10,7 +17,7 @@
 \usepackage[danish]{babel}
 \usepackage{inputenc}
 \usepackage{siunitx}
-
+\usepackage[x11names]{xcolor}
 
 \newmdtheoremenv{exmp}{Example}[section]
 \newtheorem{prob}{Problem}[section]

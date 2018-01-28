@@ -1,21 +1,14 @@
 \documentclass[12pt,a4paper,danish]{book}
 \setlength{\headheight}{15pt}
 \usepackage{amsmath, amsthm, amssymb}
-\usepackage[framemethod=default]{mdframed}
-\usepackage{showexpl}
-
-\mdfdefinestyle{exampledefault}{%
-rightline=true,innerleftmargin=10,innerrightmargin=10,
-frametitlerule=true,frametitlerulecolor=green,
-frametitlebackgroundcolor=yellow,
-frametitlerulewidth=2pt}
+\usepackage{mdframed}
 
 \usepackage{lipsum}
 \usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
 \usepackage{url,textcomp}
 \usepackage{graphicx}
 \usepackage[danish]{babel}
-\usepackage{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{siunitx}
 
 
@@ -43,34 +36,47 @@ frametitlerulewidth=2pt}
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\lhead{ETISB}
+\lhead{I4ISU}
 \rhead{\textsc{Jonas Lind}}
 \cfoot{\thepage}
     
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
+
+
+\title{I4ISU -  Indlejret software udvikling}
+\begin{document}
+\begin{titlepage}
+	\clearpage\thispagestyle{empty}
+
+	\begin{center}
+		\HRule \\[0.4cm]
+		{\huge \bfseries I4ISU} \\[.3cm] {\huge Indlejret software udvikling}\\[0cm]
+		\HRule \\[3.4cm]
+		\includegraphics[width=0.5\linewidth]{graphics/au}
+	\end{center}
+	\renewcommand{\contentsname}{Indholdsfortegnelse}
+	\tableofcontents
+
+\end{titlepage}
+ 
 %-----------------------------------------------------------------
 %   TITLE SECTION
 %-----------------------------------------------------------------
 
-\title{ETISB - Embedded Signal Processing}
-\begin{document}
-\begin{titlepage}
-	\clearpage\thispagestyle{empty}
-	\begin{center}
-		\HRule \\[0.4cm]
-		{\huge \bfseries ETISB} \\[.3cm] {\huge Embedded Signal Processing}\\[0cm]
-		\HRule \\[3.4cm]
-		\includegraphics[width=0.5\linewidth]{graphics/au}
-	\end{center}
-\end{titlepage}
-
-\tableofcontents
-
-\chapter{Introduction, number formats and Blackfin}
+\chapter{OS and programming in Linux}
 \input{Lektioner/Lektion1}
 
-\chapter{Quantization and fixed-point effects}
+\chapter{Process and Threads}
 \input{Lektioner/Lektion2}
+
+\chapter{Thread Synchronization I}
+\input{Lektioner/Lektion3}
+
+\chapter{Thread Synchronization II}
+\input{Lektioner/Lektion4}
+
+\chapter{Thread Communication}
+\input{Lektioner/Lektion5}
 
 \end{document}

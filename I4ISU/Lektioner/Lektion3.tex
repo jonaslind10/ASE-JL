@@ -1,0 +1,31 @@
+\section{Lektion 18-04-2017}
+
+\begin{enumerate}
+	\item Mutex og Semaphores
+	\item Conditionals
+	\item Producer/consumer problem
+\end{enumerate}
+
+\subsection{Mutex og Semaphores}
+For at løse samtidighedsudfordringen indføres mutex og semaphorer. Deres formål er at beskytte data således at de ikke tilgås af flere ad gangen. En lås til hver, uafhængig af andre data.\\
+
+\noindent Problemer
+\begin{enumerate}
+	\item Glemmer at tage
+	\item Glemmer at frigive
+	\item Tager den forkerte
+	\item Holder unødigt længe
+	\item Deadlocks
+\end{enumerate}
+
+
+\noindent Mutex skal frigives af den tråd der har taget den. 
+
+\noindent Semaphorer har intet ejerskab. Kan være binær eller counting. Behøver ikke frigives af den tråd der tog den. Kan derfor bruges til signalering.
+
+\subsection{Conditionals}
+Conditionals anvendes sammen med mutex til at signalere tråde imellem at der er sket en opdatering af fælles data. En tråd kan sættes til at vente på netop sådan en opdatering, f.eks. i øvelsen park-a-lot. Man implementerer en cond\_wait i en while-loop for at fange falske vækninger.
+
+
+\subsection{Producer/consumer problem}
+Consumer og producer deler en buffer af en fikseret størrelse. Consumer må ikke forsøge at tage noget ud af en tom kø, og producer må ikke lægge noget i en fuld kø. I stedet skal de sove til de kan fortsætte. Vi implementerer dette med counting semaphores og mutex (husk rækkefølge for at undgå deadlocks). Man kan også bruge monitors.
