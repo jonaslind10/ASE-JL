@@ -77,6 +77,9 @@ Den største forskel mellem forskellige modulation typer er hvordan et baseband 
 \begin{itemize}
 	\item Skalering af signalniveauerne beregnes ved modulation index m.
 	\item Med et normaliseret baseband signal $|x(t)|\leq 1$, indebærer betingelsen $m \leq 1$ ( eller $100 \% $ ) et undistorted reproduction af  baseband signalet.
+	\begin{itemize}
+		\item \textit{m}: modulation index 
+	\end{itemize}
 	\item Det er let at gendanne baseband signalet fra en AM modulated wave i en receiver med det simple envelope detector circuit. 
 \end{itemize} 
 
@@ -109,16 +112,16 @@ y(t) = A_{c0} x(t) \cos(\omega_c t)
 \end{itemize}
 
 \begin{equation}\label{eq:AM_spectral1}
-y(t)_{|AM} = A_{c0}(1+m A_x \cos \omega_x t) \cos \omega_c t
+y(t)_{|AM} = A_{c0}(1+m A_x \cos \omega_x t) \cos \omega_c t \Rrightarrow
 \end{equation}
 
 \begin{equation}\label{eq:AM_spectral2}
-y(t)_{|AM} = A_{c0} \cos \omega_c t + \dfrac{A_{c0}}{2}m A_x \cos(\omega_c-\omega_x) t + \dfrac{A_{c0}}{2} m A_x \cos(\omega_c+\omega_x) t
+A_{c0} \cos \omega_c t + \dfrac{A_{c0}}{2}m A_x \cos(\omega_c-\omega_x) t + \dfrac{A_{c0}}{2} m A_x \cos(\omega_c+\omega_x) t
 \end{equation}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/5.png}
+	\includegraphics[width=0.85\linewidth]{graphics/5.png}
 	\caption{ Spectral components in a double-sided amplitude spectrum of the sinusoidal baseband signal and the AM modulated waveform from Eq. ~\ref{eq:AM_spectral2}. $u$ and $l$ are the	upper and lower sideband components.}
 	\label{fig:5}
 \end{figure}
@@ -128,12 +131,23 @@ With maximum undistorted modulation, i.e. $m=1$ and $A_x = 1$, the power of the 
 \begin{equation}\label{eq:AM_ex1}
 P_{|AM} = 2 \dfrac{A_{c0}^2}{4} + 4 \dfrac{A_{c0}^2 m^2 A_x^2}{16}
 \end{equation}
+\begin{center}
+	\textit{carrier \qquad envelope}
+\end{center}
 
 \begin{equation}\label{eq:ex2}
 P_{|AM} = \dfrac{1}{2}A_{c0}^2 + \dfrac{1}{4}A_{c0}^2
 \end{equation}
 so at most 33\% of the transmitted power contains the message from the baseband signal.
 \end{mdframed}
+
+\begin{itemize}
+	\item AM modulated signal i frekvens domænet:
+	\begin{itemize}
+		\item Anvender eulers formel ($\cos 2\pi t \rightarrow e^{j2\pi\omega_c t}+e^{-j2\pi\omega_c t}$)
+		\item Fourier transform (gange i tidsdomænet $\cdot$ og folde i frekvenssdomænet $\circledast$) 
+	\end{itemize}
+\end{itemize}
 
 \begin{figure} [H]
 	\centering
