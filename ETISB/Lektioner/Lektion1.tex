@@ -96,20 +96,25 @@
  	\item As the dynamic range increases, precision becomes	coarser.
  \end{itemize}
  
- \begin{figure} [H]
+\begin{figure} [H]
  	\centering
  	\includegraphics[width=\linewidth]{graphics/2.png}
  	\caption{Dynamic ranges and precisions of 16-bit numbers using different formats.}
  	\label{fig:2}
- \end{figure}
+\end{figure}
 
-
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/8.png}
+	\caption{Scaling factors and dynamic ranges for 16-bit numbers using different formats.}
+	\label{fig:8}
+\end{figure}
 
 \subsection{Conversion between different number formats}
 \subsubsection{Fixed-Point Data Types}
 The Blackfin C compiler supports eight scalar data types and two fractional data types.
 
- \begin{figure} [H]
+\begin{figure} [H]
 	\centering
 	\includegraphics[width=0.85\linewidth]{graphics/3.png}
 	\caption{Fixed-Point Data Types.}
@@ -117,5 +122,71 @@ The Blackfin C compiler supports eight scalar data types and two fractional data
 \end{figure}
 
 \subsection{(Blackfin) DSP Architecture}
+The Von Neumann architecture uses a single memory to hold both data and instructions. In comparison, the Harvard architecture uses separate memories 
+for data and instructions, providing higher speed. The Super Harvard Architecture improves upon Harvard design by adding an instruction cache and a dedicated I/O controller. 
 
-\subsection{Software development flow}
+\subsubsection{Von Neumann Architecture}
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{graphics/4.png}
+	\caption{Von Neumann Architecture (single memory).}
+	\label{fig:4}
+\end{figure}
+
+\subsubsection{Super Harvard Architecture}
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{graphics/5.png}
+	\caption{Super Harvard Achitecture (dual memory, instruction cache, I/O controller)}
+	\label{fig:5}
+\end{figure}
+
+\subsection{Choice of processor}
+\begin{itemize}
+	\item DSP
+	\begin{itemize}
+		\item Harvard memory architecture (optimized for the operational needs of digital signal processing).
+		\item Handle real time processing, architecture is specially designed to fetch multiple data at the same time.
+		\item Can handle floating numbers directly in the data flow path.
+		\item Calculations are usually carried out by fixed point arithmetic process in order to speed them up.
+	\end{itemize}
+	\item Microcontroller
+	\item General‐purpose CPU
+	\begin{itemize}
+		\item Most general-purpose CPU can also execute DSP algorithms successfully, but dedicated DSPs usually have better power efficiency.
+	\end{itemize}
+	\item FPGA
+	\item GPU
+\end{itemize}
+
+\subsection{Blackfin}
+\begin{itemize}
+	\item Blackfin is a \textit{MSA} Processor.
+	\begin{itemize}
+		\item MCU and DSP in same processor.
+		\begin{itemize}
+			\item Cheap and low power consumption.
+		\end{itemize}
+	\end{itemize}
+	\item Architecture optimized for multimedia	processing (Audio and Video).
+	\item Dataflow oriented tasks (DSP).
+	\item Control flow oriented tasks (MCU).
+	\item Good tools and compiler support.
+\end{itemize}
+
+\subsubsection{BF533 Overview}
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{graphics/6.png}
+	\caption{BF533 Overview.}
+	\label{fig:6}
+\end{figure}
+
+\subsubsection{Blackfin Core}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{graphics/7.png}
+	\caption{BF533 Core, Fixed-point processor.}
+	\label{fig:7}
+\end{figure}
