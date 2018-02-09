@@ -20,8 +20,8 @@ Vinkel modulation er processen når frekvensen eller phase af carrieren varriere
 \begin{itemize}
 	\item Vinkel modulation, $A(t) = A_{c0}$
 	\begin{itemize}
-		\item \textit{phase modulation, AM} ~\ref{eq:PM}
-		\item \textit{frequency modulation, PM} ~\ref{eq:FM}
+		\item \textit{phase modulation, PM} ~\ref{eq:PM}
+		\item \textit{frequency modulation, FM} ~\ref{eq:FM}
 	\end{itemize}
 \end{itemize} 
 
@@ -33,6 +33,17 @@ y(t) = A_{c0} \cos(\omega_c t + \beta x(t))
 y(t) = A_{c0} \cos(\omega_c t + \phi(t))
 \end{equation}
 
+Phase informationen findes ved at differentere.
+
+\begin{equation}\label{eq:FMphi}
+\dfrac{d\phi}{dt} = \Delta \omega(t)=\Delta\omega_{max}x(t)=2\pi\Delta f_{max}x(t)
+\end{equation}
+
+\begin{description}
+	\item[$\beta$] $=\frac{\Delta f_{max}}{f_x}$ maximum phase deviation from the carrier phase
+	\item[$\Delta f_{max}$] peak frequency deviation
+	\item[$f_x$] baseband frequency component
+\end{description}
 
 \textit{The change in phase, changes the frequency of the modulated wave. The frequency of the wave also changes the phase of the wave.}
 
@@ -43,13 +54,7 @@ y(t) = A_{c0} \cos(\omega_c t + \phi(t))
 	\label{fig:8}
 \end{figure}
 
-\begin{description}
-	\item[$\beta$] $=\frac{\Delta f_{max}}{f_x}$ maximum phase deviation from the carrier phase
-	\item[$\Delta f_{max}$] peak frequency deviation
-\end{description}
-
 \subsubsection{PM}
-
 \begin{equation}\label{eq:PM1}
 \theta(t) =\omega_c t +\beta x(t)+\phi_0
 \end{equation}
@@ -61,23 +66,111 @@ y(t) = A_{c0} \cos(\omega_c t + \phi(t))
 	\item[$\phi_0$] $=0$ Initial angle
 \end{description}
 
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/10.png}
+	\caption{PM angular modulation.}
+	\label{fig:10}
+\end{figure}
+
 \subsubsection{FM}
 \textbf{Indirect FM}
 \begin{equation}\label{eq:FM1}
-\theta_i(t) =\omega_c t + \beta \int_{}^{} x(t) dt
-\end{equation}
-
-\noindent \textbf{Direct FM}
-\begin{equation}\label{eq:FM2}
-\theta_i(t) =\omega_c t +2\pi K_V\int_{}^{} x(t) dt
+y(t) =A_{c0}\cos[\omega_c t + \beta \int_{}^{} x(t) dt]
 \end{equation}
 
 \begin{description}
 	\item[$x(t)$] Baseband signal
-	\item[$\omega_c t$] Angle of Unmodulated carrier wave
+	\item[$\omega_c t$] Angle of unmodulated carrier wave
+	\item[$\beta$]$=\frac{radian}{volt}$ Phase sensitivity (const.)
+	\item[$\omega_{inst}$] $=\omega_c + \beta x(t)$ instantaneous frequency.
+\end{description}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.65\linewidth]{graphics/11.png}
+	\caption{FM indirect modulation.}
+	\label{fig:11}
+\end{figure}
+
+
+
+\noindent\textbf{Direct FM}
+\begin{equation}\label{eq:FM2}
+y(t) =A_{c0} \cos[\omega_c t +2\pi K_V\int_{}^{} x(t) dt]
+\end{equation}
+
+\begin{description}
+	\item[$x(t)$] Baseband signal
+	\item[$\omega_c t$] Angle of unmodulated carrier wave
 	\item[$\beta$]$=\frac{radian}{volt}$ Phase sensitivity (const.)
 	\item[$K_V$]$=\frac{hertz}{volt}$ Frequency gain (const.)
+	\item[$\omega_{inst}$] $=\omega_c + 2\pi K_V x(t)$ instantaneous frequency.
 \end{description}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.65\linewidth]{graphics/12.png}
+	\caption{FM direct modulation using VCO.}
+	\label{fig:12}
+\end{figure}
+
+\subsubsection{Wideband FM}
+Tilnærmelsen fra NBFM er ikke gældende ved wideband og derfor gælder følgende. Dette introducerer Bessel funktioner.
+\begin{equation}
+\cos(\beta_{eff}\sin\omega_x t)=J_0(\beta_{eff})+\sum_{n-2,even}^{\infty}2 J_n(\beta_{eff})\cos n \omega_x t
+\end{equation}
+
+\begin{equation}
+\sin(\beta_{eff}\sin\omega_x t)=\sum_{n-1,odd}^{\infty}2 J_n(\beta_{eff})\sin n \omega_x t
+\end{equation}
+
+\begin{description}
+	\item[$\beta_{eff}$] $=\beta A_x$ effective modulation index
+	\item[$n_{99\%}$] $\approx \beta_{eff}+1$ 
+\end{description}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/13.png}
+	\caption{$J_n(\beta_{eff})$, expansion coefficients from Bessel functions.}
+	\label{fig:13}
+\end{figure}
+
+Bessel funktioner indsættes.
+
+\begin{equation}
+y(t)|_{FM or PM} = A_{c0}J_0 (\beta_{eff})\cos(\omega_c t)
+\end{equation}
+
+\begin{equation}
+y(t)|_{FM or PM} = A_{c0} \sum_{n=-\infty}^{\infty}J_n(\beta_{eff})\cos(\omega_c t+n\omega_x t)
+\end{equation}
+
+\newpage\noindent\textbf{Accumalted power}
+\begin{equation}
+p_{ac,n}(\beta_{eff}) = \dfrac{P_{ac,n}}{\frac{A_{c0}^2}{2}}=J_0^2(\beta_{eff})+\sum_{i=1}^{n}2J_i^2(\beta_{eff})
+\end{equation}
+\noindent\textbf{Bandwidth for 99\% power}
+\begin{itemize}
+	\item \textit{phase modulation, PM} ~\ref{eq:ppm}
+	\item \textit{frequency modulation, FM} ~\ref{eq:pfm}
+\end{itemize}
+
+\begin{equation}\label{eq:ppm}
+W_{99\%}=2\omega_x(\beta_{eff}+1)=2\omega_x[\beta A_x+1]
+\end{equation}
+
+\begin{equation}\label{eq:pfm}
+W_{99\%}=2\omega_x(\beta_{eff}+1)=2[\Delta\omega_{max} A_x+\omega_x]
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/14.png}
+	\caption{$p_{ac,n}(\beta_{eff})$, accumulated relative power of frequency components to and including	order \textit{n} in size. Figures in bold indicate the first 99\% bound passing.}
+	\label{fig:14}
+\end{figure}
 
 \subsection{Phasor repræsentation}
 
