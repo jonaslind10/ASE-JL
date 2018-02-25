@@ -2,9 +2,9 @@
 
 \begin{enumerate}
 	\item ADC Quantization
-	\item Coefficient- and product-quantization
-	\item Overflow / underflow and coefficient scaling
-	\item Notch and peak filters as example
+	\item Coefficient- and Product-Quantization
+	\item Overflow/Underflow and Coefficient Scaling
+	\item Notch- and Peak-filters as example
 \end{enumerate}
 
 \begin{mdframed}[style=exampledefault]
@@ -60,8 +60,8 @@ Besides analog-to-digital and digital-to-analog quantization noise, there are ot
 	\item Quantization error due to truncation and rounding
 \end{itemize}
 
-\subsection{Coefficient- and product-quantization}
-\subsubsection{Coefficient quantization}
+\subsection{Coefficient- and Product-Quantization}
+\subsubsection{Coefficient Quantization}
 When a digital system is designed for computer simulation, the coefficients are generally represented with floating-point format. 
 However, these parameters are usually represented with a finite number of bits in fixed-point processors with a typical wordlength of 16 bits.\\
 
@@ -73,7 +73,7 @@ Coefficient quantization of an IIR filter can affect pole/zero locations, thus a
 	\item Deterministic effect – known in advance
 \end{itemize}
 
-\subsubsection{Product quantization}
+\subsubsection{Product Quantization}
 Truncation or rounding is used after multiplication to store the result back into the memory.\\
 
 In general, the distribution of errors caused by rounding is uniform, resulting in quantization errors with zero mean and variance of $\Delta2/12$. Truncation has a bias mean of $\Delta/2$ and a variance of $\Delta2/12$.
@@ -83,9 +83,9 @@ In general, the distribution of errors caused by rounding is uniform, resulting 
 	\item Limit-cycles may occur
 \end{itemize}
 
-\subsection{Quantization and noise models}
+\subsection{Quantization and Noise models}
 Noise is introduced by multiplications between variables, a noise signal is added e(n).
-\subsubsection{Signal flow graphs}
+\subsubsection{Signal Flow Graphs}
 \begin{itemize}
 	\item Illustration of implementation
 	\item Useful for illustration of quantization errors
@@ -104,7 +104,7 @@ Assumed that noise \textit{e} is equal distributed
 	\label{fig:10}
 \end{figure}
 
-\subsection{Overflow / underflow and coefficient scaling}
+\subsection{Overflow/Underflow and Coefficient Scaling}
 Because of the finite memory/register length, the results of arithmetic operations may have too many bits to be fitted into the wordlength of the memory or register.
 
 \begin{itemize}
@@ -124,14 +124,14 @@ Overflow/underflow can be avoided with "clever" scaling or, at least, avoided "w
 	\item Coefficient scaling
 \end{itemize}
 
-\subsection{Notch and peak filters}
+\subsection{Notch- and Peak-filters}
 \begin{itemize}
 	\item Can be designed by pole-zero placement
 	\item Pole radii and angle determine frequency response
 	\item Common buildingblocks	for higher-order IIR
 \end{itemize}
 
-\subsubsection{Notch filter}
+\subsubsection{Notch-filter}
 A notch filter contains one or more deep notches in its magnitude response. To create a notch at frequency $\omega_0$, a pair of complex-conjugate zeros on
 the unit circle at angle $\omega_0$ as $z=e^{\pm j\omega_0}$.\\
 
@@ -151,7 +151,7 @@ To reduce the bandwidth of the null, we may introduce poles into the system $z_p
 	\label{fig:11}
 \end{figure}
 
-\subsubsection{Peak filter}
+\subsubsection{Peak-filter}
 To create a peak (or narrow passband) at frequency $\omega_0$, we may think we can simply follow the example of designing a notch filter by introducing a pair of complex-conjugate poles on the unit circle at angle $\omega_0$.
 However the resulting second-order IIR filter will be unstable. To solve this
 problem, we have to move the poles slightly inside the unit circle ($r_p < 1$) as $z_p = r_p e^{\pm j \omega_0}$.\\
