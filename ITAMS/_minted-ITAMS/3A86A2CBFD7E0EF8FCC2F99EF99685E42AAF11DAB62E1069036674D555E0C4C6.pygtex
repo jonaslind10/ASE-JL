@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n+nf}{WriteData}\PYG{p}{(}\PYG{k+kt}{unsigned} \PYG{k+kt}{int} \PYG{n}{data}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{n}{DATA\PYGZus{}PORT\PYGZus{}HIGH} \PYG{o}{=} \PYG{p}{(}\PYG{n}{data} \PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{l+m+mi}{8}\PYG{p}{);}	\PYG{c+c1}{// MSB}
+\PYG{n}{DATA\PYGZus{}PORT\PYGZus{}LOW}  \PYG{o}{=} \PYG{n}{data}\PYG{p}{;}	       \PYG{c+c1}{// LSB}
+\PYG{n}{DC\PYGZus{}PORT} \PYG{o}{|=} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{DC\PYGZus{}BIT}\PYG{p}{);}	      \PYG{c+c1}{// DCX HIGH = DATA MODE}
+\PYG{n}{CS\PYGZus{}PORT} \PYG{o}{\PYGZam{}=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{CS\PYGZus{}BIT}\PYG{p}{);}	     \PYG{c+c1}{// CSX LOW}
+\PYG{n}{WR\PYGZus{}PORT} \PYG{o}{\PYGZam{}=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{WR\PYGZus{}BIT}\PYG{p}{);}	     \PYG{c+c1}{// WRX LOW}
+\PYG{n}{\PYGZus{}NOP}\PYG{p}{();}			      \PYG{c+c1}{// DELAY = twrl 15ns}
+\PYG{n}{WR\PYGZus{}PORT} \PYG{o}{|=} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{WR\PYGZus{}PORT}\PYG{p}{);}	     \PYG{c+c1}{// WRX HIGH}
+\PYG{n}{\PYGZus{}NOP}\PYG{p}{();}			      \PYG{c+c1}{// DELAY = twcf 10ns}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
