@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper,danish]{book}
+\documentclass[12pt,a4paper,danish,oneside]{book}
 \setlength{\headheight}{15pt}
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage[framemethod=default]{mdframed}
@@ -20,6 +20,7 @@
 \usepackage{siunitx}
 \usepackage{caption}
 \usepackage{float}
+\usepackage{pdfpages}
 \usepackage[footnote,draft,danish,silent,nomargin]{fixme}
 
 \newmdtheoremenv{exmp}{Example}[section]
@@ -83,4 +84,9 @@
 
 \chapter{Parallel og serie resonans kredsløb}
 \input{Lektioner/Lektion4}
+
+\chapter{Opgaver}
+\includepdf[pages=-]{tasks/ETHFE_Lektion4.pdf}
+\includepdf[pages=-]{tasks/ETHFE_Lektion5.pdf}
+
 \end{document}

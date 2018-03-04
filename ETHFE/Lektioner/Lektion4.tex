@@ -490,9 +490,7 @@ N = \sqrt{\dfrac{L}{A_L}}
 	\begin{itemize}
 		\item[]
 		\begin{itemize}
-			\item A calculated guess of \textit{Q} a
-			
-			t low frequencies (\SI{100}{\kilo\hertz}), the \textit{Q} of	the coil would be approximately:
+			\item A calculated guess of \textit{Q} at low frequencies (\SI{100}{\kilo\hertz}), the \textit{Q} of	the coil would be approximately:
 		\end{itemize} 
 	\end{itemize} 
 \end{itemize}
@@ -500,3 +498,179 @@ N = \sqrt{\dfrac{L}{A_L}}
 \begin{equation}
 Q = \dfrac{R_p/N^2}{X_p/N^2} = \dfrac{R_p}{X_p}
 \end{equation}
+
+\subsection{Resonanskredsløb}
+\subsubsection{Tabsfrie komponenter}
+\begin{itemize}
+	\item Hvis $Z_p$ er en frekvensafhængig impedans (capacitive or inductive reactance), så vil $V_{out}$ også være frekvensafhængig.
+	\item Forholdet mellem $V_{out}$ og $V_{in}$ vil udgøre gain/loss i kredsløbet, som også vil være frekvensafhængig. 
+\end{itemize}
+
+\begin{equation}
+\dfrac{V_{out}}{V_{in}} = 20\log_{10}\dfrac{X_C}{R_s+X_C}
+\end{equation}
+
+\begin{description}
+	\item[$R_s$] source resistance
+	\item[$X_C$] reactance of capacitor
+\end{description}
+
+\begin{equation}
+X_C=\dfrac{1}{j\omega C}
+\end{equation}
+
+\noindent\textit{The loss of this RC circuit	increases as the frequency increases; thus, we have formed a simple low-pass filter.}
+
+\begin{equation}
+\dfrac{V_{out}}{V_{in}} = 20\log_{10}\dfrac{X_L}{R_s+X_L}
+\end{equation}
+
+\begin{description}
+	\item[$R_s$] source resistance
+	\item[$X_L$] reactance of coil
+\end{description}
+
+\begin{equation}
+X_L=j\omega L
+\end{equation}
+
+\noindent\textit{We have formed a simple high-pass filter.}
+
+\begin{itemize}
+	\item Resonant kredsløb med to reactive komponenter.
+\end{itemize}
+\begin{equation}
+X_{total}=\dfrac{X_C X_L}{X_C + X_L}
+\end{equation}
+
+\begin{equation}
+\dfrac{V_{out}}{V_{in}} = \left|20\log_{10}\dfrac{j\omega L}{(R_s-\omega^2 R_s L C)+j\omega L}\right|
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/22.png}
+	\caption{Resonant circuit with two reactive components.}
+	\label{fig:22}
+\end{figure}
+
+\subsubsection{Loaded Q}
+\begin{itemize}
+	\item \textit{Q} - The ratio of the center frequency of the resonant
+	circuit to its bandwidth is defined as the circuit Q.
+	\item The higher its Q, the narrower its bandwidth.
+\end{itemize}
+\begin{equation}
+Q = \dfrac{f_e}{f_2-f_1}
+\end{equation}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/24.png}
+	\caption{Equivalent parallel impedance across a resonant circuit.}
+	\label{fig:24}
+\end{figure}
+
+\begin{equation}
+Q_p = \dfrac{R_p}{X_p}
+\end{equation}
+
+\begin{equation}
+Q_s = \dfrac{X_s}{R_s}
+\end{equation}
+
+\begin{description}
+	\item[$R_p$] equivalent parallel resistance of $R_s$ and $R_L$
+	\item[$X_p$] inductive or capacitive reactance (equal at resonance)
+\end{description}
+
+\noindent\textit{The optimum Q of a resonant circuit is obtained when the inductor
+	is a \textbf{small value} and the capacitor is a \textbf{large value}.}
+\newpage
+\begin{itemize}
+	\item Two approaches to follow in designing a resonant circuit with a particular \textit{Q}
+	\begin{itemize}
+		\item Select an optimum value of source and load impedance
+		\item Select component values of \textit{L} and \textit{C} that	optimize \textit{Q}
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Series-to-Parallel Transformation}
+Prior assumed that the components used in the resonant circuits are lossless. Due to component losses, there exists some finite equivalent parallel resistance.\\
+
+\noindent Transformation Equation
+
+\begin{equation}
+R_p = (Q^2 +1)R_s
+\end{equation}
+
+\begin{description}
+	\item[$R_p$] equivalent parallel resistance
+	\item[$R_s$] series resistance of the component
+	\item[$Q = Q_s$] which equals $Q_p$ which equals the \textit{Q} of the component
+	\item[$X_p = \dfrac{R_p}{Q_p}$]
+\end{description}
+
+\noindent If \textit{Q} of the component is greater than 10, then,
+\begin{equation}
+R_p \approx Q^2 R_s
+\end{equation}
+
+\noindent and
+
+\begin{equation}
+X_p \approx X_s
+\end{equation}
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/23.png}
+	\caption{Series-to-parallel transformation.}
+\end{figure}
+\newpage
+\subsubsection{Impedans transformation}
+\begin{itemize}
+	\item Impedance transforming circuits
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphics/25.png}
+	\caption{Equivalent parallel impedance across a resonant circuit.}
+	\label{fig:25}
+\end{figure}
+
+\begin{itemize}
+	\item Tapped-C transformer
+\end{itemize}
+
+\begin{equation}
+R'_s = R_s \left(1+\dfrac{C_1}{C_2}\right)^2
+\end{equation}
+
+\begin{itemize}
+	\item Equivalent capacitance $C_T$ will resonate with the inductor ($C_1$ in series with $C_2$)
+\end{itemize}
+
+\begin{equation}
+C_T=\dfrac{C_1 C_2}{C_1+C_2}
+\end{equation}
+
+\begin{itemize}
+	\item Tapped-L network
+\end{itemize}
+
+\begin{equation}
+R'_s = R_s \left(\dfrac{n}{n_1}\right)^2
+\end{equation}
+
+
+\subsection{Filter design}
+\begin{itemize}
+	\item Resonant frequency
+\end{itemize}
+
+\begin{equation}
+F_r=\dfrac{1}{2\pi\sqrt{L C}}
+\end{equation}
+
+\subsection{Frekvens og impedans skalering}
