@@ -1,0 +1,55 @@
+\section{Lektion 01-03-2018}
+
+\begin{enumerate}
+	\item Impulsrepsonser
+	\item Auralisation Af Rum
+	\item Binaural Analysis
+\end{enumerate}
+
+\begin{mdframed}[style=exampledefault]
+	\begin{itemize}
+		\item \textbf{Pensum:} 
+		\begin{enumerate}
+			\item Master Handbook of Acoustics, ch. 26 (5. edition) or \\ch. 30 (6. edition)
+			\item Modelling Acoustic Spaces For Audio Virtal Reality, \\U. Peter Svensson
+		\end{enumerate}
+		\item \textbf{Opgaver:} 
+		\begin{enumerate}
+			\item Lyd og Akustik - Lektion 6 - opgaver og øvelser
+		\end{enumerate}
+	\end{itemize}
+\end{mdframed}
+
+\subsection{Impulsrepsonser}
+\begin{itemize}
+	\item Image Source Method og Ray Tracing kan bruges til at bestemme RIR (Room Impulse Response).
+	\item Medregner frekvensafhængige karakteristikker såsom absorptionskoefficienter for materialer og højtalerens impulsrepsons.
+\end{itemize}
+\newpage
+
+\subsection{Auralisation Af Rum}
+\begin{itemize}
+	\item Beregning af RIR (Room Impulse Response) og derefter BRIR (Binaural Room Impulse Response) er nødvendigt.
+	\item Disse impulsresponser foldes med et signal som enten skal være syntestisk genereret eller optaget i lyddødt rum (tørt signal). 
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=.6\linewidth]{graphics/21.png}
+	\caption{Auralisation system med impulsresponse (IR) og foldning.}
+	\label{fig:21}
+\end{figure}
+
+\subsection{Binaural Analysis}
+\begin{itemize}
+	\item Lytteren bliver karakteriseret med overførelsesfunktion HTRF (head-related transfer function).
+	\item Differensen i responset ved hvert øre, med og uden en lytter tilstede.
+	\item Information om arrival time, energi, og dets vinkel i forhold til receiveren (venstre/højre øre).
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/20.png}
+	\caption{Receiverens HRTF.}
+	\label{fig:20}
+\end{figure}
