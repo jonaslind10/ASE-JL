@@ -1,0 +1,149 @@
+\section{Lektion 27-02-2018}
+
+\begin{enumerate}
+	\item Method steps for DSP projects
+	\item Implementation
+	\item Optimization
+	\item Built-in and Native fractional
+\end{enumerate}
+
+\begin{mdframed}[style=exampledefault]
+\begin{itemize}
+	\item ESP 6.2.3.2 (Overflow and scaling)
+	\item ESP 8.1 - 8.2 except 8.2.5, 8.2.6, 8.2.7 (Code Optimization)
+	\item CrossCore Embedded Studio 1.0 C/C++ Compiler and Library Manual
+	\begin{itemize}
+		\item 1-115 - 1-118 (Fixed-Point Types, Intrinsic and Native)
+		\item 1-417 - 1-421 (Fixed-Point Data Representation)
+		\item 2-57 - 2-60  (Fixed-Point Examples)
+	\end{itemize}
+\end{itemize}
+\end{mdframed}
+
+\subsection{Method steps for DSP projects}
+\begin{itemize}
+	\item Specification
+	\begin{itemize}
+		\item What is the problem?
+	\end{itemize}
+	\item Algorithm	development
+	\begin{itemize}
+		\item What is the solution?
+	\end{itemize} 
+	\item Algorithm	implementation and optimization
+	\begin{itemize}
+		\item How good is the solution?
+	\end{itemize}
+\end{itemize}
+
+\subsection{Implementation}
+\begin{itemize}
+	\item Algorithm decomposition and estimation
+	\begin{itemize}
+		\item Requirements to drive decisions
+		\item Decomposition of algorithm into blocks
+		\item Estimation of needed precision
+		\begin{itemize}
+			\item Fixed point 16‐, 32‐bit ?
+			\item Floating point 32‐, 64‐bit ?
+			\item Signal to noise ratio
+			\item Dynamic range
+		\end{itemize}
+		\item Estimate needed computation performance
+		\begin{itemize}
+			\item Based on required sample rate and DSP choice (MIPS)
+			\item Cycle estimation for each block of algorithm
+		\end{itemize}
+	\end{itemize}
+	\item Porting algorithm to target
+	\begin{itemize}
+		\item Choice of DSP processor
+		\begin{itemize}
+			\item Number of multiplications per. second (MIPS)
+			\item Data communication rate (fs)
+			\item Memory requirements (program and data)
+			\item Use estimated cycle usages based on similar algorithm implementations
+			\item Sum of algorithm cycles compared to CPU speed and sampling rate
+		\end{itemize}
+		\item Signal to noise ratio (SNR)
+		\begin{itemize}
+			\item Noise e(n) is introduced by multiplications between variables
+			\item Equal distributed noise with m bits $0 \leq |e|\leq 2^{-(m+1)}$
+		\end{itemize}
+		\item Dynamic range
+		\item Fixed-point vs. floating-point?
+		\begin{itemize}
+			\item Quantization
+			\item Saturation
+		\end{itemize}
+		\item Verification and optimization
+		\begin{itemize}
+			\item Compare performance with high level simulation (Matlab)
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\subsection{Optimization}
+\begin{itemize}
+	\item Algorithm on DSP
+	\begin{itemize}
+		\item Start programming solution in 'C'
+		\item Separate optimization of modules with compiler options when debugging/testing
+		\item Use intrinsic built-in or assembler to optimize final design
+		\item Move solution to 'C++' framework
+	\end{itemize}
+	\item Optimization on target
+	\begin{itemize}
+		\item Compiler optimization (size vs. speed) in \textit{Compiler Options}
+		\item Cycle measuring of blocks uses \textit{CYCLES Register}
+		\item Profiling of code
+		\begin{itemize}
+			\item Percentage of time spent executing function
+		\end{itemize}
+		\item Effective C code implementation using the manual
+		\begin{itemize}
+			\item Optimizing structures
+			\item Constants statically
+			\item Function inline (inline keywords)
+			\item Inline assembler statements
+			\item Improving conditional code
+			\item Fractional recommendations
+			\item Function \#pragmas
+			\item Intrinsic built-in functions
+			\item Native fixed-point
+		\end{itemize}
+		\item Looping guidelines
+		\begin{itemize}
+			\item Keep loops short and simple
+			\item Don't use global variables in loops
+			\item Use circular buffers
+			\item Use const qualifiers to function calls
+		\end{itemize}	
+	\end{itemize}
+\end{itemize}
+\subsection{Built-in and Native fractional}
+\begin{itemize}
+	\item Fixed-point and fractional data
+	\begin{itemize}
+		\item Integer Arithmatic
+		\begin{itemize}
+			\item \textbf{BAD} Uses shifts to implement fractional multiplication
+		\end{itemize}
+		\newpage\item Built-in Functions
+		\begin{itemize}
+			\item \textbf{GOOD} Uses built-ins to implement fractional multiplication (less intuitive)
+			\item \mintinline{c}{#include <fract.h>}
+			\item \mintinline{c}{fract16}
+			\item \mintinline{c}{fract32}
+		\end{itemize}
+		\item Native fixed-point types
+		\begin{itemize}
+			\item \textbf{GOOD} Uses built-ins to implement fractional multiplication
+			\item Standard C operators +, ‐, *, and /
+			\item Are well‐defined and clear to the compiler
+			\item \mintinline{c}{#include <stdfix.h>}
+			\item \mintinline{c}{fract}
+			\item \mintinline{c}{accum}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
