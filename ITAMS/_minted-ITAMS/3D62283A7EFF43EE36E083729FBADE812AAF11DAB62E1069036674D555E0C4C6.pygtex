@@ -1,0 +1,77 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n+nf}{vDecCountTask}\PYG{p}{(} \PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{pvParameters} \PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{switchOn}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{))}
+        \PYG{p}{\PYGZob{}}
+            \PYG{n}{xSemaphoreTake}\PYG{p}{(} \PYG{n}{xSemaphore1}\PYG{p}{,} \PYG{n}{portMAX\PYGZus{}DELAY} \PYG{p}{);}
+            \PYG{n}{count}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{;}
+            \PYG{c+cm}{/* Don\PYGZsq{}t block if the queue is already full. */}
+            \PYG{n}{xQueueSendToBack}\PYG{p}{(} \PYG{n}{xQueue1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{count}\PYG{p}{,} \PYG{l+m+mi}{0} \PYG{p}{);}
+            \PYG{n}{xSemaphoreGive}\PYG{p}{(} \PYG{n}{xSemaphore1} \PYG{p}{);}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{n}{vTaskDelay}\PYG{p}{(}\PYG{l+m+mi}{50}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{vIncCountTask}\PYG{p}{(} \PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{pvParameters} \PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{switchOn}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{))}
+        \PYG{p}{\PYGZob{}}
+            \PYG{n}{xSemaphoreTake}\PYG{p}{(} \PYG{n}{xSemaphore1}\PYG{p}{,} \PYG{n}{portMAX\PYGZus{}DELAY} \PYG{p}{);}
+            \PYG{n}{count}\PYG{o}{++}\PYG{p}{;}
+            \PYG{c+cm}{/* Don\PYGZsq{}t block if the queue is already full. */}
+            \PYG{n}{xQueueSendToBack}\PYG{p}{(} \PYG{n}{xQueue1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{count}\PYG{p}{,} \PYG{l+m+mi}{0} \PYG{p}{);}
+            \PYG{n}{xSemaphoreGive}\PYG{p}{(} \PYG{n}{xSemaphore1} \PYG{p}{);}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{n}{vTaskDelay}\PYG{p}{(}\PYG{l+m+mi}{50}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{vReceiveQueue}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*}\PYG{n}{pvParameters}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{unsigned} \PYG{k+kt}{char} \PYG{n}{localCount}\PYG{p}{;}
+    \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{c+cm}{/* Receive an item on the created queue.}
+\PYG{c+cm}{        Block for portMAX\PYGZus{}DELAY ticks if a message is not}
+\PYG{c+cm}{        immediately available.*/}
+        \PYG{k}{if}\PYG{p}{(} \PYG{n}{xQueueReceive}\PYG{p}{(} \PYG{n}{xQueue1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{localCount}\PYG{p}{,} \PYG{n}{portMAX\PYGZus{}DELAY} \PYG{p}{)} \PYG{p}{)}
+        \PYG{p}{\PYGZob{}}
+            \PYG{n}{writeAllLEDs}\PYG{p}{(}\PYG{n}{localCount}\PYG{p}{);}
+            \PYG{n}{SendInteger}\PYG{p}{(}\PYG{n}{localCount}\PYG{p}{);}
+            \PYG{n}{SendChar}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}r\PYGZsq{}}\PYG{p}{);}
+            \PYG{n}{SendChar}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{);}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{initLEDport}\PYG{p}{();}
+    \PYG{n}{initSwitchPort}\PYG{p}{();}
+    \PYG{n}{initExtInts}\PYG{p}{();}
+    \PYG{n}{InitUART}\PYG{p}{(}\PYG{l+m+mi}{115200}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+s+sc}{\PYGZsq{}N\PYGZsq{}}\PYG{p}{);}
+
+    \PYG{c+cm}{/* Create the semaphore to guard a shared resource. */}
+    \PYG{n}{vSemaphoreCreateBinary}\PYG{p}{(}\PYG{n}{xSemaphore1}\PYG{p}{);}
+
+    \PYG{c+cm}{/* Create a queue capable of containing 10 unsigned}
+\PYG{c+cm}{    char values.*/}
+    \PYG{n}{xQueue1} \PYG{o}{=} \PYG{n}{xQueueCreate}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{p}{));}
+
+    \PYG{n}{xTaskCreate}\PYG{p}{(} \PYG{n}{vDecCountTask}\PYG{p}{,} \PYG{p}{(} \PYG{k+kt}{signed} \PYG{k+kt}{char} \PYG{o}{*} \PYG{p}{)} \PYG{l+s}{\PYGZdq{}DEC\PYGZdq{}}\PYG{p}{,} \PYG{p}{...}
+    \PYG{n}{configMINIMAL\PYGZus{}STACK\PYGZus{}SIZE}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{tskIDLE\PYGZus{}PRIORITY}\PYG{p}{,} \PYG{n+nb}{NULL} \PYG{p}{);}
+    \PYG{n}{xTaskCreate}\PYG{p}{(} \PYG{n}{vIncCountTask}\PYG{p}{,} \PYG{p}{(} \PYG{k+kt}{signed} \PYG{k+kt}{char} \PYG{o}{*} \PYG{p}{)} \PYG{l+s}{\PYGZdq{}INC\PYGZdq{}}\PYG{p}{,} \PYG{p}{...}
+    \PYG{n}{configMINIMAL\PYGZus{}STACK\PYGZus{}SIZE}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{tskIDLE\PYGZus{}PRIORITY}\PYG{p}{,} \PYG{n+nb}{NULL} \PYG{p}{);}
+    \PYG{n}{xTaskCreate}\PYG{p}{(} \PYG{n}{vReceiveQueue}\PYG{p}{,} \PYG{p}{(} \PYG{k+kt}{signed} \PYG{k+kt}{char} \PYG{o}{*} \PYG{p}{)} \PYG{l+s}{\PYGZdq{}REC\PYGZdq{}}\PYG{p}{,} \PYG{p}{...}
+    \PYG{n}{configMINIMAL\PYGZus{}STACK\PYGZus{}SIZE}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{tskIDLE\PYGZus{}PRIORITY}\PYG{p}{,} \PYG{n+nb}{NULL} \PYG{p}{);}
+    \PYG{n}{vTaskStartScheduler}\PYG{p}{();}
+    \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
