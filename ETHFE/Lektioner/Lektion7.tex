@@ -238,7 +238,117 @@ K = \dfrac{2(g_i+G_S)(g_o+G_L)}{|y_{12}y_{21}|+Re(y_{12}y_{21})}
 \end{itemize}
 
 \subsection{Maximum Available Gain}
+\begin{itemize}
+	\item Obtained when $y_r=0$ (not realistic) 
+	\item Consider MAG as a guideline
+\end{itemize}
 
 \begin{equation}
 MAG = \dfrac{|y_{21}|^2}{4g_ig_o}
 \end{equation}
+
+\subsection{Transducer Gain}
+\begin{itemize}
+	\item Transducer (power) gain $G_T$
+	\item Actual implemented gain for the transistor amplifier
+\end{itemize}
+
+\begin{equation}
+G_T = \dfrac{4 G_S G_L |y_f|^2}{|(y_i+Y_S)(y_o+Y_L)-y_fy_r|^2}
+\end{equation}
+
+\subsection{Simultaneous Conjugate Matching}
+\begin{itemize}
+	\item For unconditionally stable transistors
+\end{itemize}
+
+\begin{equation}
+G_S=\dfrac{\sqrt{[2g_og_o-Re(y_fy_r)]^2-|y_fy_r|^2}}{2g_o}
+\end{equation}
+
+\begin{equation}
+B_S=-jb_i+\dfrac{Im(y_fy_r)}{2g_o}
+\end{equation}
+
+\begin{equation}
+G_L=\dfrac{\sqrt{[2g_og_o-Re(y_fy_r)]^2-|y_fy_r|^2}}{2g_i}=\dfrac{G_sg_o}{g_i}
+\end{equation}
+
+\begin{equation}
+B_L=-jb_o+\dfrac{Im(y_fy_r)}{2g_i}
+\end{equation}
+
+\begin{itemize}
+	\item $G_S$ source conductance
+	\item $B_S$ source susceptance
+	\item $G_L$ load conductance
+	\item $B_L$ load susceptance
+\end{itemize}
+
+\subsection{Unilateralization And Neutralization}
+\begin{itemize}
+	\item For potentially unstable transistors
+	\begin{itemize}
+		\item Linvill stability factor (C) calculated is greater than 1
+	\end{itemize}
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/41.png}
+	\caption{Neutralization circuits.}
+	\label{fig:41}
+\end{figure}
+
+\begin{itemize}
+	\item Selectively mismatch the input and output impedance of the transistor to reduce the gain of the stage.
+\end{itemize}
+
+
+\begin{itemize}
+	\item Unilateralization
+	\begin{itemize}
+		\item Providing external feedback path ($Y_f$) from output to input
+		\item Full removal of $y_r$ (real and imaginary part) 
+		\begin{itemize}
+			\item \textbf{Difficult and often impractical}
+		\end{itemize}
+	\end{itemize}
+	\item Neutralization
+	\begin{itemize}
+		\item Providing external feedback path from	output to input
+		\item Only imaginary component of $y_r = \pm jb$ is counteracted
+		\begin{itemize}
+			\item Neutralize at operating frequency only 
+			\item \textbf{May cause instability	at other frequencies}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Use Expressions}
+\begin{itemize}
+	\item Input- and ouput admittance
+	\begin{itemize}
+		\item $Y_{in}=y_i-\dfrac{y_ry_f}{y_o+Y_L}$
+		\item $Y_{out}=y_o-\dfrac{y_ry_f}{y_i+Y_S}$
+	\end{itemize}
+	\item Stern's procedure for maximum power gain for a stability factor
+	\begin{itemize}
+		\item $G_S=\sqrt{\dfrac{k(|y_iy_r|+Re(y_ry_f))}{2}}\sqrt{\dfrac{g_i}{g_o}}-g_i$
+		\item[]
+		\item $G_L=\sqrt{\dfrac{k(|y_iy_r|+Re(y_ry_f))}{2}}\sqrt{\dfrac{g_o}{g_i}}-g_o$
+		\item[]
+		\item $B_S=\dfrac{(G_S+g_i)Z_o}{\sqrt{k(|y_iy_r|+Re(y_ry_f))}}-b_i$
+		\item[]
+		\item $B_L=\dfrac{(G_L+g_o)Z_o}{\sqrt{k(|y_iy_r|+Re(y_ry_f))}}-b_o$
+		\item[]
+		\begin{itemize}
+			\item[]
+			\item $Z=\dfrac{(B_S+b_i)(G_Lg_o)+(B_Lb_o)k(L+M)/2(G_L+g_o)}{\sqrt{k(L+M)}}$
+			\item[]
+			\item $L = |y_ry_f|$
+			\item[] 
+			\item $M = Re(y_ry_f)$
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
