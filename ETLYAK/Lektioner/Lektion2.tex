@@ -1,9 +1,10 @@
 \section{Lektion 08-02-2018}
 
 \begin{enumerate}
-	\item Mikrofon
-	\item Højtaler (afstandsregel)
 	\item Måling af lydtryk
+	\item Mikrofon
+	\item Udstyr til lydmåling
+	\item Måleprincipper
 \end{enumerate}
 
 \begin{mdframed}[style=exampledefault]
@@ -20,6 +21,41 @@
 	\end{itemize}
 \end{mdframed}
 
+\subsection{Måling af lydtryk}
+\begin{itemize}
+	\item Lyd er ganske små variationer	omkring det statiske lufttryk,
+	\item Et reference lydtryk er valgt til at være \SI{20}{\micro\pascal} hvilket svarer til den mindste ændring i tryk et menneske kan opfange.
+	\item Forholdet mellem det statiske tryk og reference lydtrykket er $1 :
+	5.066.250.000$.
+	\begin{itemize}
+		\item Lydtryk (Engelsk: Sound Pressure)
+		\item Enhed: Pascal [\si{\pascal}]
+		\item Lydtrykniveau (Engelsk: Sound Pressure Level - SPL)
+		\item Enhed: Decibel [\si{\decibel}]
+	\end{itemize}
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=.8\linewidth]{graphics/44.png}
+	\caption{Trykvariationer omkring det statiske lufttryk.}
+	\label{fig:44}
+\end{figure}
+
+\begin{itemize}
+	\item Lydstyrker udtrykt som lydtrykniveau [\si{\decibel}, SPL] i stedet for lydtryk [\si{\pascal}]
+\end{itemize}
+
+\begin{equation}\label{eq:spl1}
+SPL = 20\log_{10}\frac{p}{p_{ref}}
+\end{equation}
+
+\begin{itemize}
+	\item $SPL$ = sound-pressure level, \si{\decibel}
+	\item $p$ = acoustic pressure, \si{\micro\pascal}
+	\item $p_{ref}$ = acoustic reference pressure, \SI{20}{\micro\pascal}.
+\end{itemize}
+
 \subsection{Mikrofon}
 \begin{itemize}
 	\item En transducer der omsætter et oscillerende lydtryk til et analogt elektrisk signal.
@@ -28,6 +64,42 @@
 		\item Måler lydtrykkets variation i et punkt uden reference til den retning lyden udbredes i.
 		\item Flere mikrofontyper er retningsbestemte på grund af deres opbygning.
 	\end{itemize}
+	\newpage\item Mikrofoner – 4 hovedgrupper
+	\begin{itemize}
+		\item Studiemikrofoner (Dynamiske- og kondensator mikrofoner)
+		\item Målemikrofoner (Kondensator mikrofoner)
+		\item Mikrofonkapsler (Elektret mikrofoner)
+		\item MEMS mikrofoner (Silicium mikrofoner)
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Dynamisk mikrofon}
+\begin{itemize}
+	\item \textbf{Klassiske form}: minder om en højttaler (membranen sættes i bevægelse af lydtrykket). Derved bevæges svingspolen i magnetfeltet
+	og der induceres en spænding.
+	\item \textbf{Båndmikrofonen}: membranen er i et kraftigt magnetfelt. Når lydtrykket får membranen til at svinge induceres der en spænding over de to ender af båndet. Spændingen er normalt så lav at der skal benyttes en transformator for at løfte det op på et brugbart niveau. 
+	\begin{itemize}
+		\item Lyden har adgang til begge sider af membranen.
+		\begin{itemize}
+			\item Mest følsom for lyd på aksen ($0\degree$ og $180\degree$.
+			\item Der kan ikke registreres lyd fra siden ($90\degree$).
+		\end{itemize}
+	\end{itemize} 
+\end{itemize}
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=.9\linewidth]{graphics/12.png}
+	\caption{V: svingspolen drives af en membran til at svinge i et magnetfelt. H: En tynd metalfolie svinger i et magnetfelt og signalet tages ud ved båndets ender (ud af papiret og ind i papiret).}
+	\label{fig:12}
+\end{figure}
+
+\begin{itemize}
+	\item Beregnet til optagelser af musik og sang.
+	\item Ikke forberedt til at blive kalibreret.
+	\item Frekvensrespons er designet til at lyde "godt", "fedt" eller "spændende".
+	\item Fysisk størrelse er ikke vigtig (forskellige designs afhængig af brand).
+	\item Typisk lavt støjniveau pga. stor membran diameter.
+	\item Ikke velegnet til akustiske målinger.
 \end{itemize}
 
 \subsubsection{Kondensator mikrofon}
@@ -56,40 +128,245 @@
 \begin{itemize}
 	\item Alternativt indbygges en plastskive mellem membran og elektrode hvor en såkaldt "fastfrosset ladning" fungerer som $Q$.
 	\item Den høje udgangsimpedans sænkes af en indbygget JFET og det eksterne kredsløb skal nu levere strøm til transistorens drain.
-	\item Følsomheden er typisk $\approx 5 \si{\milli\volt}/\si{\pascal}$. 
+	\item Beregnet til til akustiske målinger da "alle" specifikationer er kendte.
+	\item Generelt er der to typer: "Frit-felts kalibrede" og "Tryk-felts kalibrerede".
+	\item Tager højde for at den måde mikrofonen selv forstyrrer lydfeltet på.
+	\item Stor diameter vælges til lave frekvenser og lave lydtryk.
+	\item Lille diameter vælges til høje frekvenser og høje lydtryk.
 \end{itemize}
 
-\subsubsection{Dynamisk mikrofon}
+\subsubsection{Elektretmikrofoner}
 \begin{itemize}
-	\item \textbf{Klassiske form}: minder om en højttaler (membranen sættes i bevægelse af lydtrykket). Derved bevæges svingspolen i magnetfeltet
-	og der induceres en spænding.
-	\item \textbf{Båndmikrofonen}: membranen er i et kraftigt magnetfelt. Når lydtrykket får membranen til at svinge induceres der en spænding over de to ender af båndet. Spændingen er normalt så lav at der skal benyttes en transformator for at løfte det op på et brugbart niveau. 
-	\begin{itemize}
-		\item Lyden har adgang til begge sider af membranen.
-		\begin{itemize}
-			\item Mest følsom for lyd på aksen ($0\degree$ og $180\degree$.
-			\item Der kan ikke registreres lyd fra siden ($90\degree$).
-		\end{itemize}
-	\end{itemize} 
+	\item Mikrofonkapsler.
+	\item Velegnet til mange forskellige formål – også målinger selvom få specifikationer er kendte.
+	\item Prisen er meget attraktiv: 1-2 \$
+	\item Ingen forskel på "Frit-felt" og "Tryk-felt" grundet lille membran-åbning.
+	\item Vælg mellem kommunikations mikrofoner og bredbåndet mikrofon.
+	\item Som regel 6-10 \si{\milli\meter} diameter.
+	\item Benytter 2-10 VDC strømforsyning.
+	\item Kvaliteten afhænger meget af forstærker og strømforsyning.
 \end{itemize}
+
+\subsubsection{MEMS mikrofoner}
+\begin{itemize}
+	\item Silicium mikrofoner.
+\end{itemize}
+
+\subsection{Mikrofon for-forstærkere}
+\begin{itemize}
+	\item LM337/LM137, 3-Terminal Adjustable Regulators
+	\begin{itemize}
+		\item Justerbar $V_{out}$.
+		\item 1/3 støj på $V_{out}$.
+		\begin{itemize}
+			\item Overvej en 2-trinsregulering (1/3 af 1/3 støj).
+		\end{itemize}
+	\end{itemize}
+	\item LM8333/OP27, Audio Operational Amplifier
+	\begin{itemize}
+		\item Made for audio purpose.
+		\item Specified low noise voltage.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Udstyr til lydmåling}
+\begin{itemize}
+	\item Pistonfon
+	\item \textbf{Lydtrykkalibrator}
+	\item Elektrostatisk aktuator
+	\item Reciprocitets kalibrering
+\end{itemize}
+
+\subsubsection{Pistonfon}
+\begin{itemize}
+	\item Frembringer et meget veldefineret lydtryk i et lille kammer.
+	\item Ind i åbningen stikkes mikrofonen, som herved påvirkes med et kendt lydtryk.
+	\begin{itemize}
+		\item Lydtrykniveau: \SI{124}{\decibel}
+		\item Tolerance: $\pm$\SI{0.2}{\decibel}
+		\item Testfrekvens: \SI{250}{\hertz}
+	\end{itemize}
+\end{itemize}
+
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=.9\linewidth]{graphics/12.png}
-	\caption{(V: svingspolen drives af en membran til at svinge i et magnetfelt.) (H: En tynd metalfolie svinger i et magnetfelt og signalet tages ud ved båndets ender (ud af papiret og ind i papiret)).}
-	\label{fig:12}
+	\includegraphics[width=\linewidth]{graphics/2.png}
+	\caption{Pistonfon.}
+	\label{fig:2}
 \end{figure}
 
-\subsection{Højtaler (afstandsregel)}
-\fxnote{Mangler højtaler (aftandsregel) noter.}
+\subsubsection{Lydtrykkalibrator}
+\begin{itemize}
+	\item Lydtrykniveau: \SI{94}{\decibel} eller \SI{114}{\decibel}
+	\item Tolerance: $\pm$\SI{0.3}{\decibel}
+	\item Testfrekvens: \SI{1000}{\hertz}
+\end{itemize}
 
-\subsection{Måling af lydtryk}
-\fxnote{Mangler måling af lydtryk noter.}
+\subsubsection{Elektrostatisk Aktuator}
+\begin{itemize}
+	\item Lydtrykniveau: \SI{70}{\decibel} - \SI{90}{\decibel}
+	\item Tolerance: $\pm$\SI{0.5}{\decibel}
+	\item Testfrekvens: \SI{1.0}{\kilo\hertz}-\SI{40.0}{\kilo\hertz}
+\end{itemize}
 
-\subsection{Opgaver}
+\subsubsection{PC-baseret udstyr til lydmåling}
+\begin{itemize}
+	\item TrueRTA.com
+	\item YMEC.com
+\end{itemize}
+
+\subsection{Måleprincipper}
+\subsubsection{Frekvensanalyse}
+\begin{itemize}
+	\item Stepped sinus
+	\item Sinus sweep
+	\item Oktavbåndsanalyse (Constant Percentage Bandwidth - CPB)
+	\item Fast Fourier Transform (FFT)
+\end{itemize}
+
+\subsubsection{Impulsresponser og overføringsfunktioner}
+\begin{itemize}
+	\item En impulsrespons eller overføringsfunktion kan fuldstændig beskrive et LTI-system (Lineært og	Tidsinvariant).
+	\item Disse responser kan bestemmes ved at tilføje et velegnet input-signal til systemet og derefter samtidig betragte input, x[n] og output, y[n].
+	\item Med krydskorrelation kan vi bestemme impulsresponsen (xcorr i matlab)
+	\item Et velegnet input signal kan være:
+	\begin{itemize}
+		\item Random Noise
+		\item MLS (maximum length sequence)
+		\begin{itemize}
+			\item Sekvensen repeteres efter ($2\cdot N-1$) samples for et N'
+			te ordens skifteregister.
+			\item Output amplitude er binary [$-1; 1$].
+			\item Output er 'pseudo random' hvid støj.
+			\item Auto-correlation er næsten perfekt.
+			\item Sekvens længden vil altid være et radix-2 antal af samples samples -1.
+			\item Dækker hele frekvensintervallet fra \SI{0}{\hertz} til $\frac{f_s}{2}$.
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphics/45.png}
+	\caption{MLS sekvens.}
+	\label{fig:45}
+\end{figure}
+
+\begin{itemize}
+	\item[] 
+	\begin{itemize}
+		\item Logaritmisk sinus sweep
+		\begin{itemize}
+			\item Output har konstant amplitude.
+			\item Auto-correlation er god.
+			\item Sekvensens længde kan vælges arbitrært men bestemmer måletiden.
+			\item Fantastisk udnyttelse af dynamic området (højt signal-støj forhold, SNR).
+			\item Sweeps kan bade være stigende og faldende i frekvens.
+			\item Dækker frekvensområdet [$f_1 – f_2$].
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+x(t)=\sin \left[\dfrac{2\pi f_1 T}{\ln
+	\left(\frac{f_2}{f_1}\right)}\left(e^{\frac{t}{T}\ln
+	\left(\frac{f_2}{f_1}\right)}-1\right)\right]
+\end{equation}
+
+
+\begin{itemize}
+	\item Matematiske funktioner for sekvenser
+	\begin{itemize}
+		\item \textbf{Filtrering}
+		\begin{itemize}
+			\item Convolution $(f\circledast g)(t) = \int_{-\infty}^{\infty}f(\tau)g(t-\tau)d\tau$ 
+			\item[]
+		\end{itemize}
+		\item \textbf{Mønstergenkendelse}
+		\begin{itemize}
+			\item Cross-corelation $(f\star g)(t) =\int_{-\infty}^{\infty}f*(\tau)g(t+\tau)d\tau$
+			\item[]
+		\end{itemize}
+		\item \textbf{Gentagelsesgrad}
+		\begin{itemize}
+		\item Auto-correlation $(f\star f)(t) =\int_{-\infty}^{\infty}f*(\tau)f(t+\tau)d\tau$
+		\item[]
+		\end{itemize}
+	\end{itemize}
+	\item En lang måletid giver mere præcise resultater end korte måletider.
+	\begin{itemize}
+		\item Hver gang man fordobler antallet af målinger (repetitioner) kan SNR forbedres med \SI{6}{\decibel} ved midling.
+	\end{itemize}
+	\item De mest præcise resultater for konstant måletid er "Logaritmisk Sinus
+	Sweep".
+\end{itemize}
+
+
+\newpage\subsection{Opgaver}
 
 \begin{enumerate}
 	\item Lav et MLS signal med orden 10.
-	\item Find impulsresponsen ud fra de sammenhørende exitations- og målesignaler i filen meassigs.mat. Systemet er ”målt” både med MLS og hvid støj.
+\end{enumerate}
+
+
+\begin{lstlisting}
+%% LYAK L2 08-02-2018
+%  Lav et MLS signal med orden 10
+m = 10;
+buf = ones(1,m);  
+
+tap1=3;
+tap2=10;
+
+for i = (2^m)-1:-1:1
+xorbit = xor(buf(tap1),buf(tap2)); % feedback bit
+
+buf = [xorbit buf(1:m-1)];
+y(i) = (-2 .* xorbit) + 1;         % 0 -> 1; 1 -> -1
+end
+\end{lstlisting}
+
+\begin{enumerate}[resume]
+	\item Find impulsresponsen ud fra de sammenhørende exitations- og målesignaler i filen meassigs.mat. Systemet er ”målt” både med MLS og hvid støj. 
+\end{enumerate}
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/46.png}
+	\label{fig:46}
+\end{figure}
+
+
+\begin{lstlisting}
+%% LYAK L2 08-02-2018
+%  Find impulsresponsen ud fra de sammenhoerende 
+%  exitations- og maalesignaler i filen meassigs.mat
+load('meassigs.mat');
+N = 524;
+
+% Cross correlation
+rxy_mls = xcorr(x_mls,y_mls);
+% Flip the correlation result and take the first N samples
+ryx_mls = fliplr(rxy_mls(1:N));   
+
+
+subplot(2,1,1)
+plot(ryx_mls/max(ryx_mls));
+title('Impulse Response, MLS');
+grid;
+
+% Cross correlation
+rxy_wn = xcorr(x_wn,y_wn);
+% Flip the correlation result and take the first N samples
+ryx_wn = fliplr(rxy_wn(1:N));  
+
+subplot(2,1,2)
+plot(ryx_wn/max(ryx_wn));
+title('Impulse Response, White Noise');
+grid;
+\end{lstlisting}
+
+\begin{enumerate}[resume]
 	\item En 8 ohms højttaler har DC modstand på 6 ohm og virkningsgrad på 1 \%.
 	\begin{enumerate}
 		\item Bestem den producerede akustiske effekt, når højttaleren tilføres 2,83 volt.
@@ -98,9 +375,9 @@
 	\end{enumerate}
 \end{enumerate}
 
+\begin{figure} [H]
+	\includegraphics[width=\linewidth]{graphics/40.png}
+\end{figure}
 
-\begin{lstlisting}
-%% LYAK L2 08-02-2018
 
-\end{lstlisting}
 

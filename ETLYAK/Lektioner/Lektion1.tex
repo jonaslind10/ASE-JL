@@ -51,7 +51,7 @@
 		\begin{itemize}
 			\item Jo større densistet, jo nemmere er det for partiklerne at overføre energi. Lyd udbredes derfor hurtigere i væsker og materialer i fast form end i luft.
 		\end{itemize}
-		\item Lydens udbredelse afhænger også af temperatur og luftfugtighed.
+		\item Lydens udbredelse afhænger af temperatur og luftfugtighed.
 		\begin{itemize}
 			\item Jo højere temperatur, jo hurtigere udbredes lyden. 
 			\item Jo højere luftfugtighed, jo hurtigere udbredes lyden.
@@ -61,9 +61,9 @@
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.85\linewidth]{graphics/2.png}
-	\caption{(A) Variationer af luftryk komprimerer luftpartiklerne. \\(B) Variationerne ligger lige over og lige under det atmosfæriske tryk. }
-	\label{fig:2}
+	\includegraphics[width=0.85\linewidth]{graphics/44.png}
+	\caption{Variationerne omkring det atmosfæriske tryk.}
+	\label{fig:44}
 \end{figure}
 
 \begin{itemize}
@@ -76,7 +76,7 @@
 f = \frac{c}{T}
 \end{equation}
 \begin{itemize}
-	\item 
+	\item[] 
 	\begin{itemize}
 		\item Wavelength (to complete one cycle) 
 	\end{itemize}
@@ -85,65 +85,26 @@ f = \frac{c}{T}
 T = \frac{c}{f}
 \end{equation}
 
-\subsection{Hørelsen}
+\subsection{Lydtryk}
 \begin{itemize}
-	\item Tonehøjden (pitch) af en frekvens høres forskelligt af øret.
-	\item Tonehøjden for en \textbf{lav frekvens dæmpes} når intensiteten øges mens tonehøjden for en \textbf{høj frekvens øges} når intensiteten øges.
-	\item Harmonisk er en lineær skala.
-	\item Oktaver er en logaritmisk skala ofte anvendt i musik fordi den skalerer bedre til ørets opfattelse af lyd. 
-	\begin{itemize}
-		\item En oktav er defineret ved en 2:1 ratio af to frekvenser. 
-		\item Intervallet fra \SI{100}{\hertz} til \SI{200}{\hertz} opfattes som værende større end intervallet fra \SI{200}{\hertz} til \SI{300}{\hertz}. 
-	\end{itemize}
-\end{itemize}
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=\linewidth]{graphics/3.png}
-	\caption{Sammenligning mellem harmoniske og oktaver. }
-	\label{fig:3}
-\end{figure}
-
-\begin{equation}\label{eq:octave}
-\frac{f_2}{f_1} = 2^n
-\end{equation}
-
-\begin{description}
-	\item $f_2$ = frequency of the upper edge of the octave interval, \si{\hertz}
-	\item $f_1$ = frequency of the lower edge of the octave interval, \si{\hertz}
-	\item $n$ = number of octaves
-\end{description}
-
-\begin{itemize}
-	\item Scopet af det hørbare spektrum er \SI{20}{\hertz} til \SI{20}{\kilo\hertz}.
-	\begin{itemize}
-		\item Der er lyde der ikke kan høres af øret. Det er frekvenser der er lavere end det hørbare spektrum (infrasound) og frekvenser der er højere end det hørbare spektrum (ultrasound).
-	\end{itemize}
 	\item Intensiteten af lyden $I_L$ kan opgives i decibel [dB] ved at anvende reference $I_{ref} = \SI{20}{\micro\pascal}$ som er den mindste ændring i trykket et øre kan opfatte.
-	\item Lydeffekten kan ligeledes opgives i \si{\decibel}ved at anvende reference effekt $L_p = \SI{1}{\pico\watt} = 10^{-12} \si{\watt}$.
+	\item Lydeffekten kan ligeledes opgives i \si{\decibel} ved at anvende reference effekt $L_p = \SI{1}{\pico\watt} = 10^{-12} \si{\watt}$.
 \end{itemize}
 
 \begin{equation}\label{eq:decibel}
-PW_L = 10\log_{10}\frac{W}{W_{ref}}
+PWL = 10\log_{10}\frac{W}{W_{ref}}
 \end{equation}
-
+\newpage
 \begin{description}
-	\item $PW_L$ = sound-power level, \si{\decibel}
+	\item $PWL$ = sound-power level, \si{\decibel}
 	\item $W$ = sound power, watts
 	\item $W_{ref}$ = a reference power, $10^{–12}$ \si{\watt}
 \end{description}
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=\linewidth]{graphics/8.png}
-	\caption{Det menneskelige øres opfattelse af subjektivt konstant lydtryk.}
-	\label{fig:8}
-\end{figure}
-
 \begin{itemize}
-	\item Lydintensitet er svært at måle. Men lydtryk (sound pressure level $SP_L$) er derimod det nemmeste at måle. Derfor anvendes lydtryk ofte.
+	\item Lydintensitet er svært at måle. Men lydtryk (sound pressure level $SPL$) er derimod det nemmeste at måle. Derfor anvendes lydtryk ofte.
 	\begin{itemize}
-		\item $SP_L$ er tæt på at være ens med $I_L$, hvor begge ofte bliver referet til som lydniveauet (sound level).
+		\item $SPL$ er tæt på at være ens med $I_L$, hvor begge ofte bliver referet til som lydniveauet (sound level).
 	\end{itemize}
 \end{itemize}
 
@@ -188,10 +149,47 @@ SP_L = 20\log_{10}\frac{p}{p_{ref}}
 \end{figure}
 
 \subsection{Vægtning}
+\subsubsection{Tidsvægtning}
+\begin{itemize}
+	\item Lineær
+\end{itemize}
+
+\begin{equation}
+p_{RMS}=\sqrt{\dfrac{1}{T}\int_{0}^{T}p^2 dt}
+\end{equation}
+
+\begin{itemize}
+	\item Eksponentiel midling
+\end{itemize}
+
+\begin{equation}
+p_{RMS}(\tau)=\sqrt{\dfrac{1}{T_c}\int_{0}^{\infty}e^{-\frac{t}{T_c}}p^2(\tau-t)dt}
+\end{equation}
+
+\begin{itemize}
+	\item[]
+	\begin{itemize}
+		\item SLOW: $T_c = \SI{1000}{\milli\second}$
+		\begin{itemize}
+			\item Menneskets opfattelse af lydstyrke
+		\end{itemize}
+		\item FAST: $T_c = \SI{125}{\milli\second}$
+		\begin{itemize}
+			\item Skadepåvirking af ørene
+		\end{itemize}
+		\item IMPPULSE: $T_c = \SI{35}{\milli\second}$
+		\begin{itemize}
+			\item Hurtige ændringer i lydniveauet i tid
+		\end{itemize}
+	\end{itemize} 
+\end{itemize}
+
+\subsubsection{Frekvensvægtning}
 \begin{itemize}
 	\item Ved måling af lydtryk benyttes ikke blot en mikrofon og en forstærker. Hørelsen er kompleks og for at efterligne hjernens opfattelse af et lydniveau benyttes nogle elektriske filtre
 	\item Filtrene A, B og C modificerer frekvensresponsen så den efterligner hørekurven ved lavt, middel og højt lydniveau.
 	\begin{itemize}
+		\item Lineær vægtning svarer til ingen vægtning.
 		\item A-vejning korrelere godt til nedslidningen af hørelsen ved kraftige signaler og benyttes derfor ved støjmåling.
 		\item B-vejning benyttes ikke mere.
 		\item C-vejning bruges til specifikation af kortvarige spidser for måling af støjens skadevirkning ved klassifikation af en arbejdsplads for påbudt brug af høreværn.
@@ -200,8 +198,8 @@ SP_L = 20\log_{10}\frac{p}{p_{ref}}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/7.png}
-	\caption{A, B, and C weighting response characteristics for sound-level meters.}
+	\includegraphics[width=0.9\linewidth]{graphics/7.png}
+	\caption{Weighting response characteristics for sound-level meters.}
 	\label{fig:7}
 \end{figure}
 
@@ -220,7 +218,7 @@ SP_L = 20\log_{10}\frac{p}{p_{ref}}
 		\item Lyden fra en punktlydkilde ændrer \textbf{ikke} udseende ved stigende afstand.
 		\item En plan lydbølge er en matematisk abstraktion og følgende tilnærmelser anvendes:
 		\begin{itemize}
-			\item Lydens udbredelse i smalle rør (musikinstrumenter, fjernvarme).
+			\item Lydens udbredelse i smalle rør (musikinstrumenter).
 			\item Lydens udbredelse i stor afstand fra lydkilden.
 			\item Højttalerens nærfelt.
 		\end{itemize}
@@ -229,8 +227,8 @@ SP_L = 20\log_{10}\frac{p}{p_{ref}}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.65\linewidth]{graphics/9.png}
-	\caption{Lyden fra en punktkilde udbredes fra kildens centrum og lydtrykket aftager ved stigende afstand.}
+	\includegraphics[width=0.5\linewidth]{graphics/9.png}
+	\caption{Lydens udbredelse fra en punktkilde.}
 	\label{fig:9}
 \end{figure}
 
@@ -259,24 +257,27 @@ SP_L = 20\log_{10}\frac{p}{p_{ref}}
 	\item Hvor meget lydtryk skal der til, for at vi opfatter lyden - ved \SI{63}{\hertz} og ved \SI{2}{\kilo\hertz}?
 \end{enumerate}
 
+1.
+\begin{figure} [H]
+	\includegraphics[width=\linewidth]{graphics/36.png}
+\end{figure}
 
-\begin{lstlisting}
-%% LYAK L1 01-02-2018
-% 1. Beregn dB vaerdien af det maksimalt mulige lydtryk.
-L = 20*log10(10^5/(20*10^-6));
-disp(['Det maksimalt mulige lydtryk er ', num2str(L), ' dB']) 
+2.
+\begin{figure} [H]
+	\includegraphics[width=\linewidth]{graphics/37.png}
+\end{figure}
 
-% 2. Beregn det A-vaegtede lydtryk af 76 dB ved 125 Hz.
-f = 125;
+\newpage 3.
+\begin{figure} [H]
+	\includegraphics[width=\linewidth]{graphics/38.png}
+\end{figure}
 
-R_A = (12194^2*f^4)/((f^2+20.6^2)* ...
-sqrt((f^2+107.7^2)*(f^2+737.9^2))*(f^2+12194^2));
-A = 20*log10(R_A)+2;
+4.
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphics/39.png}
+	\caption{\SI{63}{\hertz} = \SI{38}{\decibel}, \SI{2}{\kilo\hertz}= \SI{-1}{\deci\bel}}
+	\label{fig:39}
+\end{figure}
 
-disp(['Det A-vaegtede lydtryk af 76 dB (125 Hz) er ', num2str(76+A), ' dB']) 
-
-% 3. Et lydtryk reduceres 8 dB, hvor mange gange er det?
-gg = db2mag(8);
-disp(['Lydtrykket reduceres 8 dB, hvilket svarer til ', num2str(gg), ' ganges reducering'])
-\end{lstlisting}
 

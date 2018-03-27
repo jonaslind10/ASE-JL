@@ -235,7 +235,43 @@
 	\item $r$ = afstanden til mikrofonen (\si{\meter}) typisk \SI{1}{\meter}.
 \end{itemize}
 
-\subsection{Opgaver}
+\subsection{Øvelser}
+\subsubsection{Øvelse 7.1}
+Studer modellen med filnavnet: \mintinline{cpp}{PC Loudspeaker.xmcd}. Hvad betyder det at ændre styrets eftergivelighed ($C_{MS}$), det bevægelige systems masse ($M_{MS}$) og den elektriske dæmpning til det dobbelte af den nominelle værdi af $C_{MS}$, $M_{MS}$ og $R_E$. Fx én efter én? 
+\newpage \noindent Det vi sigter efter er påvirkningen af resonansfrekvensen, dæmpningsfaktoren $Q$ (godheden) og lydtrykket i det frekvensuafhængige område.
+
 \begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/L7.pdf}
+	\includegraphics[width=\linewidth]{graphics/31.png}
 \end{figure}
+
+\newpage
+\begin{itemize}
+	\item Fordobling af den nominelle værdi af 
+	\begin{itemize}
+		\item $C_{MS}$
+		\begin{itemize}
+			\item Resonansfrekvensen $f_S$ falder til $\approx\SI{34}{\hertz}$
+			\item Dæmpningfaktoren $Q$ ændres til $\approx 0.3$
+		\end{itemize}
+		\item $M_{MS}$
+		\begin{itemize}
+			\item Resonansfrekvensen $f_S$ falder til $\approx\SI{34}{\hertz}$
+			\item Dæmpningfaktoren $Q$ ændres til $\approx 0.6$
+			\item Lydtrykket $L$ falder til $\approx \SI{78}{\deci\bel}$
+			\item Der skal mere energi til at systemet svinger
+		\end{itemize} 
+		\item $R_E$
+		\begin{itemize}
+			\item Resonansfrekvensen $f_S$ ændres ikke
+			\item Dæmpningfaktoren $Q$ ændres til $\approx 0.8$
+			\item Lydtrykket $L$ falder til $\approx \SI{79}{\deci\bel}$
+			\item Der skal mere spænding til at levere samme strøm
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Øvelse 7.2}
+Måling af lydtryk fra en højttaler (fx ved \SI{300}{\hertz}) og sammenligne med teorien for den massestyrede højttaler. Højttalerens mekaniske parametre ($S_D$, $Bl$, $M_{MS}$ og $R_E$) skal være kendt, mikrofonen skal være kalibreret og ligeledes for indstillingen af effektforstærkeren.
+
+\subsubsection{Øvelse 7.3}
+Måling af nogle af en højttalers parametre, som beskrevet i \href{http://www.torean.dk/artikel/Elektroakustik.pdf}{Elektroakustik,} side 33. For eksempel måling af DC modstand ($R_E$) med ohmmeter, stempelareal ($S_D$) med lineal og kraftfaktor ($Bl$) ved brug af en lille masse og strøm i svingspolen.
