@@ -1,0 +1,72 @@
+\section{Lektion 08-02-2018}
+\subsection{Simulator and JTAG debugging}
+\begin{enumerate}
+	\item To be able to use the Atmel Studio 7 simulator.
+	\item To be able to set up and use the Atmel - ICE for debugging purposes
+\end{enumerate}
+
+\subsubsection{Exercise, Part 1}
+\begin{itemize}
+	\item Create a project and write a C program (intended for debugging).
+\end{itemize}
+
+\subsubsection{Exercise, Part 2}
+\begin{itemize}
+	\item Simulate the program using the Atmel Studio Simulator ("debugger"). The simulator is integrated in the Atmel Studio IDE.
+	\item When using the simulator, the program execution can be simulated in Atmel Studio (not in real time). 
+	\item \textbf{Important} to disable the compiler optimization.
+	\begin{itemize}
+		\item Select "Project" $\:\Rightarrow$ "Properties" (Alt + F7).
+		\item Select "Toolchain", and mark "Optimization".
+		\item Select "Optimization Level" to "None".
+	\end{itemize}
+	\item  Remember after debugging, normally the "Optimization Level" should be set to	generate effective code.
+	\item Select "Debug" $\:\Rightarrow$ "Start Debugging and Break" (ALT + F5).
+	\item Note that the program is "just" simulated, it will take more time than executing the program on the microcontroller.
+	\item Registers can be watched in the window "Processor".
+	\item Register contents that has been changed by an instruction, will be marked with a red color.
+	\item "Stop Watch" show the exact time elapsed since program execution started.
+	\item Monitoring specific variables and registers can be done using the "Watch Window". 
+	\begin{itemize}
+		\item Select "Debug" $\:\Rightarrow$ "Windows" $\:\Rightarrow$ "Watch" $\:\Rightarrow$ "Watch1".
+	\end{itemize} 
+	\item  Monitoring I/O registers of the microcontroller using "I/O View".
+	\begin{itemize}
+		\item Select "Debug" $\:\Rightarrow$ "Windows" $\:\Rightarrow$ "I/O View".
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Exercise, Part 3}
+\begin{itemize}
+	\item  Use the Atmel-ICE for debugging the program while it is
+	executing in target.
+	\item Possible since Mega2560 has an on chip hardware JTAG interface. 
+	\item Advantage is that the program is executed in real time.
+	\item Disadvance is that 4 pins of PORTF are allocated for the JTAG interface.
+	\item \textbf{Important} to enable JTAG interface by setting a fuse. Can only be done using ISP programming. 
+	\item Connect the ISP 6 pin connector of the ICE to the Mega2560 ISP connector (plastic tab $\rightarrow$ Mega2560 chip).
+	\begin{itemize}
+		\item Select "Device Programming".
+		\item Select Atmel-ICE as tool and interface as	ISP.
+	\end{itemize}
+	\item The Arduino board comes with a boot loader installed. When using the ICE, we will probably erase the boot loader.
+	\item Start by reading the flash content of your board to a .hex file.
+	\item Go to tab "Fuses" and check "JTAGEN". Click Program.
+	\item Set up Atmel Studio to use the Atmel-ICE for debugging instead of the simulator.
+	\begin{itemize}
+		\item Select "Project Properties" (Alt + F7).
+		\item Select "Tool" $\:\Rightarrow$ "Atmel-ICE" as debugger $\:\Rightarrow$ "JTAG" as interface. 
+	\end{itemize}
+	\item Connect the mini squid cable of the Atmel-ICE.
+	\begin{itemize}
+		\item Signal \space\space ICE port pin \space Mega2560 pin
+		\item TCK \space\space\space 1 \space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space PORTF, 4
+		\item TMS \space\space\space 5 \space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space PORTF, 5
+		\item TDO \space\space\space 3 \space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space PORTF, 6
+		\item TDI \space\space\space\space 9 \space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space PORTF, 7
+	\end{itemize}
+	\item \textbf{Restore} the Arduino with the original bootloader, program the device with the .hex file, saved earlier.
+	\item To free the JTAG pins of PORT F, you will have to clear the JTAG
+	fuse "JTAGEN".
+\end{itemize}
+
