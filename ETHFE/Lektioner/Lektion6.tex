@@ -1,28 +1,27 @@
 \section{Lektion 06-03-2018}
 
 \begin{enumerate}
-	\item Impedans tilpasning
-	\item L kredsløb
-	\item Pi kredsløb
-	\item T kredsløb
+	\item Impedance matching
+	\item L network
+	\item Pi network
+	\item T network
 \end{enumerate}
 
-\begin{mdframed}[style=exampledefault]
+\noindent\fbox{\parbox{\textwidth}{
 	\begin{itemize}
 		\item \textbf{Pensum:} CB, Ch 4 p. 63-72
 		\item \textbf{Opgaver:} Lektion 4-1, Lektion 4-2, Lektion 4-3
 	\end{itemize}
-\end{mdframed}
+}} \vspace{3mm}
 
 \noindent\textit{Impedance matching is often necessary in the design of RF circuitry to provide the maximum possible transfer of power	between a source and its load.}
 
-\subsection{L kredsløb}
-
+\subsection{L network}
 \begin{itemize}
-	\item 4 mulige kombinationer af placeringen af L og C komponenterne.
+	\item 4 possible combinations of placement of L and C components.
 	\begin{itemize}
-		\item 2 kombinationer der resulterer i en lavpas konfiguration.
-		\item 2 kombinationer der resulterer i en højpas konfiguration.
+		\item 2 combinations that result in a lowpass configuration.
+		\item 2 combinations that result in a highpass configuration.
 	\end{itemize}
 \end{itemize}
 
@@ -98,7 +97,7 @@ Two basic approaches in handling complex impedances.
 	\end{itemize}
 \end{itemize}
 
-\subsection{Pi kredsløb}
+\subsection{Pi network}
 \textit{Two "back-to-back" L networks that are both configured to match the load and
 	the source to an invisible or "virtual" resistance located at the junction between the two networks.}
 
@@ -133,7 +132,7 @@ Q = \sqrt{\dfrac{R}{R_{small}}-1}
 \end{equation}
 
 
-\subsection{T kredsløb}
+\subsection{T network}
 \textit{The T network is often used to match two low-valued impedances when a high-Q arrangement is needed.}
 
 \begin{figure} [H]
@@ -181,3 +180,10 @@ Q = \sqrt{\dfrac{R}{R_{smaller}-1}}= \sqrt{\dfrac{R_{larger}}{R}-1}
 	\caption{Two series-connected L networks for lower Q applications.}
 	\label{fig:30}
 \end{figure}
+
+\noindent\fbox{\parbox{\textwidth}{
+		\begin{itemize}
+			\item \textcolor{red}{Series element should be placed at  lowest impedance.}
+			\item \textcolor{red}{Parallel element should be placed at highest impedance.} 
+		\end{itemize}	
+}} \vspace{3mm}

@@ -1,0 +1,124 @@
+\section{Lektion 17-04-2018}
+
+\begin{enumerate}
+	\item White noise
+	\item Shot noise
+	\item Støjfaktor
+\end{enumerate}
+
+\noindent\fbox{\parbox{\textwidth}{
+	\begin{itemize}
+	\item \textbf{Pensum:} 
+	\begin{itemize}
+		\item CB, Ch 8 p. 194-195
+		\item CB, Ch 5 p. 115-123 
+		\item CB, Ch 6 p. 152-161
+		\item Note: Noise-Calculations.pdf
+	\end{itemize} 
+	\item \textbf{Opgaver:} 
+	\begin{itemize}
+		\item Lektion 10-2
+		\item Ex2010 opg. 2
+		\item Ex2012 opg. 2
+	\end{itemize}
+\end{itemize}
+}} \vspace{3mm}
+
+\subsection{White noise (Thermal)}
+\begin{itemize}
+	\item Noise from each component adds to the	receiver's noise floor.
+	\item Sets the limit on the minimum signal level that can be detected.
+	\item PSD is power contained within a	given bandwidth (watts per hertz).
+	\item Thermal noise is the minimum amount of noise related to temperature.
+	\begin{itemize}
+		\item $k=1.38 \cdot 10^{-20}\si{\milli\watt/\kelvin}$ Boltzmann's constant.
+		\item $T=$ temperature in degrees Kelvin \si{\kelvin}.
+		\item $B=$ noise bandwidth in hertz \si{\hertz}.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+kTB = (1.38\cdot 10^{-23}\si{\joule/\kelvin})(293\si{\kelvin})(1\si{\hertz})
+\end{equation}
+
+\begin{itemize}
+	\item Increase in bandwidth comes increase in noise power.
+	\item Can be expressed as RMS voltage.
+\end{itemize}
+
+\begin{equation}
+V_n = \sqrt{4kTBR_N}
+\end{equation}
+
+\subsection{Shot noise (Schottky)}
+\begin{itemize}
+	\item Particle-like nature of the charge carriers.
+	\item Random current change.
+\end{itemize}
+
+\begin{equation}
+I_n^2=2qI_{dc}B
+\end{equation}
+
+\begin{itemize}
+	\item $I_n^2 =$ mean sqaure noise current.
+	\item $q =1.6\cdot 10^{-19} \,\si{\coulomb}$ electron charge.
+	\item $I_{dc} =$ direct current in amperes (\si{\ampere}).
+	\item $B = $ bandwidth in hertz (\si{\hertz}).
+\end{itemize}
+
+\begin{itemize}
+	\item Can be expressed as RMS current.
+\end{itemize}
+
+\begin{equation}
+I_n=\sqrt{2qI_{dc}B}
+\end{equation}
+
+\subsection{Noise Figure}
+\begin{itemize}
+	\item Components are characterized by several parameters.
+	\begin{itemize}
+		\item Noise Figure (NF)
+		\item Noise Factor (F)
+		\begin{itemize}
+			\item Ratio of SNR at output compared to SNR at input.
+		\end{itemize}
+	\end{itemize}
+\end{itemize} 
+
+\begin{equation}
+Noise \:Factor = \left(\dfrac{Output\:SNR_2}{Input\:SNR_1}\right)
+\end{equation}
+
+\begin{equation}
+Noise \:Figure = 10\log\left(\dfrac{Output\:SNR_2}{Input\:SNR_1}\right)
+\end{equation}
+
+\begin{itemize}
+	\item Noise Figure for a passive device is equal to the insertion loss of
+	the device.
+	\item Calculation of noise contributions of stages in cascade (Friis).
+	\begin{itemize}
+		\item Noise Factor of the first stage in the system ($F_1$) has a dominant effect on the overall noise performance.
+	\end{itemize}
+\end{itemize}
+
+\begin{equation}
+NF_{sys} = 10\log\left(\dfrac{F_1+(F_2-1)}{A_1}\right)
+\end{equation}
+
+\begin{itemize}
+	\item $F =$ noise factor, equivalent to $10^{\frac{NF}{10}}$.
+	\item $A=$ numerical power gain, equivalent to $10^{\frac{G}{10}}$.
+	\item $G$ power gain in \si{\decibel}.
+\end{itemize}
+
+\begin{equation}
+F_{sys} = F_1+\dfrac{F_2-1}{G_1}+\dfrac{F_3-1}{G_1G_2}+\dfrac{F_n-1}{G_1G_2...G_{n-1}}
+\end{equation}
+
+\begin{itemize}
+	\item $F =$ noise factor of each stage.
+	\item $G=$ numerical power gain in \si{\decibel}.
+\end{itemize}

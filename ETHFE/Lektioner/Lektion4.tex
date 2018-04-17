@@ -9,14 +9,14 @@
 	\item Frekvens og impedans skalering
 \end{enumerate}
 
-\begin{mdframed}[style=exampledefault]
-	\begin{itemize}
-		\item \textbf{Pensum:} CB, Ch 1+2+3
-		\item \textbf{Opgaver:} Uge 3-1, Uge 3-2
-	\end{itemize}
-\end{mdframed}
+\noindent\fbox{\parbox{\textwidth}{
+		\begin{itemize}
+			\item \textbf{Pensum:} CB, Ch 1+2+3
+			\item \textbf{Opgaver:} Uge 3-1, Uge 3-2
+		\end{itemize}
+}} \vspace{3mm}
 
-\subsection{Komponenter}
+\subsection{Components}
 Komponenters egenskaber, modstande, kondensatorer og induktorer ved radiofrekvenser og hvordan det vedrører kredsløbsdesign. De mest enkle komponenter af ethvert system undersøges ved radiofrekvenser.
 \begin{itemize}
 	\item Wire (diameter, længde)
@@ -499,8 +499,8 @@ N = \sqrt{\dfrac{L}{A_L}}
 Q = \dfrac{R_p/N^2}{X_p/N^2} = \dfrac{R_p}{X_p}
 \end{equation}
 
-\subsection{Resonanskredsløb}
-\subsubsection{Tabsfrie komponenter}
+\subsection{Resonance circuit}
+\subsubsection{Lossless components}
 \begin{itemize}
 	\item Hvis $Z_p$ er en frekvensafhængig impedans (capacitive or inductive reactance), så vil $V_{out}$ også være frekvensafhængig.
 	\item Forholdet mellem $V_{out}$ og $V_{in}$ vil udgøre gain/loss i kredsløbet, som også vil være frekvensafhængig. 
@@ -537,7 +537,7 @@ X_L=j\omega L
 \noindent\textit{We have formed a simple high-pass filter.}
 
 \begin{itemize}
-	\item Resonant kredsløb med to reactive komponenter.
+	\item Resonant circuit with two reactive components.
 \end{itemize}
 \begin{equation}
 X_{total}=\dfrac{X_C X_L}{X_C + X_L}
@@ -631,7 +631,7 @@ X_p \approx X_s
 	\caption{Series-to-parallel transformation.}
 \end{figure}
 \newpage
-\subsubsection{Impedans transformation}
+\subsubsection{Impedance Transformation}
 \begin{itemize}
 	\item Impedance transforming circuits
 \end{itemize}
@@ -677,4 +677,5 @@ R'_s = R_s \left(\dfrac{n}{n_1}\right)^2
 F_r=\dfrac{1}{2\pi\sqrt{L C}}
 \end{equation}
 
-\subsection{Frekvens og impedans skalering}
+\subsection{Frequency and impeance scaling}
+\fxnote{MISSING! Frequency and impeance scaling}
