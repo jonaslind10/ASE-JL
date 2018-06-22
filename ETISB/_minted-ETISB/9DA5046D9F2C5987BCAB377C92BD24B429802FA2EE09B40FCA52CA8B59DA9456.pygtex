@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{DMA2\PYGZus{}PERIPHERAL\PYGZus{}MAP} \PYG{o}{=} \PYG{l+m+mh}{0x2000}\PYG{p}{;} \PYG{c+c1}{// channel 2 for SPORT0 TX}
-\end{Verbatim}

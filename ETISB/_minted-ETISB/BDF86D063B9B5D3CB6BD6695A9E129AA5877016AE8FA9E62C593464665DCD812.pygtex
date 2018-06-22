@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{rfft\PYGZus{}fr16}\PYG{p}{(}\PYG{n}{input}\PYG{p}{,}\PYG{n}{m\PYGZus{}fft\PYGZus{}output}\PYG{p}{,}\PYG{n}{m\PYGZus{}twiddle\PYGZus{}table}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{N\PYGZus{}FFT}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{block\PYGZus{}exponent}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{);}
-
-\PYG{n}{fft\PYGZus{}magnitude\PYGZus{}fr16}\PYG{p}{(}\PYG{n}{m\PYGZus{}fft\PYGZus{}output}\PYG{p}{,}\PYG{n}{m\PYGZus{}real\PYGZus{}magnitude}\PYG{p}{,}\PYG{n}{N\PYGZus{}FFT}\PYG{p}{,}\PYG{n}{block\PYGZus{}exponent}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{);}
-\end{Verbatim}

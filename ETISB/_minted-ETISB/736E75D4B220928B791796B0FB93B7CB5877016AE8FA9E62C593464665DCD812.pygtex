@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}filter.h\PYGZgt{}}
-
-\PYG{n}{iir\PYGZus{}init} \PYG{p}{(}\PYG{n}{filter\PYGZus{}state}\PYG{p}{,}\PYG{n}{coeffs}\PYG{p}{,}\PYG{n}{delay}\PYG{p}{,}\PYG{n}{NUM\PYGZus{}STAGES}\PYG{p}{);}
-\PYG{n}{iir\PYGZus{}fr16} \PYG{p}{(}\PYG{n}{signal}\PYG{p}{,}\PYG{n}{output}\PYG{p}{,}\PYG{n}{NUM\PYGZus{}SAMPLES}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{filter\PYGZus{}state}\PYG{p}{);}
-\end{Verbatim}

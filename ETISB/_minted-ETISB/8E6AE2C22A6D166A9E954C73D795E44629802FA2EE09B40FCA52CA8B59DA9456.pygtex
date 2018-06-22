@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{DMA1\PYGZus{}CONFIG} \PYG{o}{=} \PYG{l+m+mo}{0001} \PYG{l+m+mo}{0000} \PYG{l+m+mi}{1000} \PYG{l+m+mo}{0110}\PYG{n}{b}
-\end{Verbatim}
