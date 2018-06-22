@@ -7,8 +7,8 @@
 	\item Reflektogram
 \end{enumerate}
 
-\begin{mdframed}[style=exampledefault]
-	\begin{itemize}
+\noindent\fbox{\parbox{\textwidth}{
+		\begin{itemize}
 		\item \textbf{Pensum:} 
 		\begin{enumerate}
 			\item The Use of Computer Modeling in Room Acoustics, \\J. H. Rindel
@@ -19,16 +19,16 @@
 			\item Lyd og Akustik - Lektion 5 - opgaver og øvelser
 		\end{enumerate}
 	\end{itemize}
-\end{mdframed}
+}} \vspace{3mm}
 
 \subsection{Virtuel Akustik}
 \begin{itemize}
-	\item Audio for virtual reality has many equivalent	terms, such as auralization, virtual acoustics, binaural room simulation and auditory display.
-	\item Common approach to auralization is a two-stage process:
+	\item Audio for virtual reality har mange termer såsom auralization, virtual acoustics, binaural room simulation  og auditory display.
+	\item Auralization er en two-stage proces:
 	\begin{itemize}
-		\item Computation of an impulse response (IR) representing an acoustic space.
-		\item Convolution of this impulse response with a dry (anechoically
-		recorded or synthetically generated) source signal.
+		\item Udregning af impulsrespons (IR) for et akustisk rum.
+		\item Convolution af impulsresponset med et tørt (anechoically
+		recorded eller syntetisk genereret) signal.
 	\end{itemize} 
 \end{itemize}
 
@@ -55,7 +55,7 @@
 	\item Den virtuelle kilde (image source) er placeret i en afstand \textit{d} der svarer til den dobbelte afstand mellem source og rumgrænsen (vinkelret).
 	\item Afstanden mellem den virtuelle kilde S1 og receiveren R1 svarer til refleksions distancen (reflection path) mellem S og R1.
 	\item Refleksionerne af alle reelle og virtuelle kilder, der krydser en rumgrænse, skaber et mirror image.
-	\item Ved et rekangulært rum vil alle virtuelle kilder være synlige i alle positioner i rummet og beregningen er hurtig.
+	\item Ved et rektangulært rum vil alle virtuelle kilder være synlige i alle positioner i rummet og beregningen er hurtig.
 	\item Gælder ikke ved irregulære rum. Validering af hvert image er påkrævet og antallet af beregninger bliver hurtigt mange.
 	\item 2. ordens refleksion når en stråle rammer 2 rumgrænser inden den når receiveren.
 \end{itemize}
@@ -95,14 +95,3 @@ N_{sou}=1+\dfrac{n}{(n-2)}((n-1)^i -1)\approx (n-1)^i
 	\label{fig:19}
 \end{figure}
 
-\subsection{Øvelser}
-\begin{enumerate}
-	\item \textbf{Øvelse 5.1:} Modeller et virtuelt rum vha. spejlkildemetoden. Bestem selv rummets dimensioner, absorbtions-koefficienter for overfladematerialerne (keep it simple) og position af lydkilde og modtager. Generer et reflektogram h1(n) fra en tænkt lydkilde (fast position) til en modtager. Modelleringsorden N bør ikke overstige 10 – det skulle dække alle tidlige reflektioner.
-	\item \textbf{Øvelse 5.2:} Lav et estimat af efterklangstiden for det virtuelle rum i øvelse 5.1 via Sabine’s formel og konstruer dernæst en efterklangshale (eksponentielt vægtet hvid støj), som hægtes efter h1(n). Så får vi et væsentligt længere reflektogram h2(n). Hvad mangler for at h2(n) ligner en ”rigtig” målt impulsrespons?
-\end{enumerate}
-
-
-\begin{lstlisting}
-%% LYAK L5 22-02-2018
-
-\end{lstlisting}

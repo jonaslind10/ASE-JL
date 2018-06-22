@@ -8,20 +8,20 @@
 	\item Lydens udbredelse (afstandsregel)
 	\end{enumerate}
 
-\begin{mdframed}[style=exampledefault]
-	\begin{itemize}
-		\item \textbf{Pensum:} 
-		\begin{enumerate}
-			\item Master Handbook Of Acoustics, ch. 1-3
-			\item Audio Meetering, sec. 1-6, 11, 13
-			\item Elektroakustik, TAS,  p. 6
-		\end{enumerate}
-		\item \textbf{Opgaver:} 
-		\begin{enumerate}
-			\item Lyd og Akustik - Lektion 1 - opgaver og øvelser
-		\end{enumerate}
-	\end{itemize}
-\end{mdframed}
+\noindent\fbox{\parbox{\textwidth}{
+\begin{itemize}
+	\item \textbf{Pensum:} 
+	\begin{enumerate}
+		\item Master Handbook Of Acoustics, ch. 1-3
+		\item Audio Meetering, sec. 1-6, 11, 13
+		\item Elektroakustik, TAS,  p. 6
+	\end{enumerate}
+	\item \textbf{Opgaver:} 
+	\begin{enumerate}
+		\item Lyd og Akustik - Lektion 1 - opgaver og øvelser
+	\end{enumerate}
+\end{itemize}
+}} \vspace{3mm}
 
 \subsection{Lyd i et medium}
 
@@ -29,27 +29,27 @@
 \begin{itemize}
 	\item Lyd er svingning i et medium omkring ligevægt. Uden et medium kan lyd ikke blive udbredt. 
 	\item Lyd kan udbredes i medier såsom luft, væsker og materialer af fast form. Lyd kan ikke udbredes i rummet, da mediet her er et vakuum. 
-	\item Hvis en luftpartikel bliver forskudt fra dens oprindelig position, vil elastiske krafter forsøge at tilbagevende luftpartiklen til dens oprindelige position.
+	\item Hvis en luftpartikel bliver forskudt fra dens oprindelig position, vil elastiske kræfter forsøge at tilbagevende luftpartiklen til dens oprindelige position.
 \end{itemize}
 
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.85\linewidth]{graphics/1.png}
-	\caption{En luftpartikel der vibrerer rundt om dens medie som er i ligevægt (elastiske krafter).}
+	\caption{Luftpartikel vibrerer rundt om dens medie som er i ligevægt (elastiske kræfter).}
 	\label{fig:1}
 \end{figure}
 
 \begin{itemize}
-	\item Fluktationerne i trykket omkring det atmosfæriske tryk er meget små.
+	\item Fluktationer i trykket omkring det atmosfæriske tryk er meget små.
 	\begin{itemize}
 		\item Normal tale ses som små ripples i det atmosfæriske tryk.
 		\item Den mindste ændring i trykket et øre kan opfatte er således \SI{20}{\micro\pascal}. Dette svarer til et tryk der er 5 millioner gange mindre end det atmosfæriske tryk.
 	\end{itemize}
-	\item Lydens hastighed er $c = \SI{344}{\meter\per\second}$
+	\item Lydens hastighed er $c = \SI{344}{\meter/\second}$
 	\begin{itemize}
 		\item Lydens udbredelse (hastighed) afhænger af mediets densitet.
 		\begin{itemize}
-			\item Jo større densistet, jo nemmere er det for partiklerne at overføre energi. Lyd udbredes derfor hurtigere i væsker og materialer i fast form end i luft.
+			\item Jo større densitet, jo nemmere er det for partiklerne at overføre energi. Lyd udbredes derfor hurtigere i væsker og materialer i fast form end i luft.
 		\end{itemize}
 		\item Lydens udbredelse afhænger af temperatur og luftfugtighed.
 		\begin{itemize}
@@ -78,7 +78,7 @@ f = \frac{c}{T}
 \begin{itemize}
 	\item[] 
 	\begin{itemize}
-		\item Wavelength (to complete one cycle) 
+		\item Tidsperiode (time to complete one cycle) 
 	\end{itemize}
 \end{itemize}
 \begin{equation}\label{eq:wave}
@@ -87,35 +87,38 @@ T = \frac{c}{f}
 
 \subsection{Lydtryk}
 \begin{itemize}
-	\item Intensiteten af lyden $I_L$ kan opgives i decibel [dB] ved at anvende reference $I_{ref} = \SI{20}{\micro\pascal}$ som er den mindste ændring i trykket et øre kan opfatte.
-	\item Lydeffekten kan ligeledes opgives i \si{\decibel} ved at anvende reference effekt $L_p = \SI{1}{\pico\watt} = 10^{-12} \si{\watt}$.
+	\item Intensiteten af lyden $I_L$ kan opgives i decibel [\si{\decibel}] ved at anvende reference $I_{ref} = \SI{20}{\micro\pascal}$ som er den mindste ændring i trykket et øre kan opfatte.
+	\item Lydeffekten kan ligeledes opgives i \si{\decibel} ved at anvende en reference effekt $L_p = \SI{1}{\pico\watt} = 10^{-12} \si{\watt}$.
 \end{itemize}
 
 \begin{equation}\label{eq:decibel}
-PWL = 10\log_{10}\frac{W}{W_{ref}}
+PWL = 10\log_{10}\left(\frac{W}{W_{ref}}\right)
 \end{equation}
 \newpage
 \begin{description}
 	\item $PWL$ = sound-power level, \si{\decibel}
-	\item $W$ = sound power, watts
-	\item $W_{ref}$ = a reference power, $10^{–12}$ \si{\watt}
+	\item $W$ = sound power, \si{\watt}
+	\item $W_{ref}$ = reference power, $10^{–12}$ \si{\watt}
 \end{description}
 
 \begin{itemize}
-	\item Lydintensitet er svært at måle. Men lydtryk (sound pressure level $SPL$) er derimod det nemmeste at måle. Derfor anvendes lydtryk ofte.
+	\item Lydintensitet er svært at måle. 
 	\begin{itemize}
-		\item $SPL$ er tæt på at være ens med $I_L$, hvor begge ofte bliver referet til som lydniveauet (sound level).
+		\item Lydtryk (sound pressure level) er derimod det nemmeste at måle. Derfor anvendes lydtryk ofte.
+	\end{itemize}
+	\begin{itemize}
+		\item $SPL$ er tæt på at være ens med $I_L$, hvor begge ofte bliver refereret til som lydniveauet (sound level).
 	\end{itemize}
 \end{itemize}
 
 \begin{equation}\label{eq:spl}
-SP_L = 20\log_{10}\frac{p}{p_{ref}}
+SPL = 20\log_{10}\left(\frac{p}{p_{ref}}\right)
 \end{equation}
 
 \begin{description}
-	\item $SP_L$ = sound-pressure level, \si{\decibel}
-	\item $p$ = acoustic pressure, \si{\micro\pascal} or other
-	\item $p_{ref}$ = acoustic reference pressure, \si{\micro\pascal}  or other
+	\item $SPL$ = sound pressure level, \si{\decibel}
+	\item $p$ = acoustic pressure, \si{\micro\pascal}
+	\item $p_{ref}$ = acoustic reference pressure, \si{\micro\pascal}
 \end{description}
 
 \begin{figure} [H]
@@ -144,7 +147,7 @@ SP_L = 20\log_{10}\frac{p}{p_{ref}}
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=\linewidth]{graphics/5.png}
-	\caption{Analogier for komponenter i et elektrik, mekanisk og akustisk system.}
+	\caption{Komponentanalogi i et elektrisk, mekanisk og akustisk system.}
 	\label{fig:5}
 \end{figure}
 
@@ -204,9 +207,9 @@ p_{RMS}(\tau)=\sqrt{\dfrac{1}{T_c}\int_{0}^{\infty}e^{-\frac{t}{T_c}}p^2(\tau-t)
 \end{figure}
 
 \begin{description}
-	\item For sound-pressure levels of 20 to 55 dB, use network A.
-	\item For sound-pressure levels of 55 to 85 dB, use network B.
-	\item For sound-pressure levels of 85 to 140 dB, use network C.
+	\item For sound pressure levels of 20 to 55 \si{\decibel}, use network A.
+	\item For sound pressure levels of 55 to 85 \si{\decibel}, use network B.
+	\item For sound pressure levels of 85 to 140 \si{\decibel}, use network C.
 \end{description}
 
 
@@ -216,18 +219,13 @@ p_{RMS}(\tau)=\sqrt{\dfrac{1}{T_c}\int_{0}^{\infty}e^{-\frac{t}{T_c}}p^2(\tau-t)
 	\item Punktlydkilde: Lyden udbredes ligeligt i alle retninger.
 	\begin{itemize}
 		\item Lyden fra en punktlydkilde ændrer \textbf{ikke} udseende ved stigende afstand.
-		\item En plan lydbølge er en matematisk abstraktion og følgende tilnærmelser anvendes:
-		\begin{itemize}
-			\item Lydens udbredelse i smalle rør (musikinstrumenter).
-			\item Lydens udbredelse i stor afstand fra lydkilden.
-			\item Højttalerens nærfelt.
-		\end{itemize}
+		\item En plan lydbølge er en matematisk abstraktion og der anvendes nogle tilnærmelser.
 	\end{itemize}
 \end{itemize}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.5\linewidth]{graphics/9.png}
+	\includegraphics[width=0.7\linewidth]{graphics/9.png}
 	\caption{Lydens udbredelse fra en punktkilde.}
 	\label{fig:9}
 \end{figure}
@@ -235,49 +233,15 @@ p_{RMS}(\tau)=\sqrt{\dfrac{1}{T_c}\int_{0}^{\infty}e^{-\frac{t}{T_c}}p^2(\tau-t)
 \begin{itemize}
 	\item Lydtrykket aftager med stigende afstand idet effekten i den kugleformede bølgefront fordeles over et areal, der vokser kvadratisk med afstanden.
 	\begin{itemize}
-		\item Nærfelt: Lydtrykket varierer ikke – plane bølger.
-		\item Fjernfelt: – \SI{6}{\decibel}/fordobling – sfæriske bølger.
+		\item Nærfelt: Lydtrykket varierer ikke  (plane bølger).
+		\item Fjernfelt: – \SI{6}{\decibel}/fordobling (sfæriske bølger).
 	\end{itemize}
 \end{itemize}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.85\linewidth]{graphics/10.png}
+	\includegraphics[width=0.8\linewidth]{graphics/10.png}
 	\caption{Afstandsregel.}
 	\label{fig:10}
 \end{figure}
-
-\newpage
-\subsection{Opgaver}
-
-\begin{enumerate}
-	\item Beregn dB værdien af det maksimalt mulige lydtryk.
-	\item Beregn det A-vægtede lydtryk af \SI{76}{\decibel} ved \SI{125}{\hertz}.
-	\item Et lydtryk reduceres \SI{8}{\decibel}, hvor mange gange er det?
-	\item Hvor meget lydtryk skal der til, for at vi opfatter lyden - ved \SI{63}{\hertz} og ved \SI{2}{\kilo\hertz}?
-\end{enumerate}
-
-1.
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/36.png}
-\end{figure}
-
-2.
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/37.png}
-\end{figure}
-
-\newpage 3.
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/38.png}
-\end{figure}
-
-4.
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{graphics/39.png}
-	\caption{\SI{63}{\hertz} = \SI{38}{\decibel}, \SI{2}{\kilo\hertz}= \SI{-1}{\deci\bel}}
-	\label{fig:39}
-\end{figure}
-
 

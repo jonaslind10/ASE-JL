@@ -7,51 +7,41 @@
 	\item Måleprincipper
 \end{enumerate}
 
-\begin{mdframed}[style=exampledefault]
-	\begin{itemize}
-		\item \textbf{Pensum:} 
-		\begin{enumerate}
-			\item Audio Meetering, sec. 8-9, 26-29
-			\item Elektroakustik, TAS,  p. 12-14
-		\end{enumerate}
-		\item \textbf{Opgaver:} 
-		\begin{enumerate}
-			\item Lyd og Akustik - Lektion 2 - opgaver og øvelser
-		\end{enumerate}
-	\end{itemize}
-\end{mdframed}
+\noindent\fbox{\parbox{\textwidth}{
+\begin{itemize}
+	\item \textbf{Pensum:} 
+	\begin{enumerate}
+		\item Audio Meetering, sec. 8-9, 26-29
+		\item Elektroakustik, TAS,  p. 12-14
+	\end{enumerate}
+	\item \textbf{Opgaver:} 
+	\begin{enumerate}
+		\item Lyd og Akustik - Lektion 2 - opgaver og øvelser
+	\end{enumerate}
+\end{itemize}
+}} \vspace{3mm}
 
 \subsection{Måling af lydtryk}
 \begin{itemize}
-	\item Lyd er ganske små variationer	omkring det statiske lufttryk,
 	\item Et reference lydtryk er valgt til at være \SI{20}{\micro\pascal} hvilket svarer til den mindste ændring i tryk et menneske kan opfange.
 	\item Forholdet mellem det statiske tryk og reference lydtrykket er $1 :
 	5.066.250.000$.
 	\begin{itemize}
-		\item Lydtryk (Engelsk: Sound Pressure)
-		\item Enhed: Pascal [\si{\pascal}]
-		\item Lydtrykniveau (Engelsk: Sound Pressure Level - SPL)
-		\item Enhed: Decibel [\si{\decibel}]
+		\item Lydtryk (sound pressure),  Pascal [\si{\pascal}]
+		\item Lydtrykniveau (sound pressure level - SPL), Decibel [\si{\decibel}]
 	\end{itemize}
 \end{itemize}
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=.8\linewidth]{graphics/44.png}
-	\caption{Trykvariationer omkring det statiske lufttryk.}
-	\label{fig:44}
-\end{figure}
-
 \begin{itemize}
-	\item Lydstyrker udtrykt som lydtrykniveau [\si{\decibel}, SPL] i stedet for lydtryk [\si{\pascal}]
+	\item Lydstyrke udtrykt som lydtrykniveau [\si{\decibel}] i stedet for lydtryk [\si{\pascal}]
 \end{itemize}
 
 \begin{equation}\label{eq:spl1}
-SPL = 20\log_{10}\frac{p}{p_{ref}}
+SPL = 20\log_{10}\left(\frac{p}{p_{ref}}\right)
 \end{equation}
 
 \begin{itemize}
-	\item $SPL$ = sound-pressure level, \si{\decibel}
+	\item $SPL$ = sound pressure level, \si{\decibel}
 	\item $p$ = acoustic pressure, \si{\micro\pascal}
 	\item $p_{ref}$ = acoustic reference pressure, \SI{20}{\micro\pascal}.
 \end{itemize}
@@ -64,7 +54,7 @@ SPL = 20\log_{10}\frac{p}{p_{ref}}
 		\item Måler lydtrykkets variation i et punkt uden reference til den retning lyden udbredes i.
 		\item Flere mikrofontyper er retningsbestemte på grund af deres opbygning.
 	\end{itemize}
-	\newpage\item Mikrofoner – 4 hovedgrupper
+	\item Mikrofoner – 4 hovedgrupper
 	\begin{itemize}
 		\item Studiemikrofoner (Dynamiske- og kondensator mikrofoner)
 		\item Målemikrofoner (Kondensator mikrofoner)
@@ -88,8 +78,8 @@ SPL = 20\log_{10}\frac{p}{p_{ref}}
 \end{itemize}
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=.9\linewidth]{graphics/12.png}
-	\caption{V: svingspolen drives af en membran til at svinge i et magnetfelt. H: En tynd metalfolie svinger i et magnetfelt og signalet tages ud ved båndets ender (ud af papiret og ind i papiret).}
+	\includegraphics[width=.85\linewidth]{graphics/12.png}
+	\caption{V: svingspolen drives af en membran til at svinge i et magnetfelt. H: En tynd metalfolie svinger i et magnetfelt.}
 	\label{fig:12}
 \end{figure}
 
@@ -120,7 +110,7 @@ SPL = 20\log_{10}\frac{p}{p_{ref}}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/11.png}
+	\includegraphics[width=.85\linewidth]{graphics/11.png}
 	\caption{Kondensatormikrofons opbygning.}
 	\label{fig:11}
 \end{figure}
@@ -229,7 +219,7 @@ SPL = 20\log_{10}\frac{p}{p_{ref}}
 	\item En impulsrespons eller overføringsfunktion kan fuldstændig beskrive et LTI-system (Lineært og	Tidsinvariant).
 	\item Disse responser kan bestemmes ved at tilføje et velegnet input-signal til systemet og derefter samtidig betragte input, x[n] og output, y[n].
 	\item Med krydskorrelation kan vi bestemme impulsresponsen (xcorr i matlab)
-	\item Et velegnet input signal kan være:
+	\newpage\item Et velegnet input signal kan være:
 	\begin{itemize}
 		\item Random Noise
 		\item MLS (maximum length sequence)
@@ -273,7 +263,7 @@ x(t)=\sin \left[\dfrac{2\pi f_1 T}{\ln
 	\left(\frac{f_2}{f_1}\right)}-1\right)\right]
 \end{equation}
 
-
+\newpage
 \begin{itemize}
 	\item Matematiske funktioner for sekvenser
 	\begin{itemize}
@@ -300,84 +290,3 @@ x(t)=\sin \left[\dfrac{2\pi f_1 T}{\ln
 	\item De mest præcise resultater for konstant måletid er "Logaritmisk Sinus
 	Sweep".
 \end{itemize}
-
-
-\newpage\subsection{Opgaver}
-
-\begin{enumerate}
-	\item Lav et MLS signal med orden 10.
-\end{enumerate}
-
-
-\begin{lstlisting}
-%% LYAK L2 08-02-2018
-%  Lav et MLS signal med orden 10
-m = 10;
-buf = ones(1,m);  
-
-tap1=3;
-tap2=10;
-
-for i = (2^m)-1:-1:1
-xorbit = xor(buf(tap1),buf(tap2)); % feedback bit
-
-buf = [xorbit buf(1:m-1)];
-y(i) = (-2 .* xorbit) + 1;         % 0 -> 1; 1 -> -1
-end
-\end{lstlisting}
-
-\begin{enumerate}[resume]
-	\item Find impulsresponsen ud fra de sammenhørende exitations- og målesignaler i filen meassigs.mat. Systemet er ”målt” både med MLS og hvid støj. 
-\end{enumerate}
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=\linewidth]{graphics/46.png}
-	\label{fig:46}
-\end{figure}
-
-
-\begin{lstlisting}
-%% LYAK L2 08-02-2018
-%  Find impulsresponsen ud fra de sammenhoerende 
-%  exitations- og maalesignaler i filen meassigs.mat
-load('meassigs.mat');
-N = 524;
-
-% Cross correlation
-rxy_mls = xcorr(x_mls,y_mls);
-% Flip the correlation result and take the first N samples
-ryx_mls = fliplr(rxy_mls(1:N));   
-
-
-subplot(2,1,1)
-plot(ryx_mls/max(ryx_mls));
-title('Impulse Response, MLS');
-grid;
-
-% Cross correlation
-rxy_wn = xcorr(x_wn,y_wn);
-% Flip the correlation result and take the first N samples
-ryx_wn = fliplr(rxy_wn(1:N));  
-
-subplot(2,1,2)
-plot(ryx_wn/max(ryx_wn));
-title('Impulse Response, White Noise');
-grid;
-\end{lstlisting}
-
-\begin{enumerate}[resume]
-	\item En 8 ohms højttaler har DC modstand på 6 ohm og virkningsgrad på 1 \%.
-	\begin{enumerate}
-		\item Bestem den producerede akustiske effekt, når højttaleren tilføres 2,83 volt.
-		\item Lyden antages at udbrede sig sfærisk fra højttaleren. Beregn intensiteten og lydtrykniveauet på 2,5 meters afstand.
-		\item Lydtrykket måles nu med en mikrofon hvis følsomhed er 5 mV/Pa. Hvilken spænding leverer mikrofonen?
-	\end{enumerate}
-\end{enumerate}
-
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/40.png}
-\end{figure}
-
-
-

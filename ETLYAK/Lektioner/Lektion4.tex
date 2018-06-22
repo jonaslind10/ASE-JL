@@ -9,24 +9,24 @@
 	\item Absorptionskoeffficienter
 \end{enumerate}
 
-\begin{mdframed}[style=exampledefault]
+\noindent\fbox{\parbox{\textwidth}{
 	\begin{itemize}
-		\item \textbf{Pensum:} 
-		\begin{enumerate}
-			\item Master Handbook of Acoustics, ch. 6, 7, 11, 13
-			\item Elektroakustik, TAS,  p. 89-96
-		\end{enumerate}
-		\item \textbf{Opgaver:} 
-		\begin{enumerate}
-			\item Lyd og Akustik - Lektion 4 - opgaver og øvelser
-		\end{enumerate}
-	\end{itemize}
-\end{mdframed}
+	\item \textbf{Pensum:} 
+	\begin{enumerate}
+		\item Master Handbook of Acoustics, ch. 6, 7, 11, 13
+		\item Elektroakustik, TAS,  p. 89-96
+	\end{enumerate}
+	\item \textbf{Opgaver:} 
+	\begin{enumerate}
+		\item Lyd og Akustik - Lektion 4 - opgaver og øvelser
+	\end{enumerate}
+\end{itemize}
+}} \vspace{3mm}
 
 \subsection{Stående bølger}
 Et retvinklet rum vil have et system af egenfrekvenser. Her vil plane bølger spejles så de understøtter bestemte frekvenser. Dette sker gennem konstruktiv interferens. \\
 
-Den laveste frekvens hvor der kan dannes resonans i en akseretning har en bølgelængde på halvdelen af længdedimensionen ($L_x$, $L_y$ og $L_z$). Trykbølgen reflekteres ved væggen og refleksionen kan derfor understøtte den efterfølgende bølgefront.
+\noindent Den laveste frekvens hvor der kan dannes resonans i en akseretning har en bølgelængde på halvdelen af længdedimensionen ($L_x$, $L_y$ og $L_z$). Trykbølgen reflekteres ved væggen og refleksionen kan derfor understøtte den efterfølgende bølgefront.
 \begin{itemize}
 	\item Ved \SI{5}{\meter} afstand mellem to vægge er den lavest mulige resonans $f_0 = \SI{34}{\hertz}$. Hertil kommer også resonans ved de harmoniske frekvenser på \SI{68}{\hertz}, \SI{102}{\hertz}, ... Tilsvarende gælder for de andre akseretninger.
 \end{itemize}
@@ -35,7 +35,7 @@ Dette beskrives ved at to eller tre værdier af index ($n_x$, $n_y$ og $n_z$) er
 De tre indeksværdier kombineres til et enkelt ved at udnytte at N er den højest mulige værdi. Herved kan resonanserne plottes som
 funktion af et fælles indeks \textit{n}.\\
 
-Modellen gælder indtil frekvenser hvor usikkerheden på længderetningen
+\noindent Modellen gælder indtil frekvenser hvor usikkerheden på længderetningen
 bliver sammenlignelig med bølgelængden. 
 Det kan vises at den øvre grænse er i cirka \SI{550}{\hertz} for
 et normalt beboelsesrum hvorved det enkelte indeks er begrænset til området $n = 0$ ... $7$.
@@ -99,7 +99,7 @@ h(t)=\sum_{n=0}^{N} C_n \sin(\omega t) \exp(-d_n\omega_n t)
 En lydbølge fra lydgiveren udbredes med en konstant hastighed i alle retninger. 
 En lytter i nogen afstand fra lydgiveren vil modtage lydbølgen efter en forsinkelse $t_D$ på cirka $3 \si{\milli\second}$ per meter.\\
 
-Lydbølgen vil fortsætte sin udbredelse indtil den rammer en flade i rummet hvor den reflekteres og den reflekterede bølgefront kan derfor nå frem til lytteren efter yderligere forsinkelse. 
+\noindent Lydbølgen vil fortsætte sin udbredelse indtil den rammer en flade i rummet hvor den reflekteres og den reflekterede bølgefront kan derfor nå frem til lytteren efter yderligere forsinkelse. 
 Øret vil modtage et system af lydbølger der både beskriver det materiale der lyttes på og det rum lydkilden og personen befinder sig i.
 \subsubsection{Refleksion}
 \begin{itemize}
@@ -187,55 +187,3 @@ T_{60} = 0.16\dfrac{V}{4 m V-S\ln(1-\alpha)}
 		\item Derved skal luften bag ved membranen også svinge så luften presses igennem det absorberende materiale.
 	\end{itemize}
 \end{itemize}
-
-\subsection{Opgaver}
-\subsubsection{1.}
-Beregn de første 10 rum-resonanser i lyttestuen. Angiv hvilke der er aksiale. Beregn også Schröder-frekvensen og estimer efterklangstiden T60.
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/32.png}
-\end{figure}
-\newpage
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/33.png}
-\end{figure}
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/34.png}
-\end{figure}
-\subsubsection{2.}
-Giv et bud på delay og relativ styrke for alle 1. ordens reflektioner (for faste kilde/lytter placeringer). Tegn impulsresponsen som søjler langs en tidsakse, hvor lyddæmpningen medtages efter afstandsreglen og eventuelt en vurdering af dæmpningen ved refleksion i fx loftplader.
-\subsubsection{3.}
-Beregning af efterklangstiden T60 efter Sabine for forskellige rum. Vurdering af absorption ved brug af kurverne i \href{http://www.torean.dk/artikel/Elektroakustik.pdf}{Elektroakustik,} side 50-51 eller "Report 2 – Absorber" fra Campus, eller formler fundet på nettet.
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/35.png}
-\end{figure}
-
-\subsubsection{4.}
-Bestem de rumakustiske parametre T60, EDT, og C80 ud fra impulsresponsen i filen roomir.mat.
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=\linewidth]{graphics/50.png}
-	\caption{Bestemmelse af EDT.}
-	\label{fig:50}
-\end{figure}
-
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=\linewidth]{graphics/51.png}
-	\caption{Bestemmelse af T60.}
-	\label{fig:51}
-\end{figure}
-
-
-\begin{figure} [H]
-	\includegraphics[width=\linewidth]{graphics/52.png}
-\end{figure}
-
-
-\subsection{Øvelser}
-\subsubsection{Øvelse 4.1}
-Opstilling af en højttaler og eftersøgning efter resonansfrekvenserne fra opg. 1. Bestemmelse af tryk-maksima og sammenhold det med teorien for trykmaksima i hjørnet. Sammenligning med den beregnede øvre grænse $f_{MAX}$ eller $N$ for betydningen af afvigelser fra et rektangulært rum.
-
-\subsubsection{Øvelse 4.2}
-Måling af T60 ved en højttaler med hvid/rosa støj, der pludseligt afbrydes, eller ved et klap i hænderne: Klasseværelset, musiklytterummet (med en skrå væg), efterklangsrummet i kælderen og det lyddøde rum. Relater målingerne til de beregnede resultater fra opg. 3.
