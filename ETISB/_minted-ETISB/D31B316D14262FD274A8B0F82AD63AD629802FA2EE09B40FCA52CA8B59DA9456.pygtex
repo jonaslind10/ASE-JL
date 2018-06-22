@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{R3} \PYG{o}{=} \PYG{n}{R1}\PYG{p}{.}\PYG{n}{L}\PYG{o}{*}\PYG{n}{R2}\PYG{p}{.}\PYG{n}{H}\PYG{p}{;}
+\end{Verbatim}

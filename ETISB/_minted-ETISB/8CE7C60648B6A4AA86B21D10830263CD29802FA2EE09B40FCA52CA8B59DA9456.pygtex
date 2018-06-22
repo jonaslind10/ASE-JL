@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{EX\PYGZus{}INTERRUPT\PYGZus{}HANDLER}\PYG{p}{(}\PYG{n}{Sport0\PYGZus{}RX\PYGZus{}ISR}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{c+c1}{// confirm interrupt handling}
+\PYG{o}{*}\PYG{n}{pDMA1\PYGZus{}IRQ\PYGZus{}STATUS} \PYG{o}{=} \PYG{l+m+mh}{0x0001}\PYG{p}{;}
+\PYG{c+c1}{// Move data from receive buffer to local buffer}
+\PYG{c+c1}{// Retrieve all the samples from receive buffer to process buffer}
+\PYG{n}{sCh0LeftIn} \PYG{o}{=} \PYG{n}{sDataBufferRX}\PYG{p}{[}\PYG{n}{INTERNAL\PYGZus{}ADC\PYGZus{}L0}\PYG{p}{];}
+\PYG{n}{sCh0RightIn} \PYG{o}{=} \PYG{n}{sDataBufferRX}\PYG{p}{[}\PYG{n}{INTERNAL\PYGZus{}ADC\PYGZus{}R0}\PYG{p}{];}
+\PYG{n}{sCh1LeftIn} \PYG{o}{=} \PYG{n}{sDataBufferRX}\PYG{p}{[}\PYG{n}{INTERNAL\PYGZus{}ADC\PYGZus{}L1}\PYG{p}{];}
+\PYG{n}{sCh1RightIn} \PYG{o}{=} \PYG{n}{sDataBufferRX}\PYG{p}{[}\PYG{n}{INTERNAL\PYGZus{}ADC\PYGZus{}R1}\PYG{p}{];}
+
+\PYG{n}{Process\PYGZus{}Data}\PYG{p}{();}
+
+\PYG{n}{sDataBufferTX}\PYG{p}{[}\PYG{n}{INTERNAL\PYGZus{}DAC\PYGZus{}L0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{sCh0LeftOut}\PYG{p}{;}
+\PYG{n}{sDataBufferTX}\PYG{p}{[}\PYG{n}{INTERNAL\PYGZus{}DAC\PYGZus{}R0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{sCh0RightOut}\PYG{p}{;}
+\PYG{n}{sDataBufferTX}\PYG{p}{[}\PYG{n}{INTERNAL\PYGZus{}DAC\PYGZus{}L1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{sCh1LeftOut}\PYG{p}{;}
+\PYG{n}{sDataBufferTX}\PYG{p}{[}\PYG{n}{INTERNAL\PYGZus{}DAC\PYGZus{}R1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{sCh1RightOut}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

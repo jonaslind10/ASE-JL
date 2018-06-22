@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cycle\PYGZus{}count.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}stdio.h\PYGZgt{}}
+
+\PYG{k}{extern} \PYG{k+kt}{int}
+\PYG{n+nf}{main}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{n}{cycle\PYGZus{}t} \PYG{n}{start\PYGZus{}count}\PYG{p}{;}
+\PYG{n}{cycle\PYGZus{}t} \PYG{n}{final\PYGZus{}count}\PYG{p}{;}
+
+\PYG{n}{START\PYGZus{}CYCLE\PYGZus{}COUNT}\PYG{p}{(}\PYG{n}{start\PYGZus{}count}\PYG{p}{);}
+\PYG{n}{Some\PYGZus{}Function\PYGZus{}Or\PYGZus{}Code\PYGZus{}To\PYGZus{}Measure}\PYG{p}{();}
+\PYG{n}{STOP\PYGZus{}CYCLE\PYGZus{}COUNT}\PYG{p}{(}\PYG{n}{final\PYGZus{}count}\PYG{p}{,}\PYG{n}{start\PYGZus{}count}\PYG{p}{);}
+
+\PYG{n}{PRINT\PYGZus{}CYCLES}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Number of cycles: \PYGZdq{}}\PYG{p}{,}\PYG{n}{final\PYGZus{}count}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
