@@ -1,0 +1,126 @@
+\documentclass[12pt,a4paper,oneside]{report}
+\usepackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm]{geometry}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage[draft, danish]{fixme}
+
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{minted}
+\usepackage{showexpl}
+\usepackage{url,textcomp}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+\usepackage{pdfpages}
+
+\usepackage{subfig}
+\usepackage{wrapfig}
+
+\usepackage{tabularx, multirow, booktabs}
+\usepackage{threeparttable}
+\usepackage{longtable, tabu}
+
+\usepackage{titlesec}
+\usepackage[numbered,breaklines=true]{mcode}
+
+\addbibresource{references.bib} 
+
+%-----------------------------------------------------------------
+%   HEADER SECTION
+%-----------------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Exam Project}
+\lhead{ITAMS}
+\rfoot{\thepage}
+
+
+\author{Jonas Lind; Emil Jepsen}
+\title{Applied Microcontroller Systems}
+\begin{document}
+
+%-----------------------------------------------------------------
+%   TITLE SECTION
+%-----------------------------------------------------------------
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Applied Microcontroller Systems \par}
+	\vspace{1cm}
+	{\scshape\Large Exam Project\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Counting Scale \par}
+	\vspace{.8cm}
+	\includegraphics[width=0.4\textwidth]{graphics/frontpage}\par\vspace{1cm}
+	{\Large\scshape Jonas Lind 201507296\par}
+	{\Large\scshape Emil Jepsen 20092013\par}
+	\vfill
+	Instructor \par
+	\textsc{Henning Hargaard}
+	
+	\vfill
+	
+	% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+%-----------------------------------------------------------------
+%   CONTENTS
+%-----------------------------------------------------------------	
+\setcounter{chapter}{1}
+	
+%\chapter*{Abstract}
+
+\tableofcontents
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+\input{Content/ProblemDefinition}
+\input{Content/SystemDescription}
+
+{\let\clearpage\relax \chapter*{System Architecture}}
+%\chapter*{System Architecture}
+\addcontentsline{toc}{chapter}{System Architecture}
+\input{Content/SystemArchitecture}
+
+\chapter*{System Design}
+\addcontentsline{toc}{chapter}{System Design}
+\input{Content/WeightCell}
+\input{Content/Keypad}
+\input{Content/GraphicDisplay}
+\input{Content/Menu}
+
+%\chapter*{Implementation}
+%\addcontentsline{toc}{chapter}{Implementation}
+
+\chapter*{Results}
+\addcontentsline{toc}{chapter}{Results}
+\input{Content/test}
+\input{Content/verification}
+ 
+\chapter*{Discussion}
+\addcontentsline{toc}{chapter}{Discussion}
+\input{Content/Discussion}
+
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+\input{Content/Conclusion}
+
+\chapter*{References}
+\addcontentsline{toc}{chapter}{References}
+\printbibliography[type=article,title={Articles},heading=subbibliography,sorting=none]
+\printbibliography[type=book,title={Books},heading=subbibliography,sorting=none]
+\printbibliography[type=manual,title={Datasheets},heading=subbibliography,sorting=none]
+\printbibliography[type=report,title={Standards},heading=subbibliography,sorting=none]
+\printbibliography[type=online,title={Webpages},heading=subbibliography,sorting=none]
+
+
+	
+\end{document}
+
+ 

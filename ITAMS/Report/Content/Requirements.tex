@@ -1,0 +1,87 @@
+\section{Actor Description}
+
+\begin{table}[H] 
+	\begin{threeparttable}
+		\begin{tabularx}{\linewidth}{ l X }
+			\toprule
+			\bfseries{Name of actor:}	& User \\ 
+			\bfseries{Description:} 	& ...   \\     
+			\bottomrule
+		\end{tabularx}
+	\end{threeparttable}
+	\caption{Actor description of User.}
+	\label{tab:actordescription}
+\end{table}
+
+\section{Use Cases}
+
+\begin{longtabu}{X[0.45l] X[0.75l]}
+	\textbf{Name:} &  Set Elevation\\ %fill
+	\midrule
+	\textbf{Goal:} &  Change elevation to a desired level\\ %fill
+	\midrule
+	\textbf{Initialisation:} &  User press SW9\\ %fill out 
+	\midrule
+	\textbf{Actors:} &  User (Primary)\\ %fill out 
+	\midrule
+	\textbf{Simultaneous occurrences:} & None \\ %fill out 
+	\midrule
+	\textbf{Precondition:} &  BF533 EZ-KIT is powered on\\ %fill out 
+	\midrule
+	\textbf{Postcondition:} &  Elevation is incremented or decremented\\ %fill out 
+	\midrule
+	\bfseries{Main scenario:} & \\
+	1. & User press SW6 until LED9 is on\\
+	2. & User press SW4 to decrement elevation or SW5 to increment elevation. LED4-8 shows the selected elevation.\\
+	3. & User press SW7 to confirm the elevation\\
+	\midrule
+	\bfseries{Extension:} & \\
+	\midrule
+	\bfseries{Data Variations List:} & \textbf{Elevation:} \SI{-30}{\degree} to \SI{80}{\degree} \\
+	\midrule\\
+\end{longtabu}
+
+
+\begin{longtabu}{X[0.45l] X[0.75l]}
+	\textbf{Name:} &  Set Azimuth\\ %fill
+	\midrule
+	\textbf{Goal:} &  Change azimuth to a desired level\\ %fill
+	\midrule
+	\textbf{Initialisation:} &  User press SW9\\ %fill out 
+	\midrule
+	\textbf{Actors:} &  User (Primary)\\ %fill out 
+	\midrule
+	\textbf{Simultaneous occurrences:} & None \\ %fill out 
+	\midrule
+	\textbf{Precondition:} &  BF533 EZ-KIT is powered on\\ %fill out 
+	\midrule
+	\textbf{Postcondition:} &  Azimuth is incremented or decremented\\ %fill out 
+	\midrule
+	\bfseries{Main scenario:} & \\
+	1. & User press SW6 until LED9 is off\\
+	2. & User press SW4 to decrement azimuth or SW5 to increment azimuth. LED4-8 shows the selected azimuth.\\
+	3. & User press SW7 to confirm the azimuth selection\\
+	\midrule
+	\bfseries{Extension:} & \\
+	\midrule
+	\bfseries{Data Variations List:} & \textbf{Azimuth:} \SI{0}{\degree} to \SI{360}{\degree} \\
+	\midrule\\
+\end{longtabu}
+
+\section{Functional Requirements}
+\begin{enumerate}
+	\item Resolution
+	\item Latency
+	\item Delay
+	\item Noise
+	\item 2 inputs - 1 output
+\end{enumerate}
+
+\section{Non-functional Requirements}
+\begin{enumerate}
+	\item The system must be sampled with a rate of \SI{48}{\kilo\hertz}
+	\item The system must process audio signals in the band
+	from \SI{50}{\hertz} to \SI{15}{\kilo\hertz}
+	\item The system should have a dynamic range of \SI{75}{\decibel}
+	\item The system latency should be less than \SI{12}{\milli\second}
+\end{enumerate}

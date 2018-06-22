@@ -1,0 +1,290 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{matrixkeypad}{online}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labeltitlesource}{title}
+      \field{title}{4x3 Matrix Keypad Interface}
+      \field{urlday}{26}
+      \field{urlmonth}{5}
+      \field{urlyear}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://extremeelectronics.co.in/avr-tutorials/4x3-matrix-keypad-interface-avr-tutorial/
+      \endverb
+      \verb{url}
+      \verb http://extremeelectronics.co.in/avr-tutorials/4x3-matrix-keypad-interface-avr-tutorial/
+      \endverb
+    \endentry
+    \entry{ILI9413}{manual}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{organization}{1}{%
+        {ILI TECHNOLOGY CORP}%
+      }
+      \field{sortinit}{a}
+      \field{sortinithash}{d77c7cdd82ff690d4c3ef13216f92f0b}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{a-Si TFT LCD Single Chip Driver 240RGBx320 Resolution and 262K color}
+      \field{year}{2005}
+      \field{pages}{240}
+      \range{pages}{1}
+      \verb{urlraw}
+      \verb https://www.displaytech-us.com/sites/default/files/driver-ic-data-sheet/Ilitek-ILI9341.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.displaytech-us.com/sites/default/files/driver-ic-data-sheet/Ilitek-ILI9341.pdf
+      \endverb
+    \endentry
+    \entry{ATmega2560}{manual}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{organization}{1}{%
+        {Atmel}%
+      }
+      \field{sortinit}{A}
+      \field{sortinithash}{d77c7cdd82ff690d4c3ef13216f92f0b}
+      \field{labeltitlesource}{title}
+      \field{month}{2}
+      \field{title}{Atmel ATmega{640/V}-{1280/V}-{1281/V}-{2560/V}-{2561/V}}
+      \field{year}{2014}
+      \field{pages}{435}
+      \range{pages}{1}
+    \endentry
+    \entry{progmem}{online}{}
+      \name{author}{1}{}{%
+        {{hash=726c60e6903d2e879569b579b88628fc}{%
+           family={Camera},
+           familyi={C\bibinitperiod},
+           given={Dean},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{726c60e6903d2e879569b579b88628fc}
+      \strng{fullhash}{726c60e6903d2e879569b579b88628fc}
+      \strng{bibnamehash}{726c60e6903d2e879569b579b88628fc}
+      \strng{authorbibnamehash}{726c60e6903d2e879569b579b88628fc}
+      \strng{authornamehash}{726c60e6903d2e879569b579b88628fc}
+      \strng{authorfullhash}{726c60e6903d2e879569b579b88628fc}
+      \field{sortinit}{C}
+      \field{sortinithash}{963e9d84a3da2344e8833203de5aed05}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{AVR GCC and the prog mem attribute}
+      \field{urlday}{28}
+      \field{urlmonth}{5}
+      \field{urlyear}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.fourwalledcubicle.com/AVRArticles.php
+      \endverb
+      \verb{url}
+      \verb http://www.fourwalledcubicle.com/AVRArticles.php
+      \endverb
+    \endentry
+    \entry{EEPROM}{online}{}
+      \name{author}{1}{}{%
+        {{hash=726c60e6903d2e879569b579b88628fc}{%
+           family={Camera},
+           familyi={C\bibinitperiod},
+           given={Dean},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{726c60e6903d2e879569b579b88628fc}
+      \strng{fullhash}{726c60e6903d2e879569b579b88628fc}
+      \strng{bibnamehash}{726c60e6903d2e879569b579b88628fc}
+      \strng{authorbibnamehash}{726c60e6903d2e879569b579b88628fc}
+      \strng{authornamehash}{726c60e6903d2e879569b579b88628fc}
+      \strng{authorfullhash}{726c60e6903d2e879569b579b88628fc}
+      \field{sortinit}{C}
+      \field{sortinithash}{963e9d84a3da2344e8833203de5aed05}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Using the {EEPROM} in {AVR GCC}}
+      \field{urlday}{26}
+      \field{urlmonth}{5}
+      \field{urlyear}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.fourwalledcubicle.com/AVRArticles.php
+      \endverb
+      \verb{url}
+      \verb http://www.fourwalledcubicle.com/AVRArticles.php
+      \endverb
+    \endentry
+    \entry{INA125}{manual}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{organization}{1}{%
+        {Burr-Brown (Texas Instruments)}%
+      }
+      \field{sortinit}{I}
+      \field{sortinithash}{320bc8fe8101b9376f9f21cd507de0e8}
+      \field{labeltitlesource}{title}
+      \field{month}{2}
+      \field{title}{Instrumentation {Amplifier} with {Precision} {Voltage} {Reference}}
+      \field{year}{1998}
+      \field{pages}{18}
+      \range{pages}{1}
+    \endentry
+    \entry{UTFTLIB}{online}{}
+      \name{author}{1}{}{%
+        {{hash=073404e5bf7be08be4e86708d8a514ef}{%
+           family={Karlsen},
+           familyi={K\bibinitperiod},
+           given={Henning},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{fullhash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{bibnamehash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{authorbibnamehash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{authornamehash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{authorfullhash}{073404e5bf7be08be4e86708d8a514ef}
+      \field{sortinit}{K}
+      \field{sortinithash}{9fd838a31ba64d981e8f44562bd33f89}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Make font file}
+      \field{urlday}{25}
+      \field{urlmonth}{5}
+      \field{urlyear}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.rinkydinkelectronics.com/library.php?id=51
+      \endverb
+      \verb{url}
+      \verb http://www.rinkydinkelectronics.com/library.php?id=51
+      \endverb
+    \endentry
+    \entry{UTFT}{online}{}
+      \name{author}{1}{}{%
+        {{hash=073404e5bf7be08be4e86708d8a514ef}{%
+           family={Karlsen},
+           familyi={K\bibinitperiod},
+           given={Henning},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{fullhash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{bibnamehash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{authorbibnamehash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{authornamehash}{073404e5bf7be08be4e86708d8a514ef}
+      \strng{authorfullhash}{073404e5bf7be08be4e86708d8a514ef}
+      \field{sortinit}{K}
+      \field{sortinithash}{9fd838a31ba64d981e8f44562bd33f89}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Make font file}
+      \field{urlday}{25}
+      \field{urlmonth}{5}
+      \field{urlyear}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.rinkydinkelectronics.com/r_fonts.php
+      \endverb
+      \verb{url}
+      \verb http://www.rinkydinkelectronics.com/r_fonts.php
+      \endverb
+    \endentry
+    \entry{DS-MP40}{manual}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{organization}{1}{%
+        {Sartorius}%
+      }
+      \field{sortinit}{M}
+      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{{MP 40} {Low Profile Single Point Load Cell}}
+      \field{year}{2005}
+      \field{pages}{2}
+      \range{pages}{1}
+      \verb{urlraw}
+      \verb http://www.lesyco.com/DS/DS-MP40-e.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.lesyco.com/DS/DS-MP40-e.pdf
+      \endverb
+    \endentry
+    \entry{keypad}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{8d51b3d5b78d75b54308d706b9bbe285}
+      \field{labeltitlesource}{title}
+      \field{title}{Phone key pads}
+      \field{urlday}{26}
+      \field{urlmonth}{5}
+      \field{urlyear}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://www.dialabc.com/motion/keypads.html
+      \endverb
+      \verb{url}
+      \verb http://www.dialabc.com/motion/keypads.html
+      \endverb
+    \endentry
+    \entry{rspro}{manual}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{organization}{1}{%
+        {RS Pro}%
+      }
+      \field{sortinit}{R}
+      \field{sortinithash}{da6b42bd3ab22fee61abed031ee405f7}
+      \field{labeltitlesource}{title}
+      \field{title}{{RS Pro} 12 Key Keypad}
+      \verb{urlraw}
+      \verb https://uk.rs-online.com/web/p/keypads/0333697/
+      \endverb
+      \verb{url}
+      \verb https://uk.rs-online.com/web/p/keypads/0333697/
+      \endverb
+    \endentry
+    \entry{TJC}{manual}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{labeltitlesource}{title}
+      \field{month}{5}
+      \field{title}{{SPECIFICATIONS} {MODEL NO. TJC-9341-032}}
+      \field{year}{2015}
+      \field{pages}{20}
+      \range{pages}{1}
+      \verb{urlraw}
+      \verb https://www.itead.cc/wiki/images/9/9f/TJC-9341-032_Display_Specifications_Book.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.itead.cc/wiki/images/9/9f/TJC-9341-032_Display_Specifications_Book.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

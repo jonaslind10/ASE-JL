@@ -1,0 +1,86 @@
+\section{Graphic Display}
+It has been chosen to use a graphic display to show the user interface. 
+The advantage of this is the much larger screen, this gives more choices in making the menu system. 
+Another advantage is the possibility  to show larger numbers on the screen making the weight counter easier to use. 
+This is a big difference compared to a $2\times20$ LCD which is much more limited in what can be displayed on the screen.
+
+The graphic display used in this project is a ITBD02 display. \cite{TJC}
+This is implemented with a ILI9431 controller. \cite{ILI9413} 
+It is a $320\times240$ pixel display. In this project it is using a 16 bit interface. 
+The coloring is done using RGB where bits \mintinline{c}{0-4} is for blue, bit \mintinline{c}{5-10} is for green and \mintinline{c}{11-15} is for red. 
+This means the RGB is transferred as \mintinline{c}{5-6-5} for blue, green and red.
+When writing commands to the driver it is done by transferring 8 bits. 
+There is a 16 bit parallel bus for transferring data or commands. 
+Since the display uses \SI{3.3}{\volt}, an TDB02 Arduino MEGA shield is used as in intermediate between the ATMega2560 and the display.
+
+The driver is implemented with the \mintinline{c}{writecommand} and \mintinline{c}{writeData} functions implemented according to \cite[p.~238]{ILI9413}. 
+To send data or commands the \mintinline{c}{chipselect(CSX)} is set low. 
+The \mintinline{c}{DCX} is set low to write a command and it is set high to write data. 
+The \mintinline{c}{WRX} pin is a write pin. 
+On rising edge it writes data or command. 
+This means \mintinline{c}{WRX} is first set low then held low for at least \SI{15}{\nano\second} and is then set high and held high for at least \SI{10}{\nano\second}. \cite[p.~10 \& 238]{ILI9413}
+One \mintinline{c}{NOP} instruction gives a delay of \SI{62.5}{\nano\second} since the the clock frequency is \SI{16}{\mega\hertz}. 
+The display is initialized by resetting it using the \mintinline{c}{RESX} pin by setting it low, holding it low and then setting it high.
+Then there must be a delay of at least \SI{120}{\milli\second} until the display has finished the blanking sequence. \cite[p.~230]{ILI9413}
+Then the sleep mode is exited and the display is set to on.
+The display is set to use RGB colors and switch column and rows. 
+The pixel format is set to 16 bit.
+
+An interesting function is the \mintinline{c}{writeChar}. It is based on a TFT driver for Arduino by Henning Karlsen\cite{UTFTLIB}.
+The function \mintinline{c}{writeChar} takes a character and the start positions x and y as inputs. 
+The last input is a pointer to a font. 
+This font describes the style and size of the character shown on the display. 
+The font must be stored in flash memory of the ATMega2560. 
+Since the ATMega2560 has much more limited amount of RAM than flash memory, the constant font lies in flash memory which also is where the program is stored. \cite[p.~20]{ATmega2560}
+To store constant data in program memory the \mintinline{c}{PROGMEM} identifier is used. \cite{progmem} 
+This will store the data in program space. It is not possible to access constant data in program memory directly since the pointer returns the address in RAM memory and not in program memory. 
+The macro available to read data in program space is \mintinline{c}{pgm_read_byte} used for a byte. 
+This reduces speed very little, but has the advantage that a much larger number of fonts can be used.
+Otherwise the fonts would be smaller and have fewer characters. 
+
+The fonts need to have a specific format. 
+The format used has as the first entry a width, the second a height, the third a offset of the font's first character compared to the ASCII values and the fourth the number of characters the font has. 
+Every entry in the fonts is a char which describes whether a pixel is on or off. 
+The chars are combined to make a line depending on the width of the char. 
+See \cref{lst:writechar} for \mintinline{c}{writeChar} where the size and ASCII offset is read. 
+The end addresses is set from the size of the font. 
+The \mintinline{c}{Charpos} is the entry in the font array and is calculated using the size and the fact that char has a size of 8 bits. 
+All bits are then read and checked if it is 1. 
+If the bit is set, a black pixel is written on the screen otherwise a white pixel is written on the screen. The fonts are downloaded from \cite{UTFT}.
+\vspace{-20pt}
+\begin{lstlisting}[caption={\mintinline{c}{writeChar} function.}, label={lst:writechar}, language=C, directivestyle={\color{black}},
+emph={int,char,double,float,unsigned}, emphstyle={\color{blue}}]
+void writeChar(char Char, unsigned int StartX, unsigned int StartY,
+const uint8_t *font)
+{
+	uint8_t y_size = pgm_read_byte(&font[0]);
+	uint8_t x_size = pgm_read_byte(&font[1]);
+	uint8_t ascii_offset = pgm_read_byte(&font[2]);
+	SetPageAddress(StartX, StartX + x_size - 1);
+	SetColumnAddress(StartY, StartY + y_size - 1);	
+	MemoryWrite();
+	uint16_t Charpos = (Char -  ascii_offset) * ((y_size/8)*x_size) + 4;
+	uint16_t temp = (y_size/8)*x_size;
+	uint8_t bits_to_show;
+	for(int i=0; i < temp; i++)
+	{
+		bits_to_show = pgm_read_byte(&font[i+Charpos]);
+		for(uint8_t j=0; j<8;j++)
+		{
+			if(bits_to_show >> (7-j) & 1)
+			{
+				WritePixel(0, 0, 0);
+			}
+			else
+			{
+				WritePixel(31,63,31);
+			}
+		}
+	}
+}
+\end{lstlisting}
+It has been decided to use a white screen as background which means that every time text needs to be cleared it is just overwritten with white. For the font type used for text see \cref{fig:StartMenuScreen} and for font used for numbers see \cref{fig:NoItems}.
+The font for numbers is much larger since the amount of numbers shown is smaller. This also have the advantage that the amount is much easier to see when using the weight counter.
+
+
+

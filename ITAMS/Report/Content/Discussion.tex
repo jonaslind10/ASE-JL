@@ -1,0 +1,18 @@
+A system that can count number of items placed on a scale has been implemented. 
+The user can add new items to the system which is stored, even after the system has been turned off. 
+An addition for the system could be the possibility to remove a stored item.
+
+The load cell has a offset which has changed. 
+An addition to the system could be a function that would measure the new offset and change the weight calculation.
+ 
+The system has a resolution of \SI{1.35}{\gram} which is problematic when a single item has a weight less than this. 
+Increasing the gain would improve the resolution by using the entire dynamic range of the ADC.
+This would require the offset should be reduced as it also is being amplified. 
+If the offset is reduced to \SI{150}{\milli\volt}, the ADC could still use single supply. \cite[p.~12]{ATmega2560}
+If the offset become less than this, a negative supply for the ADC would be needed.
+Changing the ADC to another ADC with a higher resolution than the ATMega 2560 10 bit ADC could also be a solution. 
+
+The user interface for the system is implemented with a keypad and a LCD. 
+The keypad takes user inputs and the LCD displays the system menu. 
+An improvement to the system would be implementing the entire user interface with the LCD. 
+The keys would be implemented using the LCD as a touch screen instead of the separate keypad.
